@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -32,26 +33,18 @@ public class Atividade {
 	@Temporal(TemporalType.DATE)
 	private Date dataTermino;
 	
-	@OneToOne(cascade= CascadeType.ALL)
-	private LocalRealizacao local;
-	
-	@OneToOne(cascade= CascadeType.ALL )
-	private FonteDeRecurso fonteDeRecurso;
+	private String local;
+	private String fonteDeRecurso;
+	private String areaTematica;
 	
 	@OneToMany(cascade= CascadeType.MERGE)
-	private AreaTematica areaTematica;
+	private LinhaDeExtensao linhaProgramatica;
 	
-	@OneToMany(cascade= CascadeType.MERGE)
-	private LinhaProgramatica linhaProgramatica;
-	
-	@OneToOne(cascade= CascadeType.MERGE)
+	@ManyToOne(cascade= CascadeType.MERGE)
 	private Coordenador coordenador;
 	
-	@OneToMany(cascade= CascadeType.MERGE)
-	private TIpoAtividade tipoAtividade;
-	
-	@OneToMany(mappedBy= "atividade" ,cascade=CascadeType.ALL)
-	private List<Vinculo> vinculos;
+	private String tipoAtividade;
+	private String vinculo;
 	
 	@OneToOne(cascade= CascadeType.ALL)
 	private AtividadeAntiga atividadeAntiga;

@@ -1,6 +1,6 @@
 package models;
 
-public class LinhaProgramatica {
+public class LinhaDeExtensao {
 	private int id; 
 	private int numero;
 	private String denominacao;

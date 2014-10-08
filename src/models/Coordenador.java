@@ -7,7 +7,7 @@ public class Coordenador {
 	private Long telPrimario;
 	private Long telAuxiliar;
 	private boolean voluntario;
-	private TipoCoordenador tipo;
+	private String tipo;
 	
 
 }
