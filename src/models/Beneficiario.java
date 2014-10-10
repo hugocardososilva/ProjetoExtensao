@@ -1,11 +1,13 @@
 package models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Inheritance(strategy= InheritanceType.SINGLE_TABLE)
@@ -14,7 +16,10 @@ public class Beneficiario {
 	@Id
 	
 	private int id;
+	
 	private String nome;
+
+	
 	
 	
 	
@@ -45,7 +50,10 @@ public class Beneficiario {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
 
+
+	
 
 
 	@Override
