@@ -29,7 +29,7 @@ import org.eclipse.persistence.config.PersistenceUnitProperties;
 		protected static EntityManager getManager(){
 			if(manager==null){
 				EntityManagerFactory factory = 
-					Persistence.createEntityManagerFactory("CRPMN");
+					Persistence.createEntityManagerFactory("crpmn");
 				manager = factory.createEntityManager();
 			}
 			return manager;

@@ -7,6 +7,7 @@
 <title>Atividade</title>
 </head>
 <body>
+<a href="Test">cadastrar</a>
 
 </body>
 </html>
