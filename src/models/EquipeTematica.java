@@ -67,6 +67,16 @@ public class EquipeTematica {
 	}
 
 
+	public Atividade getAtividade() {
+		return atividade;
+	}
+
+
+	public void setAtividade(Atividade atividade) {
+		this.atividade = atividade;
+	}
+
+
 	@Override
 	public String toString() {
 		return "EquipeTematica [id=" + id + ", nome=" + nome + ", email="

@@ -18,9 +18,12 @@ public class LinhaDeExtensao {
 	private int numero;
 	private String denominacao;
 	private String definicoes;
+	public LinhaDeExtensao() {
+		super();
+	}
 	
-	@OneToMany(mappedBy="linhaDeExtensao", cascade=CascadeType.ALL)
-	private List<Atividade> atividades;
+//	@OneToMany(mappedBy="linhaDeExtensao", cascade=CascadeType.ALL)
+//	private List<Atividade> atividades;
 	
 	
 	

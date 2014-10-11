@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 @Entity
@@ -15,6 +16,8 @@ public class AtividadeAntiga {
 	private int id; 
 	@Temporal(TemporalType.DATE)
 	private Date ano;
+	@OneToOne
+	private Atividade atividade;
 	
 		public AtividadeAntiga() {
 			super();
@@ -24,6 +27,18 @@ public class AtividadeAntiga {
 		
 		public int getId() {
 			return id;
+		}
+
+		
+
+		public Atividade getAtividade() {
+			return atividade;
+		}
+
+
+
+		public void setAtividade(Atividade atividade) {
+			this.atividade = atividade;
 		}
 
 
@@ -48,8 +63,14 @@ public class AtividadeAntiga {
 
 		@Override
 		public String toString() {
-			return "AtividadeAntiga [id=" + id + ", ano=" + ano + "]";
+			return "AtividadeAntiga [id=" + id + ", ano=" + ano
+					+ ", atividade=" + atividade + "]";
 		}
+
+
+
+
+		
 	
 	
 

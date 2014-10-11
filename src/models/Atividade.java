@@ -38,17 +38,18 @@ public class Atividade {
 	private String areaTematica;
 	private String tipoAtividade;
 	private String vinculo;
-	
+	private String linhaDeExtensao;
+	private String objetivo;
 //	Relacionamentos
-	@ManyToOne(cascade= CascadeType.MERGE)
-	private LinhaDeExtensao linhaDeExtensao;
+//	@ManyToOne(cascade= CascadeType.MERGE)
+//	private LinhaDeExtensao linhaDeExtensao;
 	
 	@ManyToOne(cascade= CascadeType.MERGE)
 	private Coordenador coordenador;
 	
 	
 	
-	@OneToOne(cascade= CascadeType.ALL)
+	@OneToOne(cascade= CascadeType.MERGE)
 	private AtividadeAntiga atividadeAntiga;
 	
 	@OneToMany(mappedBy= "atividade", cascade= CascadeType.ALL)
@@ -68,6 +69,7 @@ public class Atividade {
 	
 	@OneToMany(mappedBy= "atividade", cascade= CascadeType.ALL)
 	private List<Externos> externos;
+	
 	
 	
 	// construtor vazio(JPA)
@@ -107,6 +109,15 @@ public class Atividade {
 
 	public void setValor(Double valor) {
 		this.valor = valor;
+	}
+	
+
+	public String getObjetivo() {
+		return objetivo;
+	}
+
+	public void setObjetivo(String objetivo) {
+		this.objetivo = objetivo;
 	}
 
 	public Date getDataInicio() {
@@ -165,11 +176,11 @@ public class Atividade {
 		this.vinculo = vinculo;
 	}
 
-	public LinhaDeExtensao getLinhaDeExtensao() {
+	public String getLinhaDeExtensao() {
 		return linhaDeExtensao;
 	}
 
-	public void setLinhaDeExtensao(LinhaDeExtensao linhaDeExtensao) {
+	public void setLinhaDeExtensao(String linhaDeExtensao) {
 		this.linhaDeExtensao = linhaDeExtensao;
 	}
 
