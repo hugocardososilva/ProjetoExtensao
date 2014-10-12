@@ -1,6 +1,8 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
+
 
 
 import javax.persistence.CascadeType;
@@ -21,9 +23,10 @@ public class Coordenador {
 	private Long telAuxiliar;
 	private boolean voluntario;
 	private String tipo;
+	private String email;
 	
 	@OneToMany(mappedBy="coordenador", cascade= CascadeType.ALL)
-	private List<Atividade> atividades;
+	private List<Atividade> atividades = new ArrayList<Atividade>();
 
 	public Coordenador() {
 		super();
@@ -51,6 +54,15 @@ public class Coordenador {
 
 	public void setSetor(String setor) {
 		this.setor = setor;
+	}
+	
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public Long getTelPrimario() {
@@ -92,6 +104,11 @@ public class Coordenador {
 	public void setAtividades(List<Atividade> atividades) {
 		this.atividades = atividades;
 	}
-	
+	public void addAtividade(Atividade atividade){
+		this.atividades.add(atividade);
+	}
+	public void removeAtividade(Atividade atividade){
+		this.atividades.remove(atividade);
+	}
 	
 }

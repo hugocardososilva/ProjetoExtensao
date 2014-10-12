@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.DAO;
 import dao.DAOAtividade;
+import dao.DAOAtividadeAntiga;
 import models.Atividade;
 import models.AtividadeAntiga;
 
@@ -27,6 +28,7 @@ public class CadastrarAtividade extends HttpServlet {
 	
 	private Atividade atividade = new Atividade();
 	private DAOAtividade daoAtividade= new DAOAtividade();
+	private DAOAtividadeAntiga daoAntiga= new DAOAtividadeAntiga();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -62,6 +64,7 @@ public class CadastrarAtividade extends HttpServlet {
 				vinculo= request.getParameter("outroVinculoDeAtividade");
 			}else{
 				vinculo= request.getParameter("vinculoDaAtividade");
+				
 			}
 		
 			
@@ -73,6 +76,8 @@ public class CadastrarAtividade extends HttpServlet {
 				DateFormat format= new SimpleDateFormat("yyyy");
 				try {
 					atividadeAntiga.setAno(format.parse(especificarAtividade));
+					atividadeAntiga.setAtividade(atividade);
+					daoAntiga.persist(atividadeAntiga);
 					
 				} catch (ParseException e) {
 					

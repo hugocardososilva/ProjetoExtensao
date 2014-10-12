@@ -47,7 +47,8 @@ public class Atividade {
 	@ManyToOne(cascade= CascadeType.MERGE)
 	private Coordenador coordenador;
 	
-	
+	@OneToMany
+	private List<Atividade> atividades;
 	
 	@OneToOne(cascade= CascadeType.MERGE)
 	private AtividadeAntiga atividadeAntiga;
@@ -292,6 +293,25 @@ public class Atividade {
 		public void removeBeneficiarioIndireto(BeneficiarioIndireto indireto){
 			this.beneficiariosIndiretos.remove(indireto);
 		}
+
+		@Override
+		public String toString() {
+			return "Atividade [id=" + id + ", registro=" + registro
+					+ ", titulo=" + titulo + ", valor=" + valor
+					+ ", dataInicio=" + dataInicio + ", dataTermino="
+					+ dataTermino + ", local=" + local + ", fonteDeRecurso="
+					+ fonteDeRecurso + ", areaTematica=" + areaTematica
+					+ ", tipoAtividade=" + tipoAtividade + ", vinculo="
+					+ vinculo + ", linhaDeExtensao=" + linhaDeExtensao
+					+ ", objetivo=" + objetivo + ", coordenador=" + coordenador
+					+ ", atividades=" + atividades + ", atividadeAntiga="
+					+ atividadeAntiga + ", beneficiariosDiretos="
+					+ beneficiariosDiretos + ", beneficiariosIndiretos="
+					+ beneficiariosIndiretos + ", docentes=" + docentes
+					+ ", tecnicos=" + tecnicos + ", bolsistas=" + bolsistas
+					+ ", externos=" + externos + "]";
+		}
+		
 }
 
 
