@@ -51,10 +51,10 @@
 						</tr>
 			</c:when>
 				<c:otherwise>
-				<thead>
+				
 					<tr><td>Coordenador</td></tr>
 					
-				</thead>
+				
 				<tr>
 							<td>Nome</td>
 							<td>${requestScope.atividade.coordenador.nome }</td>
@@ -76,8 +76,25 @@
 							<td>Telefone primário</td>
 							<td>${requestScope.atividade.coordenador.telPrimario }</td>
 				</tr>
+					<tr>
+							<td>Telefone auxiliar</td>
+							<td>${requestScope.atividade.coordenador.telAuxiliar }</td>
+				</tr>
 				</c:otherwise>
 		</c:choose>	
+		<c:choose>
+			<c:when test="${requestScope.atividade.docentes == null }">
+				
+				<tr><td>Nenhum docente adicionado</td></tr>
+				
+				
+				
+			</c:when>
+			<c:otherwise>
+			<tr><td>teste</td>	</tr>
+			</c:otherwise>
+		</c:choose>
+		<tr><td><a href="inserir-equipe-tematica.jsp?id=${requestScope.atividade.id }">Adicionar Equipe Temática</a><tr><td>
 			
 			
 			

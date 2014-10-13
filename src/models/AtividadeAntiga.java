@@ -12,7 +12,7 @@ import javax.persistence.TemporalType;
 @Entity
 public class AtividadeAntiga {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id; 
 	@Temporal(TemporalType.DATE)
 	private Date ano;

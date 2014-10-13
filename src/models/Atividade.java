@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -48,28 +49,28 @@ public class Atividade {
 	private Coordenador coordenador;
 	
 	@OneToMany
-	private List<Atividade> atividades;
+	private List<Atividade> atividades = new ArrayList<Atividade>();
 	
 	@OneToOne(cascade= CascadeType.MERGE)
 	private AtividadeAntiga atividadeAntiga;
 	
 	@OneToMany(mappedBy= "atividade", cascade= CascadeType.ALL)
-	private List<BeneficiarioDireto> beneficiariosDiretos;
+	private List<BeneficiarioDireto> beneficiariosDiretos = new ArrayList<BeneficiarioDireto>();
 	
 	@OneToMany(mappedBy= "atividade", cascade= CascadeType.ALL)
-	private List<BeneficiarioIndireto> beneficiariosIndiretos;
+	private List<BeneficiarioIndireto> beneficiariosIndiretos= new ArrayList<BeneficiarioIndireto>();
 	
 	@OneToMany(mappedBy= "atividade", cascade= CascadeType.ALL)
-	private List<Docente> docentes;
+	private List<Docente> docentes= new ArrayList<Docente>();
 	
 	@OneToMany(mappedBy= "atividade", cascade= CascadeType.ALL)
-	private List<Tecnico> tecnicos;
+	private List<Tecnico> tecnicos= new ArrayList<Tecnico>();
 	
 	@OneToMany(mappedBy= "atividade", cascade= CascadeType.ALL)
-	private List<Bolsista> bolsistas;
+	private List<Bolsista> bolsistas= new ArrayList<Bolsista>();
 	
 	@OneToMany(mappedBy= "atividade", cascade= CascadeType.ALL)
-	private List<Externos> externos;
+	private List<Externos> externos= new ArrayList<Externos>();
 	
 	
 	

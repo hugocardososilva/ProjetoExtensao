@@ -71,11 +71,11 @@ public class CadastrarAtividade extends HttpServlet {
 		
 //		Atividade antiga?
 		if(especificarAtividade.equals("antiga")){
-				especificarAtividade= request.getParameter("atividadeAntiga");
+				String ano= request.getParameter("atividadeAntiga");
 				AtividadeAntiga atividadeAntiga= new AtividadeAntiga();
 				DateFormat format= new SimpleDateFormat("yyyy");
 				try {
-					atividadeAntiga.setAno(format.parse(especificarAtividade));
+					atividadeAntiga.setAno(format.parse(ano));
 					atividadeAntiga.setAtividade(atividade);
 					daoAntiga.persist(atividadeAntiga);
 					
