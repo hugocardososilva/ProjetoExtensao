@@ -34,16 +34,28 @@ public class Atividade {
 	@Temporal(TemporalType.DATE)
 	private Date dataTermino;
 	
-	private String local;
+	@ManyToOne(cascade= CascadeType.ALL)
+	private LocalRealizacao local;
+	
 	private String fonteDeRecurso;
-	private String areaTematica;
-	private String tipoAtividade;
-	private String vinculo;
-	private String linhaDeExtensao;
+	
+	@ManyToOne(cascade= CascadeType.ALL)
+	private AreaTematica areaTematica;
+	
+	@ManyToOne(cascade= CascadeType.ALL)
+	private TipoAtividade tipoAtividade;
+	
+	@ManyToOne(cascade= CascadeType.ALL)
+	private Vinculo vinculo;
+	
+	
+	
+	
+	
 	private String objetivo;
 //	Relacionamentos
-//	@ManyToOne(cascade= CascadeType.MERGE)
-//	private LinhaDeExtensao linhaDeExtensao;
+	@ManyToOne(cascade= CascadeType.MERGE)
+	private LinhaDeExtensao linhaDeExtensao;
 	
 	@ManyToOne(cascade= CascadeType.MERGE)
 	private Coordenador coordenador;
@@ -60,19 +72,19 @@ public class Atividade {
 	@OneToMany(mappedBy= "atividade", cascade= CascadeType.ALL)
 	private List<BeneficiarioIndireto> beneficiariosIndiretos= new ArrayList<BeneficiarioIndireto>();
 	
-	@OneToMany(mappedBy= "atividade", cascade= CascadeType.ALL)
+	@ManyToMany(cascade= CascadeType.ALL)
 	private List<Docente> docentes= new ArrayList<Docente>();
 	
-	@OneToMany(mappedBy= "atividade", cascade= CascadeType.ALL)
+	@ManyToMany(cascade= CascadeType.ALL)
 	private List<Tecnico> tecnicos= new ArrayList<Tecnico>();
 	
-	@OneToMany(mappedBy= "atividade", cascade= CascadeType.ALL)
+	@ManyToMany(cascade= CascadeType.ALL)
 	private List<Bolsista> bolsistas= new ArrayList<Bolsista>();
 	
-	@OneToMany(mappedBy= "atividade", cascade= CascadeType.ALL)
+	@ManyToMany(cascade= CascadeType.ALL)
 	private List<Externos> externos= new ArrayList<Externos>();
-	
-	
+	@OneToOne(cascade= CascadeType.ALL)
+	private ControleRegistro controleRegistro;
 	
 	// construtor vazio(JPA)
 	
@@ -91,6 +103,15 @@ public class Atividade {
 
 	public String getRegistro() {
 		return registro;
+	}
+	
+
+	public ControleRegistro getControleRegistro() {
+		return controleRegistro;
+	}
+
+	public void setControleRegistro(ControleRegistro controleRegistro) {
+		this.controleRegistro = controleRegistro;
 	}
 
 	public void setRegistro(String registro) {
@@ -138,11 +159,13 @@ public class Atividade {
 		this.dataTermino = dataTermino;
 	}
 
-	public String getLocal() {
+	
+
+	public LocalRealizacao getLocal() {
 		return local;
 	}
 
-	public void setLocal(String local) {
+	public void setLocal(LocalRealizacao local) {
 		this.local = local;
 	}
 
@@ -154,35 +177,43 @@ public class Atividade {
 		this.fonteDeRecurso = fonteDeRecurso;
 	}
 
-	public String getAreaTematica() {
+	public AreaTematica getAreaTematica() {
 		return areaTematica;
 	}
 
-	public void setAreaTematica(String areaTematica) {
+	public void setAreaTematica(AreaTematica areaTematica) {
 		this.areaTematica = areaTematica;
 	}
 
-	public String getTipoAtividade() {
+	public TipoAtividade getTipoAtividade() {
 		return tipoAtividade;
 	}
 
-	public void setTipoAtividade(String tipoAtividade) {
+	public void setTipoAtividade(TipoAtividade tipoAtividade) {
 		this.tipoAtividade = tipoAtividade;
 	}
 
-	public String getVinculo() {
+	public Vinculo getVinculo() {
 		return vinculo;
 	}
 
-	public void setVinculo(String vinculo) {
+	public void setVinculo(Vinculo vinculo) {
 		this.vinculo = vinculo;
 	}
 
-	public String getLinhaDeExtensao() {
+	public List<Atividade> getAtividades() {
+		return atividades;
+	}
+
+	public void setAtividades(List<Atividade> atividades) {
+		this.atividades = atividades;
+	}
+
+	public LinhaDeExtensao getLinhaDeExtensao() {
 		return linhaDeExtensao;
 	}
 
-	public void setLinhaDeExtensao(String linhaDeExtensao) {
+	public void setLinhaDeExtensao(LinhaDeExtensao linhaDeExtensao) {
 		this.linhaDeExtensao = linhaDeExtensao;
 	}
 
@@ -303,8 +334,8 @@ public class Atividade {
 					+ dataTermino + ", local=" + local + ", fonteDeRecurso="
 					+ fonteDeRecurso + ", areaTematica=" + areaTematica
 					+ ", tipoAtividade=" + tipoAtividade + ", vinculo="
-					+ vinculo + ", linhaDeExtensao=" + linhaDeExtensao
-					+ ", objetivo=" + objetivo + ", coordenador=" + coordenador
+					+ vinculo + ", objetivo=" + objetivo + ", linhaDeExtensao="
+					+ linhaDeExtensao + ", coordenador=" + coordenador
 					+ ", atividades=" + atividades + ", atividadeAntiga="
 					+ atividadeAntiga + ", beneficiariosDiretos="
 					+ beneficiariosDiretos + ", beneficiariosIndiretos="
@@ -312,6 +343,8 @@ public class Atividade {
 					+ ", tecnicos=" + tecnicos + ", bolsistas=" + bolsistas
 					+ ", externos=" + externos + "]";
 		}
+
+		
 		
 }
 

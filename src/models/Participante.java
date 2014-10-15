@@ -1,5 +1,7 @@
 package models;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,11 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
 @Inheritance(strategy= InheritanceType.TABLE_PER_CLASS)
-public class EquipeTematica {
+public class Participante {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
@@ -19,10 +22,9 @@ public class EquipeTematica {
 	private String email;
 	private boolean voluntario;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
-	private Atividade atividade;
 	
-	public EquipeTematica() {
+	
+	public Participante() {
 		super();
 	}
 
@@ -67,14 +69,9 @@ public class EquipeTematica {
 	}
 
 
-	public Atividade getAtividade() {
-		return atividade;
-	}
 
 
-	public void setAtividade(Atividade atividade) {
-		this.atividade = atividade;
-	}
+	
 
 
 	@Override

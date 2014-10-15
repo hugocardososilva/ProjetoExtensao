@@ -17,14 +17,14 @@ import models.FactoryEquipeTematica;
  * Servlet implementation class EquipeTematica
  */
 @WebServlet("/EquipeTematica.do")
-public class EquipeTematica extends HttpServlet {
+public class EquipeTecnica extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	DAOAtividade daoAtividade= new DAOAtividade();
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EquipeTematica() {
+    public EquipeTecnica() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -48,7 +48,7 @@ public class EquipeTematica extends HttpServlet {
 			if(ref.equalsIgnoreCase("novo")){
 				String tipo = request.getParameter("especificacao");
 				Atividade atividade= daoAtividade.find(Integer.parseInt(id));
-				models.EquipeTematica equipe= FactoryEquipeTematica.getEquipeTematica(tipo);
+				models.Participante equipe= FactoryEquipeTematica.getEquipeTematica(tipo);
 				System.out.println(equipe.getClass());
 				System.out.println(atividade.toString());
 			}

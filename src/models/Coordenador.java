@@ -13,17 +13,17 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Coordenador {
+public class Coordenador extends Participante {
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private int id;
-	private String nome;
+	
 	private String setor;
 	private Long telPrimario;
 	private Long telAuxiliar;
-	private boolean voluntario;
+	
 	private String tipo;
-	private String email;
+
 	
 	@OneToMany(mappedBy="coordenador", cascade= CascadeType.ALL)
 	private List<Atividade> atividades = new ArrayList<Atividade>();
@@ -40,14 +40,6 @@ public class Coordenador {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
 	public String getSetor() {
 		return setor;
 	}
@@ -56,15 +48,6 @@ public class Coordenador {
 		this.setor = setor;
 	}
 	
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public Long getTelPrimario() {
 		return telPrimario;
 	}
@@ -81,13 +64,6 @@ public class Coordenador {
 		this.telAuxiliar = telAuxiliar;
 	}
 
-	public boolean isVoluntario() {
-		return voluntario;
-	}
-
-	public void setVoluntario(boolean voluntario) {
-		this.voluntario = voluntario;
-	}
 
 	public String getTipo() {
 		return tipo;

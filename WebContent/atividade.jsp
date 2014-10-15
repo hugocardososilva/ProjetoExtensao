@@ -8,6 +8,7 @@
 <title>Atividade</title>
 </head>
 <body>
+
 		<div>
 		<table>
 		
@@ -80,6 +81,11 @@
 							<td>Telefone auxiliar</td>
 							<td>${requestScope.atividade.coordenador.telAuxiliar }</td>
 				</tr>
+				<tr>
+				<td><a href="Coordenador.do?ref=editar">Editar</a></td>
+				
+				</tr>
+				
 				</c:otherwise>
 		</c:choose>	
 		<c:choose>
