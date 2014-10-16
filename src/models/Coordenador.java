@@ -25,11 +25,12 @@ public class Coordenador extends Participante {
 	private String tipo;
 
 	
-	@OneToMany(mappedBy="coordenador", cascade= CascadeType.ALL)
+	@OneToMany(mappedBy="coordenador", cascade= CascadeType.PERSIST)
 	private List<Atividade> atividades = new ArrayList<Atividade>();
 
 	public Coordenador() {
 		super();
+		this.atividades= new ArrayList<Atividade>();
 	}
 
 	public int getId() {
@@ -85,6 +86,13 @@ public class Coordenador extends Participante {
 	}
 	public void removeAtividade(Atividade atividade){
 		this.atividades.remove(atividade);
+	}
+
+	@Override
+	public String toString() {
+		return "Coordenador [id=" + id + ", setor=" + setor + ", telPrimario="
+				+ telPrimario + ", telAuxiliar=" + telAuxiliar + ", tipo="
+				+ tipo + ", atividades=" + atividades + "]";
 	}
 	
 }

@@ -57,10 +57,10 @@ public class Atividade {
 	@ManyToOne(cascade= CascadeType.MERGE)
 	private LinhaDeExtensao linhaDeExtensao;
 	
-	@ManyToOne(cascade= CascadeType.MERGE)
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	private Coordenador coordenador;
 	
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	private List<Atividade> atividades = new ArrayList<Atividade>();
 	
 	@OneToOne(cascade= CascadeType.MERGE)
@@ -83,6 +83,7 @@ public class Atividade {
 	
 	@ManyToMany(cascade= CascadeType.ALL)
 	private List<Externos> externos= new ArrayList<Externos>();
+	
 	@OneToOne(cascade= CascadeType.ALL)
 	private ControleRegistro controleRegistro;
 	
@@ -341,8 +342,13 @@ public class Atividade {
 					+ beneficiariosDiretos + ", beneficiariosIndiretos="
 					+ beneficiariosIndiretos + ", docentes=" + docentes
 					+ ", tecnicos=" + tecnicos + ", bolsistas=" + bolsistas
-					+ ", externos=" + externos + "]";
+					+ ", externos=" + externos + ", controleRegistro="
+					+ controleRegistro + "]";
 		}
+
+		
+		
+
 
 		
 		

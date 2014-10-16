@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,18 +15,20 @@ import javax.persistence.ManyToOne;
 
 @Entity
 @Inheritance(strategy= InheritanceType.TABLE_PER_CLASS)
-public class Participante {
+public abstract class Participante {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String nome;
 	private String email;
 	private boolean voluntario;
-	
+	@ManyToMany(cascade=CascadeType.ALL)
+	private List<Atividade> atividades;
 	
 	
 	public Participante() {
 		super();
+		this.atividades= new ArrayList<Atividade>();
 	}
 
 
@@ -68,7 +71,12 @@ public class Participante {
 		this.voluntario = voluntario;
 	}
 
-
+	public void addAtividade(Atividade atividade){
+		this.atividades.add(atividade);
+	}
+	public void removeAtividade(Atividade atividade){
+		this.atividades.remove(atividade);
+	}
 
 
 	
@@ -76,7 +84,7 @@ public class Participante {
 
 	@Override
 	public String toString() {
-		return "EquipeTematica [id=" + id + ", nome=" + nome + ", email="
+		return "Participante [id=" + id + ", nome=" + nome + ", email="
 				+ email + ", voluntario=" + voluntario + "]";
 	}
 	

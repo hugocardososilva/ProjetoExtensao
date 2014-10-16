@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,7 +14,7 @@ public class Bolsista extends Participante {
 	
 	public Bolsista() {
 		super();
-		// TODO Auto-generated constructor stub
+		this.atividades= new ArrayList<Atividade>();
 	}
 
 	@Override

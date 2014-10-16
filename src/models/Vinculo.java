@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -20,6 +21,7 @@ public class Vinculo {
 
 	public Vinculo() {
 		super();
+		this.atividades= new ArrayList<Atividade>();
 	}
 
 	public int getId() {

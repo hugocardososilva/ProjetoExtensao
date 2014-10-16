@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,7 +15,7 @@ public class Docente extends Participante {
 	public Docente() {
 		
 		super();
-		// TODO Auto-generated constructor stub
+		this.atividades= new ArrayList<Atividade>();
 	}
 
 	public List<Atividade> getAtividades() {

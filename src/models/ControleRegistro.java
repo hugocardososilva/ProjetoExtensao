@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class ControleRegistro {
@@ -15,6 +17,7 @@ public class ControleRegistro {
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private int id;
 	private int numero;
+	@Temporal(TemporalType.DATE)
 	private Date ano;
 	@OneToOne(cascade=CascadeType.ALL)
 	private Atividade atividade;

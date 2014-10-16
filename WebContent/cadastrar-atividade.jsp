@@ -1,3 +1,8 @@
+<%@page import="dao.DAO"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="models.TipoAtividade"%>
+<%@page import="dao.DAOTipoAtividade"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -15,65 +20,28 @@
 		<input name="tituloDaAtividade" type="text" id="tituloDaAtividade" size="100" maxlength="250" />
 		</div>
 		<div>
+		
 			          	 <h2>Tipo de atividade</h2>
+			          	 <c:forEach var="tipo" items="${requestScope.listaTipo }">
 						<label>
-							<input type="radio" name="Tipo de atividade" value="Programa de Extensão" id="Tipodeatividade_0" />
-							Programa de Extensão
+							<input type="radio" name="Tipo de atividade" value="${tipo.nome }" id="Tipodeatividade_0" />
+							${tipo.nome }
 						</label>
-			<br />
-						<label>
-							<input type="radio" name="Tipo de atividade" value="Projeto de Extensão" id="Tipodeatividade_1" />
-							Projeto de Extensão
-						</label>
-			<br />
-						<label>
-							<input type="radio" name="Tipo de atividade" value="Curso de Extensão" id="Tipodeatividade_2" />
-							Curso de Extensão
-						</label><br />			
-						<label>	<input type="radio" name="Tipo de atividade" value="Evento de Extensão" id="Tipodeatividade_3" />
-							Evento de Extensão
-						</label>			
-						<label>	<br />	<input type="radio" name="Tipo de atividade" value="Prestação de Serviço" id="Tipodeatividade_4" />
-						Prestação de Serviço</label>            
-						<br/>
-						<label>
-						<input type="radio" name="Tipo de atividade" value="Empreendedorismo" id="Tipodeatividade_5" />
-						Empreendedorismo</label>            
-						<br/>
+						<br />
+						</c:forEach>
 			
-						<label>
-						<input type="radio" name="Tipo de atividade" value="Visitas Técnicas" id="Tipodeatividade_6" />
-						Visitas Técnicas</label>            
-						<br/>
-			
-						<label>
-						<input type="radio" name="Tipo de atividade" value="Acompanhamento de Egressos" id="Tipodeatividade_7" />
-						Acompanhamento de Egressos</label>
 		</div>
 		<div>
 			<h2>Vínculo da atividade</h2>
-
+		 <c:forEach var="vinculo" items="${requestScope.vinculo }">
 		<label>
-		<input type="radio" name="vinculoDaAtividade" value="Nenhum" id="vinculoDaAtividade_0" />
-		Nenhum</label>
-
-		<label>
-		<br />
-		<input type="radio" name="vinculoDaAtividade" value="PROBEXT" id="vinculoDaAtividade_1" />
-		PROBEXT</label>
-
+		<input type="radio" name="vinculoDaAtividade" value="${vinculo.nome }" id="vinculoDaAtividade_0" />
+		${vinculo.nome }</label>
+		</br>
+		</c:forEach>
 		<label>
 		<br />
-		<input type="radio" name="vinculoDaAtividade" value="PED" id="vinculoDaAtividade_2" />
-		PED</label>
-
-		<label>
-		<br />
-		<input type="radio" name="vinculoDaAtividade" value="Inclusão Digital" id="vinculoDaAtividade_3" />
-		Inclusão Digital</label>
-
-		<label>
-		<br />
+		
 		<input type="radio" name="vinculoDaAtividade" value="Outros" id="vinculoDaAtividade_4" />
 		Outros</label>
 		<label for="outroVinculoDeAtividade"></label>
@@ -108,45 +76,13 @@
 		<div>
 			<h2>Área  temática</h2>
 
+		<c:forEach var="areaTematica" items="${requestScope.areaTematica }">
+		<label>
+		<input type="radio" name="Área temática" value="${areaTematica.area }" id="Aacutereatemaacutetica_0" />
+		${areaTematica.area }</label>
 
-		<label>
-		<input type="radio" name="Área temática" value="Comunicação" id="Aacutereatemaacutetica_0" />
-		Comunicação</label>
-
-		<br/>           
-		<label>
-		<input type="radio" name="Área temática" value="Cultura" id="Aacutereatemaacutetica_1" />
-		Cultura</label>
-		<br/>
-
-		<label>
-		<input type="radio" name="Área temática" value="Direitos Humanos e Justiça" id="Aacutereatemaacutetica_2" />
-		Direitos Humanos e Justiça</label>
-		<br/>
-
-		<label>
-		<input type="radio" name="Área temática" value="Educação" id="Aacutereatemaacutetica_3" />
-		Educação</label>
-		<br/>            
-		<label>
-		<input type="radio" name="Área temática" value="Meio Ambiente" id="Aacutereatemaacutetica_4" />
-		Meio Ambiente</label>
-		<br/>
-
-		<label>
-		<input type="radio" name="Área temática" value="Saúde" id="Aacutereatemaacutetica_5" />
-		Saúde</label>
-		<br/>
-
-		<label>
-		<input type="radio" name="Área temática" value="Tecnologia e Produção" id="Aacutereatemaacutetica_6" />
-		Tecnologia e Produção</label>
-		<br/>
-		<label>
-		<input type="radio" name="Área temática" value="Trabalho" id="Aacutereatemaacutetica_7" />
-		Trabalho</label>
-
-		<br/>
+		<br/>      
+		</c:forEach>     
 		</div>
 		<div>
 				<br/>
