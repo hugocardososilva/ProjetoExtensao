@@ -1,9 +1,11 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,11 +18,11 @@ public class LocalRealizacao {
 	private int codigo;
 	private String local;
 	
-	@OneToMany(mappedBy="local", cascade= CascadeType.ALL)
+	@OneToMany(mappedBy="local", cascade= CascadeType.ALL, fetch= FetchType.EAGER)
 	private List<Atividade> atividades;
 	
 	public LocalRealizacao() {
-		// TODO Auto-generated constructor stub
+		this.atividades= new ArrayList<Atividade>();
 	}
 	public int getId() {
 		return id;
@@ -63,7 +65,7 @@ public class LocalRealizacao {
 	@Override
 	public String toString() {
 		return "LocalRealizacao [id=" + id + ", codigo=" + codigo + ", local="
-				+ local + ", atividades=" + atividades + "]";
+				+ local +"]";
 	}
 	
 

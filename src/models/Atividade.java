@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,18 +35,18 @@ public class Atividade {
 	@Temporal(TemporalType.DATE)
 	private Date dataTermino;
 	
-	@ManyToOne(cascade= CascadeType.ALL)
+	@ManyToOne(cascade= CascadeType.PERSIST)
 	private LocalRealizacao local;
 	
 	private String fonteDeRecurso;
 	
-	@ManyToOne(cascade= CascadeType.ALL)
+	@ManyToOne(cascade= CascadeType.PERSIST)
 	private AreaTematica areaTematica;
 	
-	@ManyToOne(cascade= CascadeType.ALL)
+	@ManyToOne(cascade= CascadeType.PERSIST)
 	private TipoAtividade tipoAtividade;
 	
-	@ManyToOne(cascade= CascadeType.ALL)
+	@ManyToOne(cascade= CascadeType.PERSIST)
 	private Vinculo vinculo;
 	
 	
@@ -54,37 +55,37 @@ public class Atividade {
 	
 	private String objetivo;
 //	Relacionamentos
-	@ManyToOne(cascade= CascadeType.MERGE)
+	@ManyToOne(cascade= CascadeType.PERSIST)
 	private LinhaDeExtensao linhaDeExtensao;
 	
 	@ManyToOne(cascade=CascadeType.PERSIST)
 	private Coordenador coordenador;
 	
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToMany(cascade=CascadeType.PERSIST)
 	private List<Atividade> atividades = new ArrayList<Atividade>();
 	
-	@OneToOne(cascade= CascadeType.MERGE)
+	@OneToOne(cascade= CascadeType.PERSIST)
 	private AtividadeAntiga atividadeAntiga;
 	
-	@OneToMany(mappedBy= "atividade", cascade= CascadeType.ALL)
+	@OneToMany(mappedBy= "atividade", cascade= CascadeType.PERSIST)
 	private List<BeneficiarioDireto> beneficiariosDiretos = new ArrayList<BeneficiarioDireto>();
 	
-	@OneToMany(mappedBy= "atividade", cascade= CascadeType.ALL)
+	@OneToMany(mappedBy= "atividade", cascade= CascadeType.PERSIST)
 	private List<BeneficiarioIndireto> beneficiariosIndiretos= new ArrayList<BeneficiarioIndireto>();
 	
-	@ManyToMany(cascade= CascadeType.ALL)
-	private List<Docente> docentes= new ArrayList<Docente>();
+	@ManyToMany(cascade= CascadeType.PERSIST, fetch= FetchType.EAGER)
+	private List<Docente> docentes;
 	
-	@ManyToMany(cascade= CascadeType.ALL)
-	private List<Tecnico> tecnicos= new ArrayList<Tecnico>();
+	@ManyToMany(cascade= CascadeType.PERSIST, fetch= FetchType.EAGER)
+	private List<Tecnico> tecnicos;
 	
-	@ManyToMany(cascade= CascadeType.ALL)
-	private List<Bolsista> bolsistas= new ArrayList<Bolsista>();
+	@ManyToMany(cascade= CascadeType.PERSIST, fetch= FetchType.EAGER)
+	private List<Bolsista> bolsistas;
 	
-	@ManyToMany(cascade= CascadeType.ALL)
-	private List<Externos> externos= new ArrayList<Externos>();
+	@ManyToMany(cascade= CascadeType.PERSIST, fetch= FetchType.EAGER)
+	private List<Externos> externos;
 	
-	@OneToOne(cascade= CascadeType.ALL)
+	@OneToOne(cascade= CascadeType.PERSIST)
 	private ControleRegistro controleRegistro;
 	
 	// construtor vazio(JPA)
@@ -92,6 +93,11 @@ public class Atividade {
 	
 	public Atividade() {
 		super();
+		this.externos= new ArrayList<Externos>();
+		this.bolsistas= new ArrayList<Bolsista>();
+		this.tecnicos= new ArrayList<Tecnico>();
+		this.docentes= new ArrayList<Docente>();
+		
 	}
 
 	public int getId() {

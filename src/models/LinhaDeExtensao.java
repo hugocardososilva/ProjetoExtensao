@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,7 +21,7 @@ public class LinhaDeExtensao {
 	private String definicoes;
 	
 	
-	@OneToMany(mappedBy="linhaDeExtensao", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="linhaDeExtensao", cascade=CascadeType.ALL, fetch= FetchType.EAGER)
 	private List<Atividade> atividades;
 	
 	public LinhaDeExtensao() {
@@ -78,7 +79,7 @@ public class LinhaDeExtensao {
 	public String toString() {
 		return "LinhaDeExtensao [id=" + id + ", numero=" + numero
 				+ ", denominacao=" + denominacao + ", definicoes=" + definicoes
-				+ ", atividades=" + atividades + "]";
+				+  "]";
 	}
 
 	

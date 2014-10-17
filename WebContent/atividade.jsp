@@ -21,31 +21,50 @@
 			<td>${requestScope.atividade.titulo }</td>
 		</tr>
 		<tr>
+			<td>Tipo da Atividade</td>
+			<td>${requestScope.atividade.tipoAtividade.nome }</td>
+		</tr>
+		<tr>
 			<td>Vínculo</td>
 			<td>${requestScope.atividade.vinculo }</td>
 		</tr>
 		<tr>
-			<td>Tipo da Atividade</td>
-			<td>${requestScope.atividade.tipoAtividade }</td>
+			<td>Fonte de Recursos</td>
+			<td>${requestScope.atividade.fonteDeRecurso }</td>
 		</tr>
 		<tr>
-			<td>Linha de Extensão</td>
-			<td>${requestScope.atividade.linhaDeExtensao }</td>
-		</tr>
-		<tr>
-			<td>Local de Realização</td>
-			<td>${requestScope.atividade.local }</td>		
+			<td>Valor</td>
+			<td>${requestScope.atividade.valor }</td>
 		</tr>
 		<tr>
 			<td>Objetivo</td>
 			<td>${requestScope.atividade.objetivo }</td>
 		</tr>
 		<tr>
-			<td>Valor</td>
-			<td>${requestScope.atividade.valor }</td>
+			<td>Área Temática</td>
+			<td>${requestScope.atividade.areaTematica.descricao }</td>
 		</tr>
+		<tr>
+			<td>Linha de Extensão</td>
+			<td>${requestScope.atividade.linhaDeExtensao.denominacao }</td>
+		</tr>
+		<tr>
+			<td>Data de Inicio</td>
+			<td>${requestScope.atividade.dataInicio }</td>
+		</tr>
+		<tr>
+			<td>Data prevista para o término</td>
+			<td>${requestScope.atividade.dataTermino }</td>
+		</tr>
+		<tr>
+			<td>Local de Realização</td>
+			<td>${requestScope.atividade.local.local }</td>		
+		</tr>
+		
+		
 		<c:choose>
 			<c:when test="${requestScope.atividade.coordenador == null }">
+				<tr><td>Coordenador</td></tr>
 						<tr>
 					
 							<td><a href="inserir-coordenador.jsp?ref=atividade&id=${requestScope.atividade.id }">Adicionar Coordenador</a></td>
@@ -88,19 +107,178 @@
 				
 				</c:otherwise>
 		</c:choose>	
+		
+		<tr>
+				<td>Docentes</td>
+		</tr>
 		<c:choose>
-			<c:when test="${requestScope.atividade.docentes == null }">
+			<c:when test="${requestScope.atividade.docentes.isEmpty() }">
 				
 				<tr><td>Nenhum docente adicionado</td></tr>
+				<tr><td><a href="inserir-equipe-tematica.jsp?especificacao=docente&id=${requestScope.atividade.id }">Adicionar Docente</a></td></tr>
 				
 				
 				
 			</c:when>
 			<c:otherwise>
-			<tr><td>teste</td>	</tr>
+			
+			<c:forEach var="docente" items="${requestScope.atividade.docentes }">
+			<tr>
+				<td>Nome</td>
+				<td>${docente.nome }</td>
+			</tr>
+			<tr>
+				<td>Email</td>
+				<td>${docente.email }</td>
+			</tr>
+			<tr>
+				<td>Voluntario?</td>
+				<td>${docente.voluntario }</td>
+			</tr>
+			<tr>
+				<td>Opções</td>
+				<td><a href="Participantes.do?ref=editar&id=${requestScope.atividade.id }&idDocente=${docente.id}">Editar</a></td>
+				<td><a href="Participantes.do?ref=remover&id=${requestScope.atividade.id }&idDocente=${docente.id}">Remover</a></td>
+			</tr>
+			
+			</c:forEach>
+				<tr><td><a href="inserir-equipe-tematica.jsp?especificacao=docente&id=${requestScope.atividade.id }">Adicionar Docente</a><tr><td>
+			
+			
+			
+			
 			</c:otherwise>
+			
 		</c:choose>
-		<tr><td><a href="inserir-equipe-tematica.jsp?id=${requestScope.atividade.id }">Adicionar Equipe Temática</a><tr><td>
+		
+		<tr>
+				<td>Técnicos Administrativos</td>
+			</tr>
+		<c:choose>
+			<c:when test="${requestScope.atividade.tecnicos.isEmpty() }">
+				
+				<tr><td>Nenhum técnico administrativo adicionado</td></tr>
+				<tr><td><a href="inserir-equipe-tematica.jsp?especificacao=tecnico&id=${requestScope.atividade.id }">Adicionar Técnico</a></td></tr>
+				
+				
+				
+			</c:when>
+			<c:otherwise>
+			
+			<c:forEach var="tecnico" items="${requestScope.atividade.tecnicos }">
+			<tr>
+				<td>Nome</td>
+				<td>${tecnico.nome }</td>
+			</tr>
+			<tr>
+				<td>Email</td>
+				<td>${tecnico.email }</td>
+			</tr>
+			<tr>
+				<td>Voluntario?</td>
+				<td>${tecnico.voluntario }</td>
+			</tr>
+			<tr>
+				<td>Opções</td>
+				<td><a href="Participantes.do?ref=editar&id=${requestScope.atividade.id }&idtecnico=${tecnico.id}">Editar</a></td>
+				<td><a href="Participantes.do?ref=remover&id=${requestScope.atividade.id }&idtecnico=${tecnico.id}">Remover</a></td>
+			</tr>
+			
+			</c:forEach>
+				<tr><td><a href="inserir-equipe-tematica.jsp?especificacao=tecnico&id=${requestScope.atividade.id }">Adicionar Técnico</a><tr><td>
+			
+			
+			
+			
+			</c:otherwise>
+			
+		</c:choose>
+		
+				<tr>
+				<td>Bolsistas</td>
+			</tr>
+		<c:choose>
+			<c:when test="${requestScope.atividade.bolsistas.isEmpty() }">
+				
+				<tr><td>Nenhum bolsista adicionado</td></tr>
+				<tr><td><a href="inserir-equipe-tematica.jsp?especificacao=bolsista&id=${requestScope.atividade.id }">Adicionar Bolsista</a></td></tr>
+				
+				
+				
+			</c:when>
+			<c:otherwise>
+			
+			<c:forEach var="bolsista" items="${requestScope.atividade.bolsistas }">
+			<tr>
+				<td>Nome</td>
+				<td>${bolsista.nome }</td>
+			</tr>
+			<tr>
+				<td>Email</td>
+				<td>${bolsista.email }</td>
+			</tr>
+			<tr>
+				<td>Voluntario?</td>
+				<td>${bolsista.voluntario }</td>
+			</tr>
+			<tr>
+				<td>Opções</td>
+				<td><a href="Participantes.do?ref=editar&id=${requestScope.atividade.id }&idbolsista=${tecnico.id}">Editar</a></td>
+				<td><a href="Participantes.do?ref=remover&id=${requestScope.atividade.id }&idbolsista=${tecnico.id}">Remover</a></td>
+			</tr>
+			
+			</c:forEach>
+				<tr><td><a href="inserir-equipe-tematica.jsp?especificacao=bolsista&id=${requestScope.atividade.id }">Adicionar Bolsista</a><tr><td>
+			
+			
+			
+			
+			</c:otherwise>
+			
+		</c:choose>
+		
+					<tr>
+				<td>Externos</td>
+			</tr>
+		<c:choose>
+			<c:when test="${requestScope.atividade.externos.isEmpty() }">
+				
+				<tr><td>Nenhum externo adicionado</td></tr>
+				<tr><td><a href="inserir-equipe-tematica.jsp?especificacao=externo&id=${requestScope.atividade.id }">Adicionar Externo</a></td></tr>
+				
+				
+				
+			</c:when>
+			<c:otherwise>
+			
+			<c:forEach var="externo" items="${requestScope.atividade.externos }">
+			<tr>
+				<td>Nome</td>
+				<td>${externo.nome }</td>
+			</tr>
+			<tr>
+				<td>Email</td>
+				<td>${externo.email }</td>
+			</tr>
+			<tr>
+				<td>Voluntario?</td>
+				<td>${externo.voluntario }</td>
+			</tr>
+			<tr>
+				<td>Opções</td>
+				<td><a href="Participantes.do?ref=editar&id=${requestScope.atividade.id }&idexterno=${externo.id}">Editar</a></td>
+				<td><a href="Participantes.do?ref=remover&id=${requestScope.atividade.id }&idexterno=${externo.id}">Remover</a></td>
+			</tr>
+			
+			</c:forEach>
+				<tr><td><a href="inserir-equipe-tematica.jsp?especificacao=externo&id=${requestScope.atividade.id }">Adicionar Externo</a><tr><td>
+			
+			
+			
+			
+			</c:otherwise>
+			
+		</c:choose>
 			
 			
 			

@@ -5,10 +5,13 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import org.apache.jasper.tagplugins.jstl.core.ForEach;
 @Entity
 public class Vinculo {
 	@Id
@@ -16,7 +19,7 @@ public class Vinculo {
 	private int id;
 	private String nome;
 	
-	@OneToMany(mappedBy="vinculo", cascade= CascadeType.ALL)
+	@OneToMany(mappedBy="vinculo", cascade= CascadeType.PERSIST, fetch= FetchType.EAGER)
 	private List<Atividade> atividades;
 
 	public Vinculo() {
@@ -59,8 +62,9 @@ public class Vinculo {
 
 	@Override
 	public String toString() {
-		return "Vinculo [id=" + id + ", nome=" + nome + ", atividades="
-				+ atividades + "]";
+		return "Vinculo [id=" + id + ", nome=" + nome + "]";
 	}
+
+	
 	
 }

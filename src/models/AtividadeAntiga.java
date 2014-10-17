@@ -2,7 +2,9 @@ package models;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,7 +18,7 @@ public class AtividadeAntiga {
 	private int id; 
 	@Temporal(TemporalType.DATE)
 	private Date ano;
-	@OneToOne
+	@OneToOne(cascade= CascadeType.PERSIST, fetch= FetchType.EAGER)
 	private Atividade atividade;
 	
 		public AtividadeAntiga() {
@@ -64,7 +66,7 @@ public class AtividadeAntiga {
 		@Override
 		public String toString() {
 			return "AtividadeAntiga [id=" + id + ", ano=" + ano
-					+ ", atividade=" + atividade + "]";
+					+"]";
 		}
 
 

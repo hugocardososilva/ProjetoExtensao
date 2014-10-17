@@ -5,8 +5,10 @@ import java.util.List;
 
 
 
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +27,7 @@ public class Coordenador extends Participante {
 	private String tipo;
 
 	
-	@OneToMany(mappedBy="coordenador", cascade= CascadeType.PERSIST)
+	@OneToMany(mappedBy="coordenador", cascade= CascadeType.PERSIST, fetch= FetchType.EAGER)
 	private List<Atividade> atividades = new ArrayList<Atividade>();
 
 	public Coordenador() {
@@ -92,7 +94,7 @@ public class Coordenador extends Participante {
 	public String toString() {
 		return "Coordenador [id=" + id + ", setor=" + setor + ", telPrimario="
 				+ telPrimario + ", telAuxiliar=" + telAuxiliar + ", tipo="
-				+ tipo + ", atividades=" + atividades + "]";
+				+ tipo + "]";
 	}
 	
 }

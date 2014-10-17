@@ -4,25 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Inserir Participante</title>
 </head>
 <body>
-<form action="EquipeTematica.do?ref=novo&id=${param.id }" method="post">
-		<label>
-		<input type="radio" name="especificacao" value="docente" id="docente" />
-		Docente</label>
-		<label>
-		<input type="radio" name="especificacao" value="tecnico" id="tecnico" />
-		Técnico Administrativo</label>
-		<label>
-		<input type="radio" name="especificacao" value="bolsista" id="bolsista" />
-		Bolsista</label>
-		<label>
-		<input type="radio" name="especificacao" value="externo" id="externo" />
-		Externo</label>
+<form action="Participantes.do?ref=novo&id=${param.id }" method="post">
 		
 		
-	
+		
+		<input type="hidden" name="tipo" value="${param.especificacao }">
 		<label for="nome">Nome <br />
 		</label>
 			<input name="nome" type="text" id="nome" size="50" maxlength="100" />
@@ -35,10 +24,10 @@
 		</p>
 		<p>
 			<label>
-			<input type="radio" name="voluntario" value="sim" id="Voluntario_0" />
+			<input type="radio" name="voluntario" value="true" id="Voluntario_0" />
 			Sim</label>
 		<label>
-		<input type="radio" name="voluntario" value="nao" id="Voluntario_1" />
+		<input type="radio" name="voluntario" value="false" id="Voluntario_1" />
 		Não</label>
 
 

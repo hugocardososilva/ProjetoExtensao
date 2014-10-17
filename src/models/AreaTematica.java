@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,7 +18,7 @@ public class AreaTematica {
 	private String area;
 	private String descricao;
 	
-	@OneToMany(mappedBy="areaTematica", cascade= CascadeType.ALL)
+	@OneToMany(mappedBy="areaTematica", cascade= CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Atividade> atividades;
 
 	public AreaTematica() {
@@ -67,7 +68,7 @@ public class AreaTematica {
 	@Override
 	public String toString() {
 		return "AreaTematica [id=" + id + ", area=" + area + ", descricao="
-				+ descricao + ", atividades=" + atividades + "]";
+				+ descricao + "]";
 	}
 
 
