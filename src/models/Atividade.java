@@ -345,7 +345,10 @@ public class Atividade {
 					}else
 						if(tipo.equalsIgnoreCase("tecnico")){
 							this.tecnicos.add((Tecnico)participante);
-						}
+						}else
+							if(tipo.equalsIgnoreCase("coordenador")){
+								this.setCoordenador((Coordenador) participante);
+							}
 		
 		}
 		public void removeParticipante ( ParticipanteInterface participante, String tipo){

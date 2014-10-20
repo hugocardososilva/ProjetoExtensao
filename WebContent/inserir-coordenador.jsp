@@ -8,11 +8,12 @@
 <title>Inserir Coordenador</title>
 </head>
 <body>
+<c:import url="/pesquisar-equipe.jsp"/>
 <form action="Coordenador.do?ref=novo&id=${param.id }" method="post">
 <h2>Coordenador</h2>
-
-		<p>
 		
+		<p>
+		<input type="hidden" name="tipo" value="${param.especificacao }">
 		<label for="nomeCoordenador">Nome Completo<br />
 		</label>
 		<input name="nomeCoordenador" type="text" id="nomeCoordenador" size="50" maxlength="100" />

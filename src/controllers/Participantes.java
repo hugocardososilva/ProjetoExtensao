@@ -21,9 +21,10 @@ import dao.DAOTecnico;
 import dao.FactoryDAOParticipante;
 import models.Atividade;
 import models.Bolsista;
+import models.Coordenador;
 import models.Docente;
 import models.Externos;
-import models.FactoryEquipeTematica;
+import models.FactoryParticipante;
 import models.ParticipanteInterface;
 import models.Tecnico;
 
@@ -67,58 +68,85 @@ public class Participantes extends HttpServlet {
 				
 				int idParticipante= Integer.parseInt(request.getParameter("idParticipante"));
 				String tipo = request.getParameter("tipo");
+				ParticipanteInterface participante= FactoryParticipante.getEquipeTematica(tipo);
+				DAOParticipanteInterface daoParticipante= FactoryDAOParticipante.getDAOParticipante(tipo);
+				participante= (ParticipanteInterface) daoParticipante.find(idParticipante);
 				
-					if(tipo.equalsIgnoreCase("docente")){
-						Docente docente= daodoc.find(idParticipante);
-							if(!atividade.getDocentes().contains(docente)){
-							atividade.addDocente(docente);							
-							docente.addAtividade(atividade);
-							daoa.merge(atividade);
-							daodoc.merge(docente);
+					if(tipo.equalsIgnoreCase("coordenador")){
+						atividade.setCoordenador((Coordenador)participante);
+						participante.addAtividade(atividade);
+						daoParticipante.merge(participante);
+						daoa.merge(atividade);
+						request.setAttribute("mensagem", "Participante vinculado ao projeto com sucesso!");
+					}else
+							if(!participante.getAtividades().contains(atividade)){
+								atividade.addParticipante(participante, tipo);
+								participante.addAtividade(atividade);
+								daoParticipante.merge(participante);
+								daoa.merge(atividade);
+								request.setAttribute("mensagem", "Participante vinculado ao projeto com sucesso!");
+								
 							}else{
 								request.setAttribute("mensagem", "Esse participante já está vinculado ao projeto");
-							}
-							
-					}else
-						if(tipo.equalsIgnoreCase("bolsista")){
-							Bolsista bolsista= daobol.find(idParticipante);
-								if(!atividade.getBolsistas().contains(bolsista)){
-								atividade.addBolsista(bolsista);
-								bolsista.addAtividade(atividade);
-								daoa.merge(atividade);
-								daobol.merge(bolsista);
-								}else{
-									request.setAttribute("mensagem", "Esse participante já está vinculado ao projeto");
-								}
-						}else
-							if(tipo.equalsIgnoreCase("tecnico")){
-								Tecnico tec= daotec.find(idParticipante);
-									if(atividade.getTecnicos().contains(tec)){
-									atividade.addTecnico(tec);
-									tec.addAtividade(atividade);
-									daoa.merge(atividade);
-									daotec.merge(tec);
-									}else{
-										request.setAttribute("mensagem", "Esse participante já está vinculado ao projeto");
-									}
-			
-							}else
-								if(tipo.equalsIgnoreCase("externo")){
-									Externos externos= daoext.find(idParticipante);
-										if(atividade.getExternos().contains(externos)){
-											atividade.addExternos(externos);
-											externos.addAtividade(atividade);
-											daoa.merge(atividade);
-											daoext.merge(externos);
-										}else{
-											request.setAttribute("mensagem", "Esse participante já está vinculado ao projeto");
-										}
-								}
+							}	
+						
 					DAO.commit();
 					DAO.close();
 					request.setAttribute("atividade", atividade);
 					
 					request.getRequestDispatcher("atividade.jsp").forward(request, response);
+				
+//					if(tipo.equalsIgnoreCase("docente")){
+//						Docente docente= daodoc.find(idParticipante);
+//							if(!atividade.getDocentes().contains(docente)){
+//							atividade.addDocente(docente);							
+//							docente.addAtividade(atividade);
+//							daoa.merge(atividade);
+//							daodoc.merge(docente);
+//							}else{
+//								request.setAttribute("mensagem", "Esse participante já está vinculado ao projeto");
+//							}
+//							
+//					}else
+//						if(tipo.equalsIgnoreCase("bolsista")){
+//							Bolsista bolsista= daobol.find(idParticipante);
+//								if(!atividade.getBolsistas().contains(bolsista)){
+//								atividade.addBolsista(bolsista);
+//								bolsista.addAtividade(atividade);
+//								daoa.merge(atividade);
+//								daobol.merge(bolsista);
+//								}else{
+//									request.setAttribute("mensagem", "Esse participante já está vinculado ao projeto");
+//								}
+//						}else
+//							if(tipo.equalsIgnoreCase("tecnico")){
+//								Tecnico tec= daotec.find(idParticipante);
+//									if(atividade.getTecnicos().contains(tec)){
+//									atividade.addTecnico(tec);
+//									tec.addAtividade(atividade);
+//									daoa.merge(atividade);
+//									daotec.merge(tec);
+//									}else{
+//										request.setAttribute("mensagem", "Esse participante já está vinculado ao projeto");
+//									}
+//			
+//							}else
+//								if(tipo.equalsIgnoreCase("externo")){
+//									Externos externos= daoext.find(idParticipante);
+//										if(atividade.getExternos().contains(externos)){
+//											atividade.addExternos(externos);
+//											externos.addAtividade(atividade);
+//											daoa.merge(atividade);
+//											daoext.merge(externos);
+//										}else{
+//											request.setAttribute("mensagem", "Esse participante já está vinculado ao projeto");
+//										}
+//								}
+//					DAO.commit();
+//					DAO.close();
+//					request.setAttribute("atividade", atividade);
+//					
+//					request.getRequestDispatcher("atividade.jsp").forward(request, response);
 			}
 	}
 
@@ -140,7 +168,7 @@ public class Participantes extends HttpServlet {
 				boolean voluntario = Boolean.parseBoolean(request.getParameter("voluntario"));
 				Atividade atividade= daoAtividade.find(Integer.parseInt(id));
 				DAOParticipanteInterface daoParticipante= FactoryDAOParticipante.getDAOParticipante(tipo);
-				ParticipanteInterface equipe= FactoryEquipeTematica.getEquipeTematica(tipo);
+				ParticipanteInterface equipe= FactoryParticipante.getEquipeTematica(tipo);
 				equipe.addAtividade(atividade);
 				equipe.setNome(nome);
 				equipe.setEmail(email);
@@ -178,41 +206,52 @@ public class Participantes extends HttpServlet {
 					int idAtividade= Integer.parseInt(request.getParameter("id"));
 					String pesquisa = request.getParameter("pesquisa");
 					String tipo= request.getParameter("tipo");
+					DAOParticipanteInterface daoParticipante= FactoryDAOParticipante.getDAOParticipante(tipo);
+					List<ParticipanteInterface> lista = new ArrayList<ParticipanteInterface>();
 					
-						if(tipo.equalsIgnoreCase("docente")){
-							DAODocente dao= new DAODocente();
-							List<Docente> lista = new ArrayList<Docente>();
-								if(campo.equalsIgnoreCase("nome")) lista= dao.findByNome(pesquisa);
-								if(campo.equalsIgnoreCase("email")) lista= dao.findByEmail(pesquisa);	
-								request.setAttribute("lista", lista);
-							
-						}else
-							if(tipo.equalsIgnoreCase("bolsista")){
-								DAOBolsista dao= new DAOBolsista();
-								List<Bolsista> lista = new ArrayList<Bolsista>();
-									if(campo.equalsIgnoreCase("nome")) lista= dao.findByNome(pesquisa);
-									if(campo.equalsIgnoreCase("email")) lista= dao.findByEmail(pesquisa);	
-									request.setAttribute("lista", lista);
-								
-							}else
-								if(tipo.equalsIgnoreCase("tecnico")){
-									DAOTecnico dao= new DAOTecnico();
-									List<Tecnico> lista = new ArrayList<Tecnico>();
-										if(campo.equalsIgnoreCase("nome")) lista= dao.findByNome(pesquisa);
-										if(campo.equalsIgnoreCase("email")) lista= dao.findByEmail(pesquisa);	
-										request.setAttribute("lista", lista);
-								}else
-									if(tipo.equalsIgnoreCase("externo")){
-										DAOExterno dao= new DAOExterno();
-										List<Externos> lista = new ArrayList<Externos>();
-											if(campo.equalsIgnoreCase("nome")) lista= dao.findByNome(pesquisa);
-											if(campo.equalsIgnoreCase("email")) lista= dao.findByEmail(pesquisa);
-											request.setAttribute("lista", lista);
-									}
-						request.setAttribute("id", idAtividade);
-						request.setAttribute("tipo", tipo);
-						request.getRequestDispatcher("selecionar-participante.jsp").forward(request, response);
-						
+						if(campo.equalsIgnoreCase("nome")) lista= daoParticipante.findByNome(pesquisa);
+						if(campo.equalsIgnoreCase("email")) lista = daoParticipante.findByEmail(pesquisa);
+					
+					request.setAttribute("lista", lista);
+					request.setAttribute("id", idAtividade);
+					request.setAttribute("tipo", tipo);
+					request.getRequestDispatcher("selecionar-participante.jsp").forward(request, response);
+					
+					
+//						if(tipo.equalsIgnoreCase("docente")){
+//							DAODocente dao= new DAODocente();
+//							List<Docente> lista = new ArrayList<Docente>();
+//								if(campo.equalsIgnoreCase("nome")) lista= dao.findByNome(pesquisa);
+//								if(campo.equalsIgnoreCase("email")) lista= dao.findByEmail(pesquisa);	
+//								request.setAttribute("lista", lista);
+//							
+//						}else
+//							if(tipo.equalsIgnoreCase("bolsista")){
+//								DAOBolsista dao= new DAOBolsista();
+//								List<Bolsista> lista = new ArrayList<Bolsista>();
+//									if(campo.equalsIgnoreCase("nome")) lista= dao.findByNome(pesquisa);
+//									if(campo.equalsIgnoreCase("email")) lista= dao.findByEmail(pesquisa);	
+//									request.setAttribute("lista", lista);
+//								
+//							}else
+//								if(tipo.equalsIgnoreCase("tecnico")){
+//									DAOTecnico dao= new DAOTecnico();
+//									List<Tecnico> lista = new ArrayList<Tecnico>();
+//										if(campo.equalsIgnoreCase("nome")) lista= dao.findByNome(pesquisa);
+//										if(campo.equalsIgnoreCase("email")) lista= dao.findByEmail(pesquisa);	
+//										request.setAttribute("lista", lista);
+//								}else
+//									if(tipo.equalsIgnoreCase("externo")){
+//										DAOExterno dao= new DAOExterno();
+//										List<Externos> lista = new ArrayList<Externos>();
+//											if(campo.equalsIgnoreCase("nome")) lista= dao.findByNome(pesquisa);
+//											if(campo.equalsIgnoreCase("email")) lista= dao.findByEmail(pesquisa);
+//											request.setAttribute("lista", lista);
+//									}
+//						request.setAttribute("id", idAtividade);
+//						request.setAttribute("tipo", tipo);
+//						request.getRequestDispatcher("selecionar-participante.jsp").forward(request, response);
+//						
 							
 						}
 							

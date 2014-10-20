@@ -67,7 +67,7 @@
 				<tr><td>Coordenador</td></tr>
 						<tr>
 					
-							<td><a href="inserir-coordenador.jsp?ref=atividade&id=${requestScope.atividade.id }">Adicionar Coordenador</a></td>
+							<td><a href="inserir-coordenador.jsp?ref=atividade&especificacao=coordenador&id=${requestScope.atividade.id }">Adicionar Coordenador</a></td>
 						</tr>
 			</c:when>
 				<c:otherwise>
@@ -280,7 +280,9 @@
 			
 		</c:choose>
 			
-			
+			<tr>
+			<td><a href="GerarRegistro.do?id=${requestScope.atividade.id }">Gerar Registro e imprimir</a></td>
+			</tr>
 			
 			
 			

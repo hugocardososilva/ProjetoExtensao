@@ -1,6 +1,6 @@
 package models;
 
-public class FactoryEquipeTematica {
+public class FactoryParticipante {
 	public static ParticipanteInterface<?> getEquipeTematica(String tipo ) {
 		if(tipo.equalsIgnoreCase("docente")) return new Docente();
 		if(tipo.equalsIgnoreCase("tecnico")) return new Tecnico();

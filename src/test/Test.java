@@ -17,7 +17,7 @@ import models.Bolsista;
 import models.Coordenador;
 import models.Docente;
 import models.Externos;
-import models.FactoryEquipeTematica;
+import models.FactoryParticipante;
 import models.Participante;
 import models.ParticipanteInterface;
 import models.TipoAtividade;
@@ -70,11 +70,14 @@ public class Test {
 		DAO.begin();
 		DAOParticipanteInterface dao= FactoryDAOParticipante.getDAOParticipante("docente");
 		System.out.println(dao.getClass());
-		ParticipanteInterface<?> participante= FactoryEquipeTematica.getEquipeTematica("docente");
+		ParticipanteInterface<?> participante= FactoryParticipante.getEquipeTematica("docente");
 		participante.setEmail("funiscreiosson");
 		participante.setNome("nomenilson");
 		participante.setVoluntario(false);
 		dao.persist(participante);
+		ParticipanteInterface p1= FactoryParticipante.getEquipeTematica("docente");
+		p1= (ParticipanteInterface) dao.find(1);
+		System.out.println(p1.toString());
 		DAO.commit();
 		
 //		Atividade atividade= daoa.find(2);

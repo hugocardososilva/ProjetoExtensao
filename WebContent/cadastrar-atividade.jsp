@@ -15,7 +15,7 @@
 </head>
 <body>
 <div>
-	<form action="CadastrarAtividade.do" method="post" name="atividade">
+	<form action="Atividades.do?ref=novo" method="post" name="atividade">
 		
 		<div><label for="tituloDaAtividade">Título da Atividade</label><br>
 		<input name="tituloDaAtividade" type="text" id="tituloDaAtividade" size="100" maxlength="250" />

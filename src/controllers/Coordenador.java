@@ -86,7 +86,7 @@ public class Coordenador extends HttpServlet {
 			DAO.flush();
 			
 			daoAtividade.merge(atividade);
-			
+			DAO.commit();
 			request.setAttribute("mensagem", "Coordenador cadastrado e vinculado à atividade!");
 			request.setAttribute("atividade", atividade);
 			request.getRequestDispatcher("atividade.jsp").forward(request, response);

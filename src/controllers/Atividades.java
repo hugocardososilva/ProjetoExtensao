@@ -32,18 +32,24 @@ import models.Vinculo;
 /**
  * Servlet implementation class CadastrarAtividade
  */
-@WebServlet("/CadastrarAtividade.do")
-public class CadastrarAtividade extends HttpServlet {
+@WebServlet("/Atividades.do")
+public class Atividades extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private Atividade atividade = new Atividade();
 	private DAOAtividade daoAtividade= new DAOAtividade();
 	private DAOAtividadeAntiga daoAntiga= new DAOAtividadeAntiga();
+	DAOTipoAtividade daot= new DAOTipoAtividade();
+	DAOVinculo daov= new DAOVinculo();
+	DAOAreaTematica daoArea= new DAOAreaTematica();
+	DAOLinhaDeExtensao daoLinha= new DAOLinhaDeExtensao();
+	DAOLocalRealizacao daoLocal= new DAOLocalRealizacao();
+	
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CadastrarAtividade() {
+    public Atividades() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -52,15 +58,14 @@ public class CadastrarAtividade extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		abrindo conexao
+		String ref= request.getParameter("ref");
+		
+		//		abrindo conexao
 		DAO.open();
 		DAO.begin();
 		
-		DAOTipoAtividade daot= new DAOTipoAtividade();
-		DAOVinculo daov= new DAOVinculo();
-		DAOAreaTematica daoArea= new DAOAreaTematica();
-		DAOLinhaDeExtensao daoLinha= new DAOLinhaDeExtensao();
-		DAOLocalRealizacao daoLocal= new DAOLocalRealizacao();
+		
+		if(ref.equalsIgnoreCase("novo")){
 		
 			String outroVinculo;
 			String titulo = request.getParameter("tituloDaAtividade");
@@ -127,6 +132,7 @@ public class CadastrarAtividade extends HttpServlet {
 							atividade.setTipoAtividade(tipoAtividade);
 							atividade.setLinhaDeExtensao(linha);
 							atividade.setTitulo(titulo);
+							atividade.setAreaTematica(area);
 							
 							atividade.setValor(Double.parseDouble(valor));
 							atividade.setFonteDeRecurso(fonteDeRecursos);
@@ -153,13 +159,6 @@ public class CadastrarAtividade extends HttpServlet {
 		
 		DAO.commit();
 		
-//		pega a ultima atividade adicionada
-//		List<Atividade> lista= new ArrayList<Atividade>();
-//		lista= daoAtividade.findAll();
-//		
-//		
-//		request.setAttribute("atividade", lista.get(lista.size()-1));
-		
 		Atividade atividade = daoAtividade.find(daoAtividade.getLast());
 		request.setAttribute("atividade", atividade);
 		request.setAttribute("mensagem", "Atividade cadastrada com sucesso!");
@@ -167,6 +166,15 @@ public class CadastrarAtividade extends HttpServlet {
 		System.out.println(atividade.toString());
 		
 		request.getRequestDispatcher("atividade.jsp").forward(request, response);
+	
+	}else
+		{
+			
+		
 	}
-
+	}
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String ref= request.getParameter("ref");
+	}
 }
