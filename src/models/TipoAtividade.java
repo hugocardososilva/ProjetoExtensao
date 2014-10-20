@@ -15,6 +15,7 @@ public class TipoAtividade {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	private String sigla;
 	private String nome;
 	
 	@OneToMany(mappedBy="tipoAtividade", cascade= CascadeType.ALL, fetch= FetchType.EAGER)
@@ -25,7 +26,7 @@ public class TipoAtividade {
 		super();
 		this.atividades= new ArrayList<Atividade>();
 	}
-
+	
 	public int getId() {
 		return id;
 	}
@@ -40,6 +41,14 @@ public class TipoAtividade {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	public String getSigla() {
+		return sigla;
+	}
+
+	public void setSigla(String sigla) {
+		this.sigla = sigla;
 	}
 
 	public List<Atividade> getAtividades() {
@@ -59,7 +68,10 @@ public class TipoAtividade {
 
 	@Override
 	public String toString() {
-		return "TipoAtividade [id=" + id + ", nome=" + nome + "]";
+		return "TipoAtividade [id=" + id + ", sigla=" + sigla + ", nome="
+				+ nome + "]";
 	}
+
+	
 	
 }

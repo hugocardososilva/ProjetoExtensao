@@ -15,7 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Coordenador extends Participante {
+public class Coordenador extends Participante implements ParticipanteInterface<Coordenador> {
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private int id;

@@ -154,11 +154,14 @@ public class CadastrarAtividade extends HttpServlet {
 		DAO.commit();
 		
 //		pega a ultima atividade adicionada
-		List<Atividade> lista= new ArrayList<Atividade>();
-		lista= daoAtividade.findAll();
+//		List<Atividade> lista= new ArrayList<Atividade>();
+//		lista= daoAtividade.findAll();
+//		
+//		
+//		request.setAttribute("atividade", lista.get(lista.size()-1));
 		
-		
-		request.setAttribute("atividade", lista.get(lista.size()-1));
+		Atividade atividade = daoAtividade.find(daoAtividade.getLast());
+		request.setAttribute("atividade", atividade);
 		request.setAttribute("mensagem", "Atividade cadastrada com sucesso!");
 		DAO.close();
 		System.out.println(atividade.toString());

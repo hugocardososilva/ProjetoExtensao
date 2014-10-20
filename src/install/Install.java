@@ -19,42 +19,49 @@ public class Install {
 		DAO.begin();
 			TipoAtividade t1= new TipoAtividade();
 			t1.setNome("Programa de Extensão");
+			t1.setSigla("PRO");
 			daoTipo.persist(t1);
 			DAO.flush();
 			
 				TipoAtividade t2= new TipoAtividade();
 				t2.setNome("Projeto de Extensão");
+				t2.setSigla("PE");				
 				daoTipo.persist(t2);
 				DAO.flush();
 				
 				TipoAtividade t3= new TipoAtividade();
 				t3.setNome("Curso de Extensão");
+				t3.setSigla("CE");
 				daoTipo.persist(t3);
 				DAO.flush();
 				
 				TipoAtividade t4= new TipoAtividade();
 				t4.setNome("Evento de Extensão");
+				t4.setSigla("EE");
 				daoTipo.persist(t4);
 				DAO.flush();
 				
 				TipoAtividade t5= new TipoAtividade();
 				t5.setNome("Prestação de Serviço");
+				t5.setSigla("PS");
 				daoTipo.persist(t5);
 				DAO.flush();
 				
 				TipoAtividade t6= new TipoAtividade();
 				t6.setNome("Empreendedorismo");
+				t6.setSigla("EP");
 				daoTipo.persist(t6);
 				DAO.flush();
 				
 				TipoAtividade t7= new TipoAtividade();
 				t7.setNome("Visitas Técnicas");
+				t7.setSigla("VT");
 				daoTipo.persist(t7);
 				DAO.flush();
 				
 				TipoAtividade t8= new TipoAtividade();
 				t8.setNome("Acompanhamento de Egressos");
-				
+				t8.setSigla("AE");
 				daoTipo.persist(t8);
 			DAO.flush();
 			DAO.commit();
@@ -93,48 +100,56 @@ public class Install {
 			AreaTematica a1= new AreaTematica();
 			a1.setArea("Área 1 -");
 			a1.setDescricao("Comunicação");
+			a1.setSigla("COM");
 			daoArea.persist(a1);
 			DAO.flush();
 			
 			AreaTematica a2= new AreaTematica();
 			a2.setArea("Área 2 -");
 			a2.setDescricao("Cultura");
+			a2.setSigla("CUL");
 			daoArea.persist(a2);
 			DAO.flush();
 			
 			AreaTematica a3= new AreaTematica();
 			a3.setArea("Área 3 -");
 			a3.setDescricao("Direitos Humanos e Justiça");
+			a3.setSigla("DHJ");
 			daoArea.persist(a3);
 			DAO.flush();
 			
 			AreaTematica a4= new AreaTematica();
 			a4.setArea("Área 4 -");
 			a4.setDescricao("Educação ");
+			a4.setSigla("EDU");
 			daoArea.persist(a4);
 			DAO.flush();
 			
 			AreaTematica a5= new AreaTematica();
 			a5.setArea("Área 5 -");
 			a5.setDescricao("Meio Ambiente ");
+			a5.setSigla("MAM");
 			daoArea.persist(a5);
 			DAO.flush();
 			
 			AreaTematica a6= new AreaTematica();
 			a6.setArea("Área 6 -");
 			a6.setDescricao("Saúde ");
+			a6.setSigla("SAU");
 			daoArea.persist(a6);
 			DAO.flush();
 			
 			AreaTematica a7= new AreaTematica();
 			a7.setArea("Área 7 -");
 			a7.setDescricao("Tecnologia e Produção ");
+			a7.setSigla("TEC");
 			daoArea.persist(a7);
 			DAO.flush();
 			
 			AreaTematica a8= new AreaTematica();
 			a8.setArea("Área 8 -");
 			a8.setDescricao("Trabalho ");
+			a8.setSigla("TRA");
 			daoArea.persist(a8);
 			DAO.flush();
 			

@@ -35,12 +35,12 @@ import dao.DAOVinculo;
 				"/Filtros", 
 				"/cadastrar-atividade.jsp"
 		})
-public class Filtros implements Filter {
+public class FiltrosFormCadastro implements Filter {
 
     /**
      * Default constructor. 
      */
-    public Filtros() {
+    public FiltrosFormCadastro() {
         // TODO Auto-generated constructor stub
     }
 

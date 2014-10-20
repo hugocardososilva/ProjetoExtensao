@@ -73,19 +73,19 @@ public class Atividade {
 	@OneToMany(mappedBy= "atividade", cascade= CascadeType.PERSIST)
 	private List<BeneficiarioIndireto> beneficiariosIndiretos= new ArrayList<BeneficiarioIndireto>();
 	
-	@ManyToMany(cascade= CascadeType.PERSIST, fetch= FetchType.EAGER)
+	@ManyToMany(cascade= CascadeType.ALL, fetch= FetchType.EAGER)
 	private List<Docente> docentes;
 	
-	@ManyToMany(cascade= CascadeType.PERSIST, fetch= FetchType.EAGER)
+	@ManyToMany(cascade= CascadeType.ALL, fetch= FetchType.EAGER)
 	private List<Tecnico> tecnicos;
 	
-	@ManyToMany(cascade= CascadeType.PERSIST, fetch= FetchType.EAGER)
+	@ManyToMany(cascade= CascadeType.ALL, fetch= FetchType.EAGER)
 	private List<Bolsista> bolsistas;
 	
-	@ManyToMany(cascade= CascadeType.PERSIST, fetch= FetchType.EAGER)
+	@ManyToMany(cascade= CascadeType.ALL, fetch= FetchType.EAGER)
 	private List<Externos> externos;
 	
-	@OneToOne(cascade= CascadeType.PERSIST)
+	@OneToOne(cascade= CascadeType.ALL)
 	private ControleRegistro controleRegistro;
 	
 	// construtor vazio(JPA)
@@ -333,6 +333,35 @@ public class Atividade {
 			this.beneficiariosIndiretos.remove(indireto);
 		}
 
+		public void addParticipante(ParticipanteInterface participante, String tipo){
+			if(tipo.equalsIgnoreCase("docente")){
+				this.docentes.add((Docente) participante);
+			}else
+				if(tipo.equalsIgnoreCase("bolsista")){
+					this.bolsistas.add((Bolsista) participante);
+				}else
+					if(tipo.equalsIgnoreCase("externo")){
+						this.externos.add((Externos) participante);
+					}else
+						if(tipo.equalsIgnoreCase("tecnico")){
+							this.tecnicos.add((Tecnico)participante);
+						}
+		
+		}
+		public void removeParticipante ( ParticipanteInterface participante, String tipo){
+			if(tipo.equalsIgnoreCase("docente")){
+				this.docentes.remove((Docente) participante);
+			}else
+				if(tipo.equalsIgnoreCase("bolsista")){
+					this.bolsistas.remove((Bolsista) participante);
+				}else
+					if(tipo.equalsIgnoreCase("externo")){
+						this.externos.remove((Externos) participante);
+					}else
+						if(tipo.equalsIgnoreCase("tecnico")){
+							this.tecnicos.remove((Tecnico)participante);
+						}
+		}
 		@Override
 		public String toString() {
 			return "Atividade [id=" + id + ", registro=" + registro

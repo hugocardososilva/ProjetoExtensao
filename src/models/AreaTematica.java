@@ -17,6 +17,7 @@ public class AreaTematica {
 	private int id;
 	private String area;
 	private String descricao;
+	private String sigla;
 	
 	@OneToMany(mappedBy="areaTematica", cascade= CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Atividade> atividades;
@@ -24,6 +25,14 @@ public class AreaTematica {
 	public AreaTematica() {
 		super();
 		this.atividades= new ArrayList<Atividade>();
+	}
+	
+	public String getSigla() {
+		return sigla;
+	}
+
+	public void setSigla(String sigla) {
+		this.sigla = sigla;
 	}
 
 	public int getId() {
@@ -68,8 +77,10 @@ public class AreaTematica {
 	@Override
 	public String toString() {
 		return "AreaTematica [id=" + id + ", area=" + area + ", descricao="
-				+ descricao + "]";
+				+ descricao + ", sigla=" + sigla + "]";
 	}
+
+	
 
 
 }

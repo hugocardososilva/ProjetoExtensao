@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 
 @Entity
-public class Bolsista extends Participante {
+public class Bolsista extends Participante implements ParticipanteInterface<Bolsista> {
 	@ManyToMany(cascade=CascadeType.ALL)
 	private List<Atividade> atividades;
 	

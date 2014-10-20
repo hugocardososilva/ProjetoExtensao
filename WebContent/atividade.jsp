@@ -8,7 +8,7 @@
 <title>Atividade</title>
 </head>
 <body>
-
+	<p>${requestScope.mensagem }</p>
 		<div>
 		<table>
 		
@@ -137,8 +137,8 @@
 			</tr>
 			<tr>
 				<td>Opções</td>
-				<td><a href="Participantes.do?ref=editar&id=${requestScope.atividade.id }&idDocente=${docente.id}">Editar</a></td>
-				<td><a href="Participantes.do?ref=remover&id=${requestScope.atividade.id }&idDocente=${docente.id}">Remover</a></td>
+				<td><a href="Participantes.do?ref=editar&especificacao=docente&id=${requestScope.atividade.id }&idParticipante=${docente.id}">Editar</a></td>
+				<td><a href="Participantes.do?ref=remover&especificacao=docente&id=${requestScope.atividade.id }&idParticipante=${docente.id}">Remover</a></td>
 			</tr>
 			
 			</c:forEach>
@@ -180,8 +180,8 @@
 			</tr>
 			<tr>
 				<td>Opções</td>
-				<td><a href="Participantes.do?ref=editar&id=${requestScope.atividade.id }&idtecnico=${tecnico.id}">Editar</a></td>
-				<td><a href="Participantes.do?ref=remover&id=${requestScope.atividade.id }&idtecnico=${tecnico.id}">Remover</a></td>
+				<td><a href="Participantes.do?ref=editar&especificacao=tecnico&id=${requestScope.atividade.id }&idParticipante=${tecnico.id}">Editar</a></td>
+				<td><a href="Participantes.do?ref=remover&especificacao=tecnico&id=${requestScope.atividade.id }&idParticipante=${tecnico.id}">Remover</a></td>
 			</tr>
 			
 			</c:forEach>
@@ -223,8 +223,8 @@
 			</tr>
 			<tr>
 				<td>Opções</td>
-				<td><a href="Participantes.do?ref=editar&id=${requestScope.atividade.id }&idbolsista=${tecnico.id}">Editar</a></td>
-				<td><a href="Participantes.do?ref=remover&id=${requestScope.atividade.id }&idbolsista=${tecnico.id}">Remover</a></td>
+				<td><a href="Participantes.do?ref=editar&especificacao=bolsista&id=${requestScope.atividade.id }&idParticipante=${tecnico.id}">Editar</a></td>
+				<td><a href="Participantes.do?ref=remover&especificacao=bolsista&id=${requestScope.atividade.id }&idParticipante=${tecnico.id}">Remover</a></td>
 			</tr>
 			
 			</c:forEach>
@@ -266,8 +266,8 @@
 			</tr>
 			<tr>
 				<td>Opções</td>
-				<td><a href="Participantes.do?ref=editar&id=${requestScope.atividade.id }&idexterno=${externo.id}">Editar</a></td>
-				<td><a href="Participantes.do?ref=remover&id=${requestScope.atividade.id }&idexterno=${externo.id}">Remover</a></td>
+				<td><a href="Participantes.do?ref=editar&especificacao=externo&id=${requestScope.atividade.id }&idParticipante=${externo.id}">Editar</a></td>
+				<td><a href="Participantes.do?ref=remover&especificacao=externo&id=${requestScope.atividade.id }&idParticipante=${externo.id}">Remover</a></td>
 			</tr>
 			
 			</c:forEach>

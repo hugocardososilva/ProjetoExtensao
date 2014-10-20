@@ -6,7 +6,7 @@ import models.Externos;
 import models.Tecnico;
 
 public class FactoryDAOParticipante {
-	public static DAO getDAOParticipante(String tipo){
+	public static DAOParticipanteInterface<?> getDAOParticipante(String tipo){
 		if(tipo.equalsIgnoreCase("docente")) return new DAODocente();
 		if(tipo.equalsIgnoreCase("tecnico")) return new DAOTecnico();
 		if(tipo.equalsIgnoreCase("bolsista")) return new DAOBolsista();

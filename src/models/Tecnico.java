@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -7,13 +8,13 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 
 @Entity
-public class Tecnico extends Participante {
+public class Tecnico extends Participante implements ParticipanteInterface<Tecnico>{
 	@ManyToMany(cascade=CascadeType.ALL)
 	private List<Atividade> atividades;
 
 	public Tecnico() {
 		super();
-		// TODO Auto-generated constructor stub
+		this.atividades= new ArrayList<>();
 	}
 
 	public List<Atividade> getAtividades() {
