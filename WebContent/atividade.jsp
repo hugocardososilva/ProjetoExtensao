@@ -4,17 +4,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="bootstrap-default.css">
+<link  rel= "stylesheet"  href= "bootstrap/css/bootstrap.min.css" >
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Atividade</title>
 </head>
 <body>
-	<p>${requestScope.mensagem }</p>
+<div class="container">
+<c:import url="scripts.jsp"/>
+<c:import url="header.jsp"/>
+<c:import url="menu.jsp"/>
+
+	<div class="alert alert-info" role="alert">${requestScope.mensagem }</div>
 		<div>
-		<table>
+		<table class="table table-bordered table-hover">
 		
 		<tr>
-			<td>ID</td>
+			<td class="tdnome">ID</td>
 			<td>${requestScope.atividade.id }</td>
 		</tr>
 		<tr>
@@ -62,22 +67,25 @@
 			<td>${requestScope.atividade.local.local }</td>		
 		</tr>
 		
+		</table> 
+		
+		<h4>Coordenador</h4>
 		
 		<c:choose>
 			<c:when test="${requestScope.atividade.coordenador == null }">
-				<tr><td>Coordenador</td></tr>
-						<tr>
+				
+						<p>Nenhum coordenador adicionado</p>
 					
-							<td><a href="inserir-coordenador.jsp?ref=atividade&especificacao=coordenador&id=${requestScope.atividade.id }">Adicionar Coordenador</a></td>
-						</tr>
+							<p><a href="inserir-coordenador.jsp?ref=atividade&especificacao=coordenador&id=${requestScope.atividade.id }"><button type="button" class="btn btn-success">Adicionar Coordenador</button></a></p>
+						
 			</c:when>
 				<c:otherwise>
 				
-					<tr><td>Coordenador</td></tr>
 					
-				
+					
+				<table class="table table-bordered table-hover ">
 				<tr>
-							<td>Nome</td>
+							<td class="tdnome">Nome</td>
 							<td>${requestScope.atividade.coordenador.nome }</td>
 							
 				</tr>
@@ -102,21 +110,21 @@
 							<td>${requestScope.atividade.coordenador.telAuxiliar }</td>
 				</tr>
 				<tr>
-				<td><a href="Coordenador.do?ref=editar"><button class="btn btn-danger" type="button">Editar</button></a></td>
+				<td><a href="Coordenador.do?ref=editar"><button class="btn btn-info" type="button">Editar</button></a></td>
 				
 				</tr>
-				
+				</table>
 				</c:otherwise>
 		</c:choose>	
 		
-		<tr>
-				<td>Docentes</td>
-		</tr>
+		
+				<h4>Docentes</h4>
+		
 		<c:choose>
 			<c:when test="${requestScope.atividade.docentes.isEmpty() }">
 				
-				<tr><td>Nenhum docente adicionado</td></tr>
-				<tr><td><a href="inserir-equipe-tematica.jsp?especificacao=docente&id=${requestScope.atividade.id }">Adicionar Docente</a></td></tr>
+				<p>Nenhum docente adicionado</p>
+				<p><a href="inserir-equipe-tematica.jsp?especificacao=docente&id=${requestScope.atividade.id }"><button type="button" class="btn btn-success">Adicionar Docente</button></a></p>
 				
 				
 				
@@ -124,8 +132,9 @@
 			<c:otherwise>
 			
 			<c:forEach var="docente" items="${requestScope.atividade.docentes }">
+			<table class="table table-bordered table-hover ">
 			<tr>
-				<td>Nome</td>
+				<td class="tdnome">Nome</td>
 				<td>${docente.nome }</td>
 			</tr>
 			<tr>
@@ -141,9 +150,9 @@
 				<td><a href="Participantes.do?ref=editar&especificacao=docente&id=${requestScope.atividade.id }&idParticipante=${docente.id}">Editar</a></td>
 				<td><a href="Participantes.do?ref=remover&especificacao=docente&id=${requestScope.atividade.id }&idParticipante=${docente.id}">Remover</a></td>
 			</tr>
-			
+			</table>
 			</c:forEach>
-				<tr><td><a href="inserir-equipe-tematica.jsp?especificacao=docente&id=${requestScope.atividade.id }">Adicionar Docente</a><tr><td>
+				<p><a href="inserir-equipe-tematica.jsp?especificacao=docente&id=${requestScope.atividade.id }"><button type="button" class="btn btn-success">Adicionar Docente</button></a><p>
 			
 			
 			
@@ -152,14 +161,14 @@
 			
 		</c:choose>
 		
-		<tr>
-				<td>Técnicos Administrativos</td>
-			</tr>
+		
+				<h4>Técnicos Administrativos</h4>
+			
 		<c:choose>
 			<c:when test="${requestScope.atividade.tecnicos.isEmpty() }">
 				
-				<tr><td>Nenhum técnico administrativo adicionado</td></tr>
-				<tr><td><a href="inserir-equipe-tematica.jsp?especificacao=tecnico&id=${requestScope.atividade.id }"><button class="btn btn-danger" type="button">Adicionar Técnico</button></a></td></tr>
+				<p>Nenhum técnico administrativo adicionado</p>
+				<p><a href="inserir-equipe-tematica.jsp?especificacao=tecnico&id=${requestScope.atividade.id }"><button class="btn btn-success" type="button">Adicionar Técnico</button></a></p>
 				
 				
 				
@@ -167,8 +176,9 @@
 			<c:otherwise>
 			
 			<c:forEach var="tecnico" items="${requestScope.atividade.tecnicos }">
+			<table class="table table-bordered table-hover ">
 			<tr>
-				<td>Nome</td>
+				<td class="tdnome">Nome</td>
 				<td>${tecnico.nome }</td>
 			</tr>
 			<tr>
@@ -184,9 +194,9 @@
 				<td><a href="Participantes.do?ref=editar&especificacao=tecnico&id=${requestScope.atividade.id }&idParticipante=${tecnico.id}">Editar</a></td>
 				<td><a href="Participantes.do?ref=remover&especificacao=tecnico&id=${requestScope.atividade.id }&idParticipante=${tecnico.id}">Remover</a></td>
 			</tr>
-			
+			</table>
 			</c:forEach>
-				<tr><td><a href="inserir-equipe-tematica.jsp?especificacao=tecnico&id=${requestScope.atividade.id }">Adicionar Técnico</a><tr><td>
+				<p><a href="inserir-equipe-tematica.jsp?especificacao=tecnico&id=${requestScope.atividade.id }"><button type="button" class="btn btn-success">Adicionar Técnico</button></a><p>
 			
 			
 			
@@ -195,14 +205,13 @@
 			
 		</c:choose>
 		
-				<tr>
-				<td>Bolsistas</td>
-			</tr>
+				<h4>Bolsistas</h4>
+			
 		<c:choose>
 			<c:when test="${requestScope.atividade.bolsistas.isEmpty() }">
 				
-				<tr><td>Nenhum bolsista adicionado</td></tr>
-				<tr><td><a href="inserir-equipe-tematica.jsp?especificacao=bolsista&id=${requestScope.atividade.id }">Adicionar Bolsista</a></td></tr>
+				<p>Nenhum bolsista adicionado</p>
+				<p><a href="inserir-equipe-tematica.jsp?especificacao=bolsista&id=${requestScope.atividade.id }"><button class="btn btn-success" type="button">Adicionar Bolsista</button></a></p>
 				
 				
 				
@@ -210,8 +219,9 @@
 			<c:otherwise>
 			
 			<c:forEach var="bolsista" items="${requestScope.atividade.bolsistas }">
+			<table class="table table-bordered table-hover ">
 			<tr>
-				<td>Nome</td>
+				<td class="tdnome">Nome</td>
 				<td>${bolsista.nome }</td>
 			</tr>
 			<tr>
@@ -227,9 +237,10 @@
 				<td><a href="Participantes.do?ref=editar&especificacao=bolsista&id=${requestScope.atividade.id }&idParticipante=${tecnico.id}">Editar</a></td>
 				<td><a href="Participantes.do?ref=remover&especificacao=bolsista&id=${requestScope.atividade.id }&idParticipante=${tecnico.id}">Remover</a></td>
 			</tr>
+			</table>
 			
 			</c:forEach>
-				<tr><td><a href="inserir-equipe-tematica.jsp?especificacao=bolsista&id=${requestScope.atividade.id }">Adicionar Bolsista</a><tr><td>
+				<p><a href="inserir-equipe-tematica.jsp?especificacao=bolsista&id=${requestScope.atividade.id }"><button type="button" class="btn btn-success">Adicionar Bolsista</button></a><p>
 			
 			
 			
@@ -238,14 +249,14 @@
 			
 		</c:choose>
 		
-					<tr>
-				<td>Externos</td>
-			</tr>
+					
+				<h4>Externos</h4>
+			
 		<c:choose>
 			<c:when test="${requestScope.atividade.externos.isEmpty() }">
 				
-				<tr><td>Nenhum externo adicionado</td></tr>
-				<tr><td><a href="inserir-equipe-tematica.jsp?especificacao=externo&id=${requestScope.atividade.id }">Adicionar Externo</a></td></tr>
+				<p>Nenhum externo adicionado</p>
+				<p><a href="inserir-equipe-tematica.jsp?especificacao=externo&id=${requestScope.atividade.id }"><button class="btn btn-success" type="button">Adicionar Externo</button></a></p>
 				
 				
 				
@@ -253,8 +264,9 @@
 			<c:otherwise>
 			
 			<c:forEach var="externo" items="${requestScope.atividade.externos }">
+			<table class="table table-bordered table-hover ">
 			<tr>
-				<td>Nome</td>
+				<td class="tdnome">Nome</td>
 				<td>${externo.nome }</td>
 			</tr>
 			<tr>
@@ -267,12 +279,12 @@
 			</tr>
 			<tr>
 				<td>Opções</td>
-				<td><a href="Participantes.do?ref=editar&especificacao=externo&id=${requestScope.atividade.id }&idParticipante=${externo.id}">Editar</a></td>
-				<td><a href="Participantes.do?ref=remover&especificacao=externo&id=${requestScope.atividade.id }&idParticipante=${externo.id}">Remover</a></td>
+				<td><a href="Participantes.do?ref=editar&especificacao=externo&id=${requestScope.atividade.id }&idParticipante=${externo.id}">Editar</a>
+				<a href="Participantes.do?ref=remover&especificacao=externo&id=${requestScope.atividade.id }&idParticipante=${externo.id}">Remover</a></td>
 			</tr>
-			
+			</table>
 			</c:forEach>
-				<tr><td><a href="inserir-equipe-tematica.jsp?especificacao=externo&id=${requestScope.atividade.id }">Adicionar Externo</a><tr><td>
+				<p><a href="inserir-equipe-tematica.jsp?especificacao=externo&id=${requestScope.atividade.id }"><button type="button" class="btn btn-success">Adicionar Externo</button></a><p>
 			
 			
 			
@@ -281,15 +293,17 @@
 			
 		</c:choose>
 			
-			<tr>
-			<td><a href="GerarRegistro.do?id=${requestScope.atividade.id }">Gerar Registro e imprimir</a></td>
-			</tr>
+			
+			<p><a href="GerarRegistro.do?id=${requestScope.atividade.id }"><button class="btn btn-info" type="button">Gerar Registro e imprimir</button></a></p>
 			
 			
 			
 			
 			
-			</table>
+			
+			
 		</div>
+		</div>
+		
 </body>
 </html>

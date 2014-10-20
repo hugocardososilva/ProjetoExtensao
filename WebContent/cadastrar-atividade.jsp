@@ -13,9 +13,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Nova Atividade</title>
 <link  rel= "stylesheet"  href= "bootstrap/css/bootstrap.min.css" >
+<!-- <script src="bootstrap/js/bootstrap.min.js"></script> -->
 </head>
 <body>
-<div>
+	<div class="container">
+<c:import url="scripts.jsp"/>
+<c:import url="header.jsp"/>
+<c:import url="menu.jsp"/>
+	
+	<div >
+
 	<form role="form" action="Atividades.do?ref=novo" method="post" name="atividade">
 		
 		<div class="form-group">
@@ -23,6 +30,7 @@
 			<input name="tituloDaAtividade" class="form-control"type="text" id="tituloDaAtividade" size="100" maxlength="250" />
 		</div>
 		<div class="radio">
+		
 		
 			          	 <h4>Tipo de atividade</h4>
 			          	 <c:forEach var="tipo" items="${requestScope.listaTipo }">
@@ -67,14 +75,16 @@
 		<label> 
 			<input type="radio" name="especificarAtividade" value="novo" id="especificarAtividade_0" />
 		Atividade Nova</label>
-
+<br />
 		<label>
-		<br />
+		
 		
 		<input type="radio" name="especificarAtividade" value="antiga" id="especificarAtividade_1" />
-		Atividade realizada anteriormente no Ano: </label>
-		<label for="atividadeAntiga"></label>
-		<input name="atividadeAntiga" type="text" id="atividadeAntiga" size="4" maxlength="4" />
+		Atividade realizada anteriormente no ano:</label>
+		<label for="atividadeAntiga">
+		
+		<input class="form-control" name="atividadeAntiga" type="text" id="atividadeAntiga" size="4" maxlength="4" />
+		</label>
 		</div>
 		<div class="radio">
 			<h4>Área  temática</h4>
@@ -129,6 +139,6 @@
 	</form>
 
 </div>
-
+</div>
 </body>
 </html>
