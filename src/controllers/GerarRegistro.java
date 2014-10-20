@@ -55,7 +55,8 @@ public class GerarRegistro extends HttpServlet {
 		controle+= "-";
 		if(controleRegistro!= null){
 			
-		controle+= controleRegistro.getNumero()+1;
+			
+			controle+= controleRegistro.getNumero()+1;
 		}else{
 			
 		}
