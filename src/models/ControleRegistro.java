@@ -23,6 +23,7 @@ public class ControleRegistro {
 	private Atividade atividade;
 	
 	
+	
 	public ControleRegistro() {
 		super();
 	}

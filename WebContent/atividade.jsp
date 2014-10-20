@@ -4,6 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="bootstrap-default.css">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Atividade</title>
 </head>
@@ -101,7 +102,7 @@
 							<td>${requestScope.atividade.coordenador.telAuxiliar }</td>
 				</tr>
 				<tr>
-				<td><a href="Coordenador.do?ref=editar">Editar</a></td>
+				<td><a href="Coordenador.do?ref=editar"><button class="btn btn-danger" type="button">Editar</button></a></td>
 				
 				</tr>
 				
@@ -158,7 +159,7 @@
 			<c:when test="${requestScope.atividade.tecnicos.isEmpty() }">
 				
 				<tr><td>Nenhum técnico administrativo adicionado</td></tr>
-				<tr><td><a href="inserir-equipe-tematica.jsp?especificacao=tecnico&id=${requestScope.atividade.id }">Adicionar Técnico</a></td></tr>
+				<tr><td><a href="inserir-equipe-tematica.jsp?especificacao=tecnico&id=${requestScope.atividade.id }"><button class="btn btn-danger" type="button">Adicionar Técnico</button></a></td></tr>
 				
 				
 				

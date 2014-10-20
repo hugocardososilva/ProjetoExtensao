@@ -12,17 +12,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Nova Atividade</title>
+<link  rel= "stylesheet"  href= "bootstrap/css/bootstrap.min.css" >
 </head>
 <body>
 <div>
-	<form action="Atividades.do?ref=novo" method="post" name="atividade">
+	<form role="form" action="Atividades.do?ref=novo" method="post" name="atividade">
 		
-		<div><label for="tituloDaAtividade">Título da Atividade</label><br>
-		<input name="tituloDaAtividade" type="text" id="tituloDaAtividade" size="100" maxlength="250" />
+		<div class="form-group">
+			<label for="tituloDaAtividade">Título da Atividade</label><br>
+			<input name="tituloDaAtividade" class="form-control"type="text" id="tituloDaAtividade" size="100" maxlength="250" />
 		</div>
-		<div>
+		<div class="radio">
 		
-			          	 <h2>Tipo de atividade</h2>
+			          	 <h4>Tipo de atividade</h4>
 			          	 <c:forEach var="tipo" items="${requestScope.listaTipo }">
 						<label>
 							<input type="radio" name="Tipo de atividade" value="${tipo.id }" id="Tipodeatividade_0" />
@@ -32,50 +34,50 @@
 						</c:forEach>
 			
 		</div>
-		<div>
-			<h2>Vínculo da atividade</h2>
+		
+		<div class="radio">
+			<h4>Vínculo da atividade</h4>
 		 <c:forEach var="vinculo" items="${requestScope.vinculo }">
 		<label>
 		<input type="radio" name="vinculoDaAtividade" value="${vinculo.id }" id="vinculoDaAtividade_0" />
 		${vinculo.nome }</label>
-		
+			<br />
 		</c:forEach>
-		<label>
-		<br />
 		
-		<input type="radio" name="vinculoDaAtividade" value="Outros" id="vinculoDaAtividade_4" />
-		Outros</label>
-		<label for="outroVinculoDeAtividade"></label>
-		<input name="outroVinculoDeAtividade" type="text" id="outroVinculoDeAtividade" size="50" maxlength="100" />
-			
+		
+		
+		
+		
 		</div>
-		<div>
-			 <h2>Fonte  dos recursos</h2>
-		<input name="fonteDeRecursos" type="text" size="50" maxlength="100" />
-		<h2>Valor </h2>
+		<div class="form-group">
+			 <h4>Fonte  dos recursos</h4>
+		<input class="form-control" name="fonteDeRecursos" type="text" size="50" maxlength="100" />
+		<h4>Valor </h4>
 		<label for="valor"></label>
-		<input type="text" name="valor" id="valor" />
-
-		<h2>Objetivo</h2>
+		<input class="form-control" type="text" name="valor" id="valor" />
+		</div>
+		<div class="form-group">
+		<h4>Objetivo</h4>
 
 		<label for="objetivo"></label>
-		<textarea name="objetivo" cols="50" rows="4" id="objetivo"></textarea>
+		<textarea class="form-control"  name="objetivo" cols="50" rows="4" id="objetivo"></textarea>
 			
 		</div>
-		<div>
+		<div class="radio">
 		<label> 
 			<input type="radio" name="especificarAtividade" value="novo" id="especificarAtividade_0" />
 		Atividade Nova</label>
 
 		<label>
 		<br />
+		
 		<input type="radio" name="especificarAtividade" value="antiga" id="especificarAtividade_1" />
 		Atividade realizada anteriormente no Ano: </label>
 		<label for="atividadeAntiga"></label>
 		<input name="atividadeAntiga" type="text" id="atividadeAntiga" size="4" maxlength="4" />
 		</div>
-		<div>
-			<h2>Área  temática</h2>
+		<div class="radio">
+			<h4>Área  temática</h4>
 
 		<c:forEach var="areaTematica" items="${requestScope.areaTematica }">
 			<label>
@@ -85,13 +87,13 @@
 				<br/>      
 		</c:forEach>     
 		</div>
-		<div>
+		<div class="form-group">
 				<br/>
-			<h2>Especifique  a linha de extensão</h2>
+			<h4>Especifique  a linha de extensão</h4>
 
 			<label for="especifiqueALinhaDeExtensão"></label>
 				
-				<select name="especifiqueALinhaDeExtensão" id="especifiqueALinhaDeExtensão">
+				<select class="form-control" name="especifiqueALinhaDeExtensão" id="especifiqueALinhaDeExtensão">
 				
 				<c:forEach var="linhaExtensao" items="${requestScope.linhaExtensao }" >
 					<option value="${linhaExtensao.id }">${linhaExtensao.denominacao }</option>
@@ -102,28 +104,28 @@
 			
 		</div>
 		
-		<div>
-			<h2>Data de início</h2>
+		<div class="form-group">
+			<h4>Data de início</h4>
 			
 
-		<input name="dataInicio" type="text" />
+		<input class="form-control" name="dataInicio" type="text" />
 
-		<h2>Data prevista para término</h2>
+		<h4>Data prevista para término</h4>
 
-		<input name="dataTermino" type="text" />
+		<input class="form-control" name="dataTermino" type="text" />
 		
 		</div>
 		
-		<div>
-				<h2>Local de realização</h2>
-		<select name="localDeLocalizacao" id="localDeLocalizacao">
+		<div class="form-group">
+				<h4>Local de realização</h4>
+		<select class="form-control" name="localDeLocalizacao" id="localDeLocalizacao">
 		
 		<c:forEach var="localRealizacao" items="${requestScope.localRealizacao }">
 			<option value="${localRealizacao.id}">${localRealizacao.codigo } - ${localRealizacao.local }</option>
 		</c:forEach>
 		</select> 
 		</div>
-	<input type="submit" value="Salvar">
+	 <button type="submit" class="btn btn-info">Salvar</button>
 	</form>
 
 </div>
