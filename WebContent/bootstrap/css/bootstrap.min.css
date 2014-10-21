@@ -6,17 +6,20 @@
  #logo{
  	
  	background: url('../../images/logo.jpg');
- 	width: 785px;
- 	height: 147px;
+ 	width: 1130px;
+ 	height: 200px;
  	float: left;
  }
  #header{
  	
- 	height: 147px;
+ 	height: 200px;
  }
 .tdnome{
 	width: 300px;
 }
 .tdparticipante{
 	width: 300px;
+}
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form{
+	height: 70px !important;
 }

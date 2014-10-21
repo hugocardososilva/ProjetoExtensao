@@ -6,15 +6,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Selecionar ${requestScope.tipo }</title>
+<link  rel= "stylesheet"  href= "bootstrap/css/bootstrap.min.css" >
 </head>
 <body>
-<table>
+<div class="container">
+<c:import url="scripts.jsp"/>
+<c:import url="header.jsp"/>
+<c:import url="menu.jsp"/>
+		<table class="table table-bordered table-hover">
 		<tr>
-			<td>Nome</td>
-			<td>Email</td>
-			<td>Voluntário?</td>
-			<td>Opções</td>
-			<td></td>
+			<th>Nome</th>
+			<th>Email</th>
+			<th>Voluntário?</th>
+			<th>Opções</th>
+			
 		</tr>
 		
 		<c:forEach var="participante" items="${requestScope.lista }">
@@ -22,9 +27,8 @@
 				<td>${participante.nome }</td>
 				<td>${participante.email }</td>
 				<td>${participante.voluntario }</td>
-				<td><a href="Participantes.do?ref=inserir&tipo=${requestScope.tipo }&id=${requestScope.id }&idParticipante=${participante.id}">Inserir</a></td>
-				<td><form action="Participantes.do?ref=inserir&tipo=${requestScope.tipo }&id=${requestScope.id }&idParticipante=${participante.id}" method="post">
-				<input type="submit" value="Inserir"></form>
+				<td><a href="Participantes.do?ref=inserir&tipo=${requestScope.tipo }&id=${requestScope.id }&idParticipante=${participante.id}"><button type="button" class="btn btn-success right">Inserir</button></a></td>
+				
 				
 			</tr>
 		
@@ -33,6 +37,7 @@
 
 
 </table>
+</div>
 
 </body>
 </html>
