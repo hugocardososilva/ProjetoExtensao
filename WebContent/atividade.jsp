@@ -83,7 +83,7 @@
 			
 		<c:choose>
 			<c:when test="${requestScope.atividade.coordenador == null }">
-				<p><a href="inserir-coordenador.jsp?ref=atividade&especificacao=coordenador&id=${requestScope.atividade.id }"><button style="clear:both;float:right" type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"> </span>Adicionar Coordenador</button></a></p>
+				<p><a href="Participantes.do?ref=novo&especificacao=coordenador&id=${requestScope.atividade.id }"><button style="clear:both;float:right" type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"> </span>Adicionar Coordenador</button></a></p>
 						<p>Nenhum coordenador adicionado</p>
 					
 							
@@ -147,7 +147,7 @@
   				<h4>Docentes</h4>
   			</div>
 		<div class="panel-body">
-		<a href="inserir-equipe-tematica.jsp?especificacao=docente&id=${requestScope.atividade.id }"><button style="clear:both;float:right;" type="button" class="btn btn-success right">Adicionar Docente</button></a>
+		<a href="Participantes.do?ref=novo&especificacao=docente&id=${requestScope.atividade.id }"><button style="clear:both;float:right;" type="button" class="btn btn-success right">Adicionar Docente</button></a>
 		<c:choose>
 			<c:when test="${requestScope.atividade.docentes.isEmpty() }">
 				
@@ -205,7 +205,7 @@
  			</div>
 		 <div class="panel-body">
 				
-			<p><a href="inserir-equipe-tematica.jsp?especificacao=tecnico&id=${requestScope.atividade.id }"><button style="clear:both;float:right;" class="btn btn-success" type="button">Adicionar Técnico</button></a></p>
+			<p><a href="Participantes.do?ref=novo&especificacao=tecnico&id=${requestScope.atividade.id }"><button style="clear:both;float:right;" class="btn btn-success" type="button">Adicionar Técnico</button></a></p>
 		<c:choose>
 			<c:when test="${requestScope.atividade.tecnicos.isEmpty() }">
 				
@@ -256,7 +256,7 @@
  			</div>
 		 <div class="panel-body">
 				
-			<p><a href="inserir-equipe-tematica.jsp?especificacao=bolsista&id=${requestScope.atividade.id }"><button style="clear:both;float:right;" class="btn btn-success" type="button">Adicionar Bolsista</button></a></p>
+			<p><a href="Participantes.do?ref=novo&especificacao=bolsista&id=${requestScope.atividade.id }"><button style="clear:both;float:right;" class="btn btn-success" type="button">Adicionar Bolsista</button></a></p>
 		<c:choose>
 			<c:when test="${requestScope.atividade.bolsistas.isEmpty() }">
 				
@@ -312,7 +312,7 @@
  			</div>
 		 <div class="panel-body">
 					
-				<p><a href="inserir-equipe-tematica.jsp?especificacao=externo&id=${requestScope.atividade.id }"><button style="clear:both;float:right;" class="btn btn-success" type="button">Adicionar Externo</button></a></p>
+				<p><a href="Participantes.do?ref=novo&especificacao=externo&id=${requestScope.atividade.id }"><button style="clear:both;float:right;" class="btn btn-success" type="button">Adicionar Externo</button></a></p>
 			
 		<c:choose>
 			<c:when test="${requestScope.atividade.externos.isEmpty() }">
@@ -362,6 +362,94 @@
 			
 			</div>
 			</div>
+			<div class="panel panel-default">
+  			<div class="panel-heading">
+  					<h4>Beneficiários</h4>
+ 			</div>
+		 <div class="panel-body">
+		 <div class="row">
+		  <div class="col-md-6">
+				<h4>Beneficiários Diretos</h4>	
+			<p><a href="Beneficiarios.do?ref=novo&especificacao=direto&id=${requestScope.atividade.id }"><button style="clear:both;float:right;" class="btn btn-success" type="button">Adicionar</button></a></p>
+		<c:choose>
+			<c:when test="${requestScope.atividade.beneficiariosDiretos.isEmpty() }">
+				
+				<p>Nenhum beneficiário adicionado</p>
+				
+				
+				
+				
+			</c:when>
+			<c:otherwise>
+			
+			<c:forEach var="direto" items="${requestScope.atividade.beneficiariosDiretos }">
+			<table class="table table-bordered table-hover ">
+			<tr>
+				<th class="tdnome">Nome</th>
+				<td>${direto.nome }</td>
+			</tr>
+			
+			<tr>
+				<th>Opções</th>
+				<td>
+					<a href="Beneficiarios.do?ref=editar&especificacao=direto&id=${requestScope.atividade.id }&idBeneficiario=${direto.id}">
+					<button class="btn btn-warning" type="button">Editar</button>
+					</a>
+					<a href="Beneficiarios.do?ref=remover&especificacao=direto&id=${requestScope.atividade.id }&idBeneficiario=${direto.id}">
+						<button class="btn btn-danger" type="button">Remover</button>
+					</a>
+				</td>
+			</tr>
+			</table>
+			</c:forEach>
+				
+			</c:otherwise>
+			
+		</c:choose>
+		</div>
+		 <div class="col-md-6">
+			
+				<h4>Beneficiários Indiretos</h4>	
+			<p><a href="Beneficiarios.do?ref=novo&especificacao=indireto&id=${requestScope.atividade.id }"><button style="clear:both;float:right;" class="btn btn-success" type="button">Adicionar</button></a></p>
+		<c:choose>
+			<c:when test="${requestScope.atividade.beneficiariosIndiretos.isEmpty() }">
+				
+				<p>Nenhum beneficiário adicionado</p>
+				
+				
+				
+				
+			</c:when>
+			<c:otherwise>
+			
+			<c:forEach var="indireto" items="${requestScope.atividade.beneficiariosIndiretos }">
+			<table class="table table-bordered table-hover ">
+			<tr>
+				<th class="tdnome">Nome</th>
+				<td>${indireto.nome }</td>
+			</tr>
+			
+			<tr>
+				<th>Opções</th>
+				<td>
+					<a href="Beneficiarios.do?ref=editar&especificacao=indireto&id=${requestScope.atividade.id }&idBeneficiario=${indireto.id}">
+					<button class="btn btn-warning" type="button">Editar</button>
+					</a>
+					<a href="Beneficiarios.do?ref=remover&especificacao=indireto&id=${requestScope.atividade.id }&idBeneficiario=${indireto.id}">
+						<button class="btn btn-danger" type="button">Remover</button>
+					</a>
+				</td>
+			</tr>
+			</table>
+			</c:forEach>
+				
+			</c:otherwise>
+			
+		</c:choose>
+		</div>
+		</div>
+		</div>
+		</div>
 			<p><a href="GerarRegistro.do?id=${requestScope.atividade.id }"><button class="btn btn-info" type="button">Gerar Registro e imprimir</button></a></p>
 			
 			
@@ -372,6 +460,7 @@
 			
 		</div>
 		</div>
+			
 		
 </body>
 </html>

@@ -6,71 +6,84 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Inserir Coordenador</title>
+<link  rel= "stylesheet"  href= "bootstrap/css/bootstrap.min.css" >
 </head>
 <body>
-<c:import url="/pesquisar-equipe.jsp"/>
-<form action="Coordenador.do?ref=novo&id=${param.id }" method="post">
-<h2>Coordenador</h2>
+<div class="container">
+	<c:import url="scripts.jsp"/>
+	<c:import url="header.jsp"/>
+	<c:import url="menu.jsp"/>
+	<Mensage:mensagens mensagem="${requestScope.mensagem }"/>
+		<c:import url="selecionar-coordenador.jsp"/>
+<div class="panel panel-default">
+  			<div class="panel-heading">
+  					<h4>Novo Coordenador</h4>
+ 			</div>
+		 <div class="panel-body">	
+<form action="Coordenadores.do?ref=novo&id=${requestScope.id }" method="post">
+
 		
-		<p>
-		<input type="hidden" name="tipo" value="${param.especificacao }">
+		
+		<input type="hidden" name="tipo" value="${requestScope.especificacao }">
 		<label for="nomeCoordenador">Nome Completo<br />
 		</label>
-		<input name="nomeCoordenador" type="text" id="nomeCoordenador" size="50" maxlength="100" />
+		<input name="nomeCoordenador" class="form-control" type="text" id="nomeCoordenador" size="50" maxlength="100" />
+
+		<div class="radio">
+				<label>
+					
+				<input type="radio" name="especificacaoCoordenador" value="Docente" id="especificacaoCoordenador_0" />
+				Docente</label>
+				<label>
+				<input type="radio" name="especificacaoCoordenador" value="Técnico Administrativo" id="especificacaoCoordenador_1" />
+				Técnico Administrativo</label>
+				
+		</div>
+		
+		
 
 
-		<label>
-		<br />
-		<br />
-		<input type="radio" name="especificacaoCoordenador" value="docente" id="especificacaoCoordenador_0" />
-		Docente</label>
-		<label>
-		<input type="radio" name="especificacaoCoordenador" value="tecnicoAdministrativo" id="especificacaoCoordenador_1" />
-		Técnico Administrativo</label>
-		</p>
-		<p>
+			<label for="emailCoordenador">Email<br />
+			</label>
+			<input class="form-control" name="emailCoordenador" type="text" id="emailCoordenador" size="50" maxlength="100" />
 
-
-		<label for="emailCoordenador">Email<br />
-		</label>
-		<input name="emailCoordenador" type="text" id="emailCoordenador" size="50" maxlength="100" />
-
-		</p>
-		<p>Voluntario
-		</p>
-		<p>
+		
+		Voluntario
+		
+		<div class="radio">
 		<label>
 		<input type="radio" name="voluntario" value="sim" id="Voluntario_0" />
 		Sim</label>
 		<label>
 		<input type="radio" name="voluntario" value="nao" id="Voluntario_1" />
 		Não</label>
+</div>
 
-
-		</p>
-		<p>
-		<label for="setorDeTrabalho">Setor de trabalho<br />
+		
+		<label  for="setorDeTrabalho">Setor de trabalho<br />
 		</label>
-		<input name="setorDeTrabalho" type="text" id="setorDeTrabalho" value="" size="50" maxlength="50" />
+		<input class="form-control" name="setorDeTrabalho" type="text" id="setorDeTrabalho" value="" size="50" maxlength="50" />
 		</p>
 		<p>
 
 
 		<label for="phonePrimario">Fone principal<br />
 		</label>
-		<input name="phonePrimario" type="text" id="phonePrimario" size="50" maxlength="10" />
+		<input  class="form-control" name="phonePrimario" type="text" id="phonePrimario" size="50" maxlength="10" />
 
 		<label for="phonePrimario"><br />
 		Fone secundário<br />
 		</label>
-		<input name="phonePrimario2" type="text" id="phonePrimario" size="50" maxlength="10" />
+		<input class="form-control" name="phonePrimario2" type="text" id="phonePrimario" size="50" maxlength="10" />
 
-		<input type="submit" value="Salvar">
+		<button type="submit" class="btn btn-info">Salvar</button> 
 
 
 
 
 </form>
-
+</div>
+</div>
+</div>
 </body>
 </html>

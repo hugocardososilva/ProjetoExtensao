@@ -67,11 +67,11 @@ public class Atividade {
 	@OneToOne(cascade= CascadeType.PERSIST)
 	private AtividadeAntiga atividadeAntiga;
 	
-	@OneToMany(mappedBy= "atividade", cascade= CascadeType.PERSIST)
-	private List<BeneficiarioDireto> beneficiariosDiretos = new ArrayList<BeneficiarioDireto>();
+	@OneToMany(mappedBy= "atividade", cascade= CascadeType.ALL, fetch= FetchType.EAGER)
+	private List<BeneficiarioDireto> beneficiariosDiretos;
 	
-	@OneToMany(mappedBy= "atividade", cascade= CascadeType.PERSIST)
-	private List<BeneficiarioIndireto> beneficiariosIndiretos= new ArrayList<BeneficiarioIndireto>();
+	@OneToMany(mappedBy= "atividade", cascade= CascadeType.ALL, fetch=FetchType.EAGER)
+	private List<BeneficiarioIndireto> beneficiariosIndiretos;
 	
 	@ManyToMany(cascade= CascadeType.ALL, fetch= FetchType.EAGER)
 	private List<Docente> docentes;
@@ -97,7 +97,8 @@ public class Atividade {
 		this.bolsistas= new ArrayList<Bolsista>();
 		this.tecnicos= new ArrayList<Tecnico>();
 		this.docentes= new ArrayList<Docente>();
-		
+		this.beneficiariosDiretos= new ArrayList<BeneficiarioDireto>();
+		this.beneficiariosIndiretos= new ArrayList<BeneficiarioIndireto>();
 	}
 
 	public int getId() {

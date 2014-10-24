@@ -32,6 +32,8 @@ public class ServletInstallApp extends HttpServlet {
 		Install.addAreaTematica();
 		Install.addLinhaExtensao();
 		Install.addLocalRealização();
+		request.setAttribute("mensagem", "Dados iniciais cadastrados com sucesso. Bem vindo!");
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
 	/**

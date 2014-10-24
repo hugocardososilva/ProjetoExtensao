@@ -8,7 +8,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 
 @Entity
-@DiscriminatorValue("DIRETO")
+
 public class BeneficiarioDireto extends Beneficiario{
 	
 	@ManyToOne(cascade=CascadeType.ALL)

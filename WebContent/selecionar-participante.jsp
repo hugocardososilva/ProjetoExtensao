@@ -37,6 +37,7 @@
 
 
 </table>
+	<c:import url="inserir-participante.jsp"/>
 </div>
 
 </body>

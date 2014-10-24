@@ -58,9 +58,23 @@ public class Participantes extends HttpServlet {
 		DAO.open();
 		DAO.begin();
 			
-			
+		
+			if(ref.equalsIgnoreCase("novo")){
+				String especificacao= request.getParameter("especificacao");
+				String id= request.getParameter("id");
+				request.setAttribute("especificacao", especificacao);
+				request.setAttribute("id", id);
 				
-			if(ref.equalsIgnoreCase("inserir")){
+					
+					
+					
+							request.getRequestDispatcher("pesquisar-participante.jsp").forward(request, response);
+				
+				
+				
+				
+			}else
+				if(ref.equalsIgnoreCase("inserir")){
 				
 				int idAtividade= Integer.parseInt(request.getParameter("id"));
 				Atividade atividade = new Atividade();
@@ -77,17 +91,17 @@ public class Participantes extends HttpServlet {
 						participante.addAtividade(atividade);
 						daoParticipante.merge(participante);
 						daoa.merge(atividade);
-						request.setAttribute("mensagem", "Participante vinculado ao projeto com sucesso!");
+						request.setAttribute("mensagem", "Participante vinculado à atividade com sucesso!");
 					}else
 							if(!participante.getAtividades().contains(atividade)){
 								atividade.addParticipante(participante, tipo);
 								participante.addAtividade(atividade);
 								daoParticipante.merge(participante);
 								daoa.merge(atividade);
-								request.setAttribute("mensagem", "Participante vinculado ao projeto com sucesso!");
+								request.setAttribute("mensagem", "Participante vinculado à atividade com sucesso!");
 								
 							}else{
-								request.setAttribute("mensagem", "Esse participante já está vinculado ao projeto");
+								request.setAttribute("mensagem", "Esse participante já está vinculado à atividade");
 							}	
 						
 					DAO.commit();
@@ -213,10 +227,15 @@ public class Participantes extends HttpServlet {
 						if(campo.equalsIgnoreCase("email")) lista = daoParticipante.findByEmail(pesquisa);
 					
 					request.setAttribute("lista", lista);
+					System.out.println(lista.toString());
 					request.setAttribute("id", idAtividade);
 					request.setAttribute("tipo", tipo);
-					request.getRequestDispatcher("selecionar-participante.jsp").forward(request, response);
-					
+						if(tipo.equalsIgnoreCase("coordenador")){
+							request.getRequestDispatcher("inserir-coordenador.jsp").forward(request, response);
+						}else
+						
+						request.getRequestDispatcher("selecionar-participante.jsp").forward(request, response);
+						
 					
 //						if(tipo.equalsIgnoreCase("docente")){
 //							DAODocente dao= new DAODocente();

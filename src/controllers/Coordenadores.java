@@ -16,8 +16,8 @@ import dao.DAOCoordenador;
 /**
  * Servlet implementation class Coordenador
  */
-@WebServlet("/Coordenador.do")
-public class Coordenador extends HttpServlet {
+@WebServlet("/Coordenadores.do")
+public class Coordenadores extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private String ref;
     DAOAtividade daoAtividade= new DAOAtividade();
@@ -27,7 +27,7 @@ public class Coordenador extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Coordenador() {
+    public Coordenadores() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -65,6 +65,7 @@ public class Coordenador extends HttpServlet {
 			String setor= request.getParameter("setorDeTrabalho");
 			String telPrimario= request.getParameter("phonePrimario");
 			String telSecundario= request.getParameter("phonePrimario2");
+			
 			
 			System.out.println(atividade);
 			coordenador.addAtividade(atividade);

@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
 @Entity
-@DiscriminatorValue("INDIRETO")
+
 public class BeneficiarioIndireto extends Beneficiario {
 	
 	@ManyToOne(cascade=CascadeType.ALL)
@@ -26,7 +26,12 @@ public class BeneficiarioIndireto extends Beneficiario {
 
 	@Override
 	public String toString() {
-		return "BeneficiarioIndireto [atividade=" + atividade + "]";
+		return "BeneficiarioIndireto [getId()=" + getId() + ", getNome()="
+				+ getNome() + ", toString()=" + super.toString()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ "]";
 	}
+
+
 	 	
 }

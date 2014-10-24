@@ -27,8 +27,8 @@ public class Coordenador extends Participante implements ParticipanteInterface<C
 	private String tipo;
 
 	
-	@OneToMany(mappedBy="coordenador", cascade= CascadeType.PERSIST, fetch= FetchType.EAGER)
-	private List<Atividade> atividades = new ArrayList<Atividade>();
+	@OneToMany(mappedBy="coordenador", cascade= CascadeType.ALL, fetch= FetchType.EAGER)
+	private List<Atividade> atividades;
 
 	public Coordenador() {
 		super();
