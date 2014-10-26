@@ -75,7 +75,8 @@ public class Atividades extends HttpServlet {
 			
 			String dataInicio= request.getParameter("dataInicio");
 			String dataTermino= request.getParameter("dataTermino");
-			
+			System.out.println(dataInicio);
+			System.out.println(dataTermino);
 			String valor= request.getParameter("valor");
 		
 				int areaTematica= Integer.parseInt(request.getParameter("areaTematica"));
@@ -107,8 +108,7 @@ public class Atividades extends HttpServlet {
 								atividade.setAtividadeAntiga(atividadeAntiga);
 								daoAntiga.persist(atividadeAntiga);
 								
-								DAO.flush();
-								
+																
 							} catch (ParseException e) {
 								
 								e.printStackTrace();
@@ -141,7 +141,7 @@ public class Atividades extends HttpServlet {
 				
 		
 //		convertendo datas
-		DateFormat data= new SimpleDateFormat("dd/MM/yyyy");
+		DateFormat data= new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			atividade.setDataInicio(data.parse(dataInicio));
 			atividade.setDataTermino(data.parse(dataTermino));
@@ -176,5 +176,40 @@ public class Atividades extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String ref= request.getParameter("ref");
+		Atividade atividade= new Atividade();
+		DAOAtividade daoa= new DAOAtividade();
+		DAO.open();
+		DAO.begin();
+			if(ref.equalsIgnoreCase("editar")){
+				int id = Integer.parseInt(request.getParameter("id"));
+				atividade = daoa.find(id);
+				List<TipoAtividade> listaTipo= new ArrayList<TipoAtividade>();
+				List<Vinculo> vinculo= new ArrayList<Vinculo>();
+				List<AreaTematica> areaTematica= new ArrayList<AreaTematica>();
+				List<LinhaDeExtensao> linhaExtensao= new ArrayList<LinhaDeExtensao>();
+				List<LocalRealizacao> localRealizacao= new ArrayList<LocalRealizacao>();
+				
+				DAOTipoAtividade daot= new DAOTipoAtividade();
+				DAOVinculo daov= new DAOVinculo();
+				DAOAreaTematica daoArea= new DAOAreaTematica();
+				DAOLinhaDeExtensao daoLinha= new DAOLinhaDeExtensao();
+				DAOLocalRealizacao daoLocal= new DAOLocalRealizacao();
+				
+				
+					listaTipo=daot.findAll();
+					vinculo=daov.findAll();
+					areaTematica= daoArea.findAll();
+					linhaExtensao= daoLinha.findAll();
+					localRealizacao= daoLocal.findAll();
+					
+				request.setAttribute("listaTipo", listaTipo);
+				request.setAttribute("vinculo", vinculo);
+				request.setAttribute("areaTematica", areaTematica);
+				request.setAttribute("linhaExtensao", linhaExtensao);
+				request.setAttribute("localRealizacao", localRealizacao);
+				request.setAttribute("atividade", atividade);
+				request.getRequestDispatcher("atividade/editar-atividade.jsp").forward(request, response);
+			}
+		DAO.close(); 
 	}
 }

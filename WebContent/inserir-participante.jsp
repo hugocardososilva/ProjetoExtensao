@@ -1,4 +1,4 @@
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
 <div class="panel panel-default">
@@ -6,21 +6,21 @@
   					<h4>Novo Participante</h4>
  			</div>
 		 <div class="panel-body">
-<form role="form" action="Participantes.do?ref=novo&id=${param.id }" method="post">
+<form role="form" action="Participantes.do?ref=novo&id=${requestScope.id }" method="post">
 		
 		<div class="form-group">
 		
-		<input type="hidden" name="tipo" value="${param.especificacao }">
+		<input type="hidden" name="tipo" value="${requestScope.tipo }">
 		
 		<label for="nome">Nome <br />
 		</label>
-			<input class="form-control" name="nome" type="text" id="nome" size="50" maxlength="100" />
+			<input class="form-control" name="nome" required="required" type="text" id="nome" size="50" maxlength="100" />
 		</div>
 		
 		<div class="form-group">
 			<label for="email">Email<br />
 		</label>
-			<input class="form-control" name="email" type="text" id="email" size="50" maxlength="100" />
+			<input class="form-control" name="email" type="email" id="email" size="50" maxlength="100" />
 		
 		</div>
 		

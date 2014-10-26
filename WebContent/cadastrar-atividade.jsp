@@ -1,13 +1,8 @@
-<%@page import="dao.DAO"%>
-<%@page import="java.util.List"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="models.TipoAtividade"%>
-<%@page import="dao.DAOTipoAtividade"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -27,15 +22,15 @@
 		
 		<div class="form-group">
 			<label for="tituloDaAtividade">Título da Atividade</label><br>
-			<input name="tituloDaAtividade" class="form-control"type="text" id="tituloDaAtividade" size="100" maxlength="250" />
+			<input name="tituloDaAtividade" required="required" class="form-control"type="text" id="tituloDaAtividade" size="100" maxlength="250" />
 		</div>
 		<div class="radio">
 		
 		
 			          	 <h4>Tipo de atividade</h4>
-			          	 <c:forEach var="tipo" items="${requestScope.listaTipo }">
+			          	 <c:forEach var="tipo"  items="${requestScope.listaTipo }">
 						<label>
-							<input type="radio" name="Tipo de atividade" value="${tipo.id }" id="Tipodeatividade_0" />
+							<input type="radio" required="required" name="Tipo de atividade" value="${tipo.id }" id="Tipodeatividade_0" />
 							${tipo.nome }
 						</label>
 						<br />
@@ -47,7 +42,7 @@
 			<h4>Vínculo da atividade</h4>
 		 <c:forEach var="vinculo" items="${requestScope.vinculo }">
 		<label>
-		<input type="radio" name="vinculoDaAtividade" value="${vinculo.id }" id="vinculoDaAtividade_0" />
+		<input type="radio"  required="required" name="vinculoDaAtividade" value="${vinculo.id }" id="vinculoDaAtividade_0" />
 		${vinculo.nome }</label>
 			<br />
 		</c:forEach>
@@ -59,21 +54,21 @@
 		</div>
 		<div class="form-group">
 			 <h4>Fonte  dos recursos</h4>
-		<input class="form-control" name="fonteDeRecursos" type="text" size="50" maxlength="100" />
+		<input class="form-control" name="fonteDeRecursos"  type="text" size="50" maxlength="100" />
 		<h4>Valor </h4>
 		<label for="valor"></label>
-		<input class="form-control" type="text" name="valor" id="valor" />
+		<input class="form-control" type="text" required="required" name="valor" id="valor" />
 		</div>
 		<div class="form-group">
 		<h4>Objetivo</h4>
 
 		<label for="objetivo"></label>
-		<textarea class="form-control"  name="objetivo" cols="50" rows="4" id="objetivo"></textarea>
+		<textarea class="form-control"  required="required" name="objetivo" cols="50" rows="4" id="objetivo"></textarea>
 			
 		</div>
 		<div class="radio">
 		<label> 
-			<input type="radio" name="especificarAtividade" value="novo" id="especificarAtividade_0" />
+			<input type="radio" name="especificarAtividade" checked="checked" value="novo" id="especificarAtividade_0" />
 		Atividade Nova</label>
 <br />
 		<label>
@@ -91,7 +86,7 @@
 
 		<c:forEach var="areaTematica" items="${requestScope.areaTematica }">
 			<label>
-				<input type="radio" name="areaTematica" value="${areaTematica.id }" id="Aacutereatemaacutetica_0" />
+				<input type="radio" required="required" name="areaTematica" value="${areaTematica.id }" id="Aacutereatemaacutetica_0" />
 					${areaTematica.area} ${areaTematica.descricao }</label>
 
 				<br/>      
@@ -118,11 +113,11 @@
 			<h4>Data de início</h4>
 			
 
-		<input class="form-control" name="dataInicio" type="text" />
+		<input class="form-control" name="dataInicio" type="date" />
 
 		<h4>Data prevista para término</h4>
 
-		<input class="form-control" name="dataTermino" type="text" />
+		<input class="form-control" name="dataTermino" type="date" />
 		
 		</div>
 		

@@ -1,5 +1,7 @@
 package models;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -152,6 +154,8 @@ public class Atividade {
 	}
 
 	public Date getDataInicio() {
+//		DateFormat df2 = new SimpleDateFormat("yyyy-MM-dd");
+//		return df2.format(dataInicio);
 		return dataInicio;
 	}
 
@@ -160,6 +164,8 @@ public class Atividade {
 	}
 
 	public Date getDataTermino() {
+//		DateFormat df2 = new SimpleDateFormat("yyyy-MM-dd");
+//		return df2.format(dataTermino);
 		return dataTermino;
 	}
 

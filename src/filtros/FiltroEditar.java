@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -26,23 +25,15 @@ import dao.DAOTipoAtividade;
 import dao.DAOVinculo;
 
 /**
- * Servlet Filter implementation class Filtros
+ * Servlet Filter implementation class FiltroEditar
  */
-@WebFilter(
-		
-
-		urlPatterns = { 
-				"/Filtros", 
-				"/atividade/editar-atividade.jsp",
-				"/cadastrar-atividade.jsp",
-				
-		}, servletNames = { "Atividades" })
-public class FiltrosFormCadastro implements Filter {
+@WebFilter({ "/editar-atividade.jsp" })
+public class FiltroEditar implements Filter {
 
     /**
      * Default constructor. 
      */
-    public FiltrosFormCadastro() {
+    public FiltroEditar() {
         // TODO Auto-generated constructor stub
     }
 
@@ -57,8 +48,8 @@ public class FiltrosFormCadastro implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		// place your code here
+		
+		
 		System.out.println("filtro de form acionado");
 		DAO.open();
 		DAO.begin();
@@ -89,8 +80,7 @@ public class FiltrosFormCadastro implements Filter {
 			request.setAttribute("areaTematica", areaTematica);
 			request.setAttribute("linhaExtensao", linhaExtensao);
 			request.setAttribute("localRealizacao", localRealizacao);
-		// pass the request along the filter chain
-		chain.doFilter(request, response);
+			chain.doFilter(request, response);
 	}
 
 	/**

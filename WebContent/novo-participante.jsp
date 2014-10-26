@@ -4,11 +4,11 @@
   					<h4>Novo Participante</h4>
  			</div>
 		 <div class="panel-body">
-<form role="form" action="Participantes.do?ref=novo&id=${param.id }" method="post">
+<form role="form" action="Participantes.do?ref=novo&id=${requestScope.id }" method="post">
 		
 		<div class="form-group">
 		
-		<input type="hidden" name="tipo" value="${param.especificacao }">
+		<input type="hidden" name="tipo" value="${requestScope.especificacao }">
 		
 		<label for="nome">Nome <br />
 		</label>
