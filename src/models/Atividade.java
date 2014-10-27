@@ -64,7 +64,7 @@ public class Atividade {
 	private Coordenador coordenador;
 	
 	@OneToMany(cascade=CascadeType.PERSIST)
-	private List<Atividade> atividades = new ArrayList<Atividade>();
+	private List<Atividade> atividades ;
 	
 	@OneToOne(cascade= CascadeType.PERSIST)
 	private AtividadeAntiga atividadeAntiga;
@@ -95,6 +95,7 @@ public class Atividade {
 	
 	public Atividade() {
 		super();
+		this.atividades = new ArrayList<Atividade>();
 		this.externos= new ArrayList<Externos>();
 		this.bolsistas= new ArrayList<Bolsista>();
 		this.tecnicos= new ArrayList<Tecnico>();
@@ -371,6 +372,12 @@ public class Atividade {
 						if(tipo.equalsIgnoreCase("tecnico")){
 							this.tecnicos.remove((Tecnico)participante);
 						}
+		}
+		public void addAtividade(Atividade atividade){
+			this.atividades.add(atividade);
+		}
+		public void removeAtividade(Atividade atividade){
+			this.atividades.remove(atividade);
 		}
 		@Override
 		public String toString() {

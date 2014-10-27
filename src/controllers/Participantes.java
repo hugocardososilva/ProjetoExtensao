@@ -68,7 +68,7 @@ public class Participantes extends HttpServlet {
 					
 					
 					
-							request.getRequestDispatcher("pesquisar-participante.jsp").forward(request, response);
+							request.getRequestDispatcher("participante/pesquisar-participante.jsp").forward(request, response);
 				
 				
 				
@@ -108,7 +108,7 @@ public class Participantes extends HttpServlet {
 					DAO.close();
 					request.setAttribute("atividade", atividade);
 					
-					request.getRequestDispatcher("atividade.jsp").forward(request, response);
+					request.getRequestDispatcher("atividade/atividade.jsp").forward(request, response);
 				
 //					if(tipo.equalsIgnoreCase("docente")){
 //						Docente docente= daodoc.find(idParticipante);
@@ -209,9 +209,9 @@ public class Participantes extends HttpServlet {
 					daoParticipante.persist(equipe);
 					DAO.flush();
 					DAO.commit();
-				
+					request.setAttribute("mensagem", "Participante cadastrado com sucesso");
 					request.setAttribute("atividade", atividade);
-					request.getRequestDispatcher("atividade.jsp").forward(request, response);
+					request.getRequestDispatcher("atividade/atividade.jsp").forward(request, response);
 				
 			}else
 				if(ref.equalsIgnoreCase("pesquisar")){
@@ -230,11 +230,12 @@ public class Participantes extends HttpServlet {
 					System.out.println(lista.toString());
 					request.setAttribute("id", idAtividade);
 					request.setAttribute("tipo", tipo);
+					
 						if(tipo.equalsIgnoreCase("coordenador")){
-							request.getRequestDispatcher("inserir-coordenador.jsp").forward(request, response);
+							request.getRequestDispatcher("participante/inserir-coordenador.jsp").forward(request, response);
 						}else
 						
-						request.getRequestDispatcher("selecionar-participante.jsp").forward(request, response);
+						request.getRequestDispatcher("participante/selecionar-participante.jsp").forward(request, response);
 						
 					
 //						if(tipo.equalsIgnoreCase("docente")){

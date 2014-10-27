@@ -46,7 +46,7 @@ public class Beneficiarios extends HttpServlet {
 //				Atividade atividade = daoa.find(id);
 				request.setAttribute("id", id);
 				request.setAttribute("especificacao", tipo);
-				request.getRequestDispatcher("inserir-beneficiario.jsp").forward(request, response);
+				request.getRequestDispatcher("beneficiario/inserir-beneficiario.jsp").forward(request, response);
 				
 			
 			}
@@ -98,7 +98,7 @@ public class Beneficiarios extends HttpServlet {
 			DAO.commit();
 			request.setAttribute("atividade", atividade);
 			request.setAttribute("mensagem", "Beneficiário adicionado com sucesso!");
-			request.getRequestDispatcher("atividade.jsp").forward(request, response);
+			request.getRequestDispatcher("atividade/atividade.jsp").forward(request, response);
 		}	
 		DAO.close();
 	}

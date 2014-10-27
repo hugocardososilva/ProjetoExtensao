@@ -7,18 +7,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Nova Atividade</title>
-<link  rel= "stylesheet"  href= "bootstrap/css/bootstrap.min.css" >
+<link  rel= "stylesheet"  href= "../bootstrap/css/bootstrap.min.css" >
 <!-- <script src="bootstrap/js/bootstrap.min.js"></script> -->
 </head>
 <body>
 	<div class="container">
-<c:import url="scripts.jsp"/>
-<c:import url="header.jsp"/>
-<c:import url="menu.jsp"/>
+<c:import url="../scripts.jsp"/>
+<c:import url="../header.jsp"/>
+<c:import url="../menu.jsp"/>
 	
 	<div >
 
-	<form role="form" action="Atividades.do?ref=novo" method="post" name="atividade">
+	<form role="form" action="../Atividades.do?ref=novo" method="post" name="atividade">
 		
 		<div class="form-group">
 			<label for="tituloDaAtividade">Título da Atividade</label><br>

@@ -6,15 +6,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link  rel= "stylesheet"  href= "../bootstrap/css/bootstrap.min.css" >
 <link  rel= "stylesheet"  href= "bootstrap/css/bootstrap.min.css" >
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Atividade</title>
 </head>
 <body>
 <div class="container">
-<c:import url="scripts.jsp"/>
-<c:import url="header.jsp"/>
-<c:import url="menu.jsp"/>
+<c:import url="../scripts.jsp"/>
+<c:import url="../header.jsp"/>
+<c:import url="../menu.jsp"/>
 
 	<Mensage:mensagens mensagem="${requestScope.mensagem }"/>
 	<div class="panel panel-default">
@@ -466,6 +467,8 @@ pattern="dd/MM/yyyy" /></td>
 		</c:choose>
 		</div>
 		</div>
+		</div>
+		</div>
 					<div class="panel panel-default">
   			<div class="panel-heading">
   					<h4>Atividades Vinculadas</h4>
@@ -475,7 +478,7 @@ pattern="dd/MM/yyyy" /></td>
 				<p><a href="VincularAtividades.do?ref=novo&id=${requestScope.atividade.id }">
 					<button style="clear:both;float:right;" class="btn btn-success" type="button">Adicionar Atividade</button>
 					</a></p>
-			
+		
 		<c:choose>
 			<c:when test="${requestScope.atividade.atividades.isEmpty() }">
 					
@@ -520,19 +523,18 @@ pattern="dd/MM/yyyy" /></td>
 			
 			</div>
 			</div>
-		</div>
-		</div>
-		</div>
 			<p><a href="GerarRegistro.do?id=${requestScope.atividade.id }"><button class="btn btn-info" type="button">Gerar Registro e imprimir</button></a></p>
-			
-			
-			
-			
-			
-			
-			
 		</div>
-		</div>
+		
+			
+			
+			
+			
+			
+			
+			
+			
+		
 			
 		
 </body>

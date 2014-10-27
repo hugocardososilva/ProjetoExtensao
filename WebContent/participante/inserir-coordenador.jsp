@@ -7,12 +7,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Inserir Coordenador</title>
 <link  rel= "stylesheet"  href= "bootstrap/css/bootstrap.min.css" >
+<link  rel= "stylesheet"  href= "../bootstrap/css/bootstrap.min.css" >
 </head>
 <body>
 <div class="container">
-	<c:import url="scripts.jsp"/>
-	<c:import url="header.jsp"/>
-	<c:import url="menu.jsp"/>
+	<c:import url="../scripts.jsp"/>
+	<c:import url="../header.jsp"/>
+	<c:import url="../menu.jsp"/>
 	<Mensage:mensagens mensagem="${requestScope.mensagem }"/>
 		<c:import url="selecionar-coordenador.jsp"/>
 <div class="panel panel-default">

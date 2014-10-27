@@ -18,7 +18,7 @@
 	
 	<div >
 
-	<form role="form" action="Atividades.do?ref=novo" method="post" name="atividade">
+	<form role="form" action="Atividades.do?ref=editar&id=${requestScope.atividade.id }" method="post" name="atividade">
 		
 		<div class="form-group">
 			<label for="tituloDaAtividade">Título da Atividade</label><br>

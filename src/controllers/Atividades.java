@@ -44,7 +44,7 @@ public class Atividades extends HttpServlet {
 	DAOAreaTematica daoArea= new DAOAreaTematica();
 	DAOLinhaDeExtensao daoLinha= new DAOLinhaDeExtensao();
 	DAOLocalRealizacao daoLocal= new DAOLocalRealizacao();
-	
+	DateFormat data= new SimpleDateFormat("yyyy-MM-dd");
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -58,31 +58,32 @@ public class Atividades extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String ref= request.getParameter("ref");
-		
-		//		abrindo conexao
 		DAO.open();
 		DAO.begin();
+		
+		String ref= request.getParameter("ref");
+		String outroVinculo;
+		String titulo = request.getParameter("tituloDaAtividade");
+		String fonteDeRecursos= request.getParameter("fonteDeRecursos");
+		String objetivo= request.getParameter("objetivo");
+		String especificarAtividade= request.getParameter("especificarAtividade");
+		
+		String dataInicio= request.getParameter("dataInicio");
+		String dataTermino= request.getParameter("dataTermino");
+		String valor= request.getParameter("valor");
+		int areaTematica= Integer.parseInt(request.getParameter("areaTematica"));
+		int localRealizacao= Integer.parseInt(request.getParameter("localDeLocalizacao"));
+		int linhaDeExtensao = Integer.parseInt(request.getParameter("especifiqueALinhaDeExtensão"));
+		int tipo= Integer.parseInt(request.getParameter("Tipo de atividade"));
+		LocalRealizacao local=daoLocal.find(localRealizacao);
+		TipoAtividade tipoAtividade= daot.find(tipo);
+		LinhaDeExtensao linha= daoLinha.find(linhaDeExtensao);
+		AreaTematica area= daoArea.find(areaTematica);
+		//		abrindo conexao
 		
 		
 		if(ref.equalsIgnoreCase("novo")){
 		
-			String outroVinculo;
-			String titulo = request.getParameter("tituloDaAtividade");
-			String fonteDeRecursos= request.getParameter("fonteDeRecursos");
-			String objetivo= request.getParameter("objetivo");
-			String especificarAtividade= request.getParameter("especificarAtividade");
-			
-			String dataInicio= request.getParameter("dataInicio");
-			String dataTermino= request.getParameter("dataTermino");
-			System.out.println(dataInicio);
-			System.out.println(dataTermino);
-			String valor= request.getParameter("valor");
-		
-				int areaTematica= Integer.parseInt(request.getParameter("areaTematica"));
-				int localRealizacao= Integer.parseInt(request.getParameter("localDeLocalizacao"));
-				int linhaDeExtensao = Integer.parseInt(request.getParameter("especifiqueALinhaDeExtensão"));
-				int tipo= Integer.parseInt(request.getParameter("Tipo de atividade"));
 				
 					if(request.getParameter("vinculoDaAtividade").equals("Outros")){
 						outroVinculo= request.getParameter("outroVinculoDeAtividade");
@@ -117,10 +118,7 @@ public class Atividades extends HttpServlet {
 						}
 					
 			//		persistindo parametros
-					LocalRealizacao local=daoLocal.find(localRealizacao);
-					TipoAtividade tipoAtividade= daot.find(tipo);
-					LinhaDeExtensao linha= daoLinha.find(linhaDeExtensao);
-					AreaTematica area= daoArea.find(areaTematica);
+					
 					
 						local.addAtividade(atividade);
 						tipoAtividade.addAtividade(atividade);
@@ -141,7 +139,7 @@ public class Atividades extends HttpServlet {
 				
 		
 //		convertendo datas
-		DateFormat data= new SimpleDateFormat("yyyy-MM-dd");
+		
 		try {
 			atividade.setDataInicio(data.parse(dataInicio));
 			atividade.setDataTermino(data.parse(dataTermino));
@@ -162,16 +160,84 @@ public class Atividades extends HttpServlet {
 		Atividade atividade = daoAtividade.find(daoAtividade.getLast());
 		request.setAttribute("atividade", atividade);
 		request.setAttribute("mensagem", "Atividade cadastrada com sucesso!");
-		DAO.close();
+		
 		System.out.println(atividade.toString());
 		
-		request.getRequestDispatcher("atividade.jsp").forward(request, response);
+		request.getRequestDispatcher("atividade/atividade.jsp").forward(request, response);
 	
 	}else
-		{
-			
-		
-	}
+		if(ref.equalsIgnoreCase("pesquisar")){
+			String campo = request.getParameter("campo");
+			String pesquisa = request.getParameter("pesquisa");
+			String id= request.getParameter("id");
+			List<Atividade> lista= new ArrayList<Atividade>();
+				if(campo.equalsIgnoreCase("titulo")){
+					lista= daoAtividade.findByTitulo(pesquisa);
+					request.setAttribute("lista", lista);
+					
+				}else
+					if(campo.equalsIgnoreCase("registro")){
+						lista= daoAtividade.findByRegistro(pesquisa);
+						request.setAttribute("lista", lista);
+					}
+				request.setAttribute("id", id);
+				request.getRequestDispatcher("atividade/listar-atividades.jsp").forward(request, response);
+						
+		}else
+			if(ref.equalsIgnoreCase("editar")){
+				atividade= daoAtividade.find(Integer.parseInt(request.getParameter("id")));
+				if(request.getParameter("vinculoDaAtividade").equals("Outros")){
+					outroVinculo= request.getParameter("outroVinculoDeAtividade");
+				}else{
+					 int vinculo= Integer.parseInt(request.getParameter("vinculoDaAtividade"));
+					 Vinculo v= daov.find(vinculo);
+					 atividade.setVinculo(v);
+				}
+				if(especificarAtividade.equals("antiga")){
+					String ano= request.getParameter("atividadeAntiga");
+					AtividadeAntiga atividadeAntiga= new AtividadeAntiga();
+					DateFormat format= new SimpleDateFormat("yyyy");
+					try {
+						atividadeAntiga.setAno(format.parse(ano));
+						atividadeAntiga.setAtividade(atividade);
+						atividade.setAtividadeAntiga(atividadeAntiga);
+						daoAntiga.persist(atividadeAntiga);
+						
+														
+					} catch (ParseException e) {
+						
+						e.printStackTrace();
+					}
+					
+				}
+				
+				try {
+					atividade.setDataInicio(data.parse(dataInicio));
+					atividade.setDataTermino(data.parse(dataTermino));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				atividade.setLocal(local);
+				atividade.setTipoAtividade(tipoAtividade);
+				atividade.setLinhaDeExtensao(linha);
+				atividade.setTitulo(titulo);
+				atividade.setAreaTematica(area);
+				
+				atividade.setValor(Double.parseDouble(valor));
+				atividade.setFonteDeRecurso(fonteDeRecursos);
+				atividade.setObjetivo(objetivo);
+				daoArea.merge(area);
+				daoLinha.merge(linha);
+				daoLocal.merge(local);
+				daot.merge(tipoAtividade);
+				daoAtividade.merge(atividade);
+				DAO.commit();
+				request.setAttribute("mensagem", "atividade editada com sucesso");
+				request.setAttribute("atividade", atividade);
+				request.getRequestDispatcher("atividade/atividade.jsp").forward(request, response);
+			}
+		DAO.close();
 	}
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

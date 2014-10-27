@@ -34,7 +34,7 @@ import dao.DAOVinculo;
 		urlPatterns = { 
 				"/Filtros", 
 				"/atividade/editar-atividade.jsp",
-				"/cadastrar-atividade.jsp",
+				"/atividade/cadastrar-atividade.jsp",
 				
 		}, servletNames = { "Atividades" })
 public class FiltrosFormCadastro implements Filter {

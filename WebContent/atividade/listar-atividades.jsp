@@ -10,24 +10,24 @@
 </head>
 <body>
 <div class="container">
-<c:import url="scripts.jsp"/>
-<c:import url="header.jsp"/>
-<c:import url="menu.jsp"/>
+<c:import url="../scripts.jsp"/>
+<c:import url="../header.jsp"/>
+<c:import url="../menu.jsp"/>
 		<table class="table table-bordered table-hover">
 		<tr>
-			<th>Nome</th>
-			<th>Email</th>
-			<th>Voluntário?</th>
+			<th>Titulo</th>
+			<th>Registro</th>
+			<th>Coordenador</th>
 			<th>Opções</th>
 			
 		</tr>
 		
-		<c:forEach var="participante" items="${requestScope.lista }">
+		<c:forEach var="atividade" items="${requestScope.lista }">
 			<tr>
-				<td>${participante.nome }</td>
-				<td>${participante.email }</td>
-				<td>${participante.voluntario }</td>
-				<td><a href="Participantes.do?ref=inserir&tipo=${requestScope.tipo }&id=${requestScope.id }&idParticipante=${participante.id}"><button type="button" class="btn btn-success right">Inserir</button></a></td>
+				<td>${atividade.titulo }</td>
+				<td>${atividade.registro }</td>
+				<td>${atividade.coordenador.nome }</td>
+				<td><a href="VincularAtividades.do?ref=inserir&id=${requestScope.id }&idAtividadeVincular=${atividade.id}"><button type="button" class="btn btn-success right">Inserir</button></a></td>
 				
 				
 			</tr>
@@ -37,7 +37,7 @@
 
 
 </table>
-	<c:import url="inserir-participante.jsp"/>
+
 </div>
 
 </body>
