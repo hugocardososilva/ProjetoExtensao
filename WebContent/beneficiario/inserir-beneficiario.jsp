@@ -11,9 +11,9 @@
 </head>
 <body>
 	<div class="container">
-<c:import url="scripts.jsp"/>
-<c:import url="header.jsp"/>
-<c:import url="menu.jsp"/>
+<c:import url="../scripts.jsp"/>
+<c:import url="../header.jsp"/>
+<c:import url="../menu.jsp"/>
 
 	<Mensage:mensagens mensagem="${requestScope.mensagem }"/>
 	

@@ -148,8 +148,8 @@ pattern="dd/MM/yyyy" /></td>
 					<a href="Coordenador.do?ref=editar">
 						<button class="btn btn-warning" type="button">Editar</button>
 					</a>
-					<a href="Coordenador.do?ref=remover">
-						<button class="btn btn-danger" type="button">Editar</button>
+					<a href="Participantes.do?ref=remover&especificacao=coordenador&id=${requestScope.atividade.id }&idParticipante=${requestScope.atividade.coordenador.id}">
+						<button class="btn btn-danger" type="button">Remover</button>
 					</a>
 				</td>
 				
@@ -304,10 +304,10 @@ pattern="dd/MM/yyyy" /></td>
 			<tr>
 				<th>Opções</th>
 				<td>
-					<a href="Participantes.do?ref=editar&especificacao=bolsista&id=${requestScope.atividade.id }&idParticipante=${tecnico.id}">
+					<a href="Participantes.do?ref=editar&especificacao=bolsista&id=${requestScope.atividade.id }&idParticipante=${bolsista.id}">
 						<button class="btn btn-warning" type="button">Editar</button>
 					</a>
-					<a href="Participantes.do?ref=remover&especificacao=bolsista&id=${requestScope.atividade.id }&idParticipante=${tecnico.id}">
+					<a href="Participantes.do?ref=remover&especificacao=bolsista&id=${requestScope.atividade.id }&idParticipante=${bolsista.id}">
 						<button class="btn btn-danger" type="button">Remover</button>
 					</a>
 				</td>

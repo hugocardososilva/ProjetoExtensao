@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 
 public class BeneficiarioIndireto extends Beneficiario {
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	private Atividade atividade;
 	
 	public BeneficiarioIndireto(){

@@ -105,63 +105,41 @@ public class Participantes extends HttpServlet {
 							}	
 						
 					DAO.commit();
-					DAO.close();
+					
 					request.setAttribute("atividade", atividade);
 					
 					request.getRequestDispatcher("atividade/atividade.jsp").forward(request, response);
 				
-//					if(tipo.equalsIgnoreCase("docente")){
-//						Docente docente= daodoc.find(idParticipante);
-//							if(!atividade.getDocentes().contains(docente)){
-//							atividade.addDocente(docente);							
-//							docente.addAtividade(atividade);
-//							daoa.merge(atividade);
-//							daodoc.merge(docente);
-//							}else{
-//								request.setAttribute("mensagem", "Esse participante já está vinculado ao projeto");
-//							}
-//							
-//					}else
-//						if(tipo.equalsIgnoreCase("bolsista")){
-//							Bolsista bolsista= daobol.find(idParticipante);
-//								if(!atividade.getBolsistas().contains(bolsista)){
-//								atividade.addBolsista(bolsista);
-//								bolsista.addAtividade(atividade);
-//								daoa.merge(atividade);
-//								daobol.merge(bolsista);
-//								}else{
-//									request.setAttribute("mensagem", "Esse participante já está vinculado ao projeto");
-//								}
-//						}else
-//							if(tipo.equalsIgnoreCase("tecnico")){
-//								Tecnico tec= daotec.find(idParticipante);
-//									if(atividade.getTecnicos().contains(tec)){
-//									atividade.addTecnico(tec);
-//									tec.addAtividade(atividade);
-//									daoa.merge(atividade);
-//									daotec.merge(tec);
-//									}else{
-//										request.setAttribute("mensagem", "Esse participante já está vinculado ao projeto");
-//									}
-//			
-//							}else
-//								if(tipo.equalsIgnoreCase("externo")){
-//									Externos externos= daoext.find(idParticipante);
-//										if(atividade.getExternos().contains(externos)){
-//											atividade.addExternos(externos);
-//											externos.addAtividade(atividade);
-//											daoa.merge(atividade);
-//											daoext.merge(externos);
-//										}else{
-//											request.setAttribute("mensagem", "Esse participante já está vinculado ao projeto");
-//										}
-//								}
-//					DAO.commit();
-//					DAO.close();
-//					request.setAttribute("atividade", atividade);
 //					
-//					request.getRequestDispatcher("atividade.jsp").forward(request, response);
-			}
+			}else
+				if(ref.equalsIgnoreCase("remover")){
+					int idParticipante = Integer.parseInt(request.getParameter("idParticipante"));
+					int idAtividade= Integer.parseInt(request.getParameter("id"));
+					String especificacao= request.getParameter("especificacao");
+					Atividade atividade = daoa.find(idAtividade);
+					ParticipanteInterface participante = FactoryParticipante.getEquipeTematica(especificacao);
+					DAOParticipanteInterface daoParticipante= FactoryDAOParticipante.getDAOParticipante(especificacao);
+					participante= (ParticipanteInterface) daoParticipante.find(idParticipante);
+						if(especificacao.equalsIgnoreCase("coordenador")){
+							atividade.setCoordenador(null);
+							participante.removeAtividade(atividade);
+							daoa.merge(atividade);
+							daoParticipante.merge(participante);
+							
+						}else{
+							atividade.removeParticipante(participante, especificacao);
+							participante.removeAtividade(atividade);
+							daoa.merge(atividade);
+							
+							daoParticipante.merge(participante);
+						}
+					DAO.commit();
+					request.setAttribute("mensagem", "Participante removido da atividade com sucesso!");
+					request.setAttribute("atividade", atividade);
+					request.getRequestDispatcher("atividade/atividade.jsp").forward(request, response);
+					
+				}
+			DAO.close();
 	}
 
 	/**

@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 
 public class BeneficiarioDireto extends Beneficiario{
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	private Atividade atividade;
 	
 	
@@ -34,6 +34,7 @@ public class BeneficiarioDireto extends Beneficiario{
 	public void setAtividade(Atividade atividade) {
 		this.atividade = atividade;
 	}
+	
 	
 	
 }

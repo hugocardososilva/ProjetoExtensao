@@ -71,20 +71,20 @@ public class Atividades extends HttpServlet {
 		String dataInicio= request.getParameter("dataInicio");
 		String dataTermino= request.getParameter("dataTermino");
 		String valor= request.getParameter("valor");
-		int areaTematica= Integer.parseInt(request.getParameter("areaTematica"));
-		int localRealizacao= Integer.parseInt(request.getParameter("localDeLocalizacao"));
-		int linhaDeExtensao = Integer.parseInt(request.getParameter("especifiqueALinhaDeExtensão"));
-		int tipo= Integer.parseInt(request.getParameter("Tipo de atividade"));
-		LocalRealizacao local=daoLocal.find(localRealizacao);
-		TipoAtividade tipoAtividade= daot.find(tipo);
-		LinhaDeExtensao linha= daoLinha.find(linhaDeExtensao);
-		AreaTematica area= daoArea.find(areaTematica);
-		//		abrindo conexao
+				//		abrindo conexao
 		
 		
 		if(ref.equalsIgnoreCase("novo")){
 		
-				
+			int areaTematica= Integer.parseInt(request.getParameter("areaTematica"));
+			int localRealizacao= Integer.parseInt(request.getParameter("localDeLocalizacao"));
+			int linhaDeExtensao = Integer.parseInt(request.getParameter("especifiqueALinhaDeExtensão"));
+			int tipo= Integer.parseInt(request.getParameter("Tipo de atividade"));
+			LocalRealizacao local=daoLocal.find(localRealizacao);
+			TipoAtividade tipoAtividade= daot.find(tipo);
+			LinhaDeExtensao linha= daoLinha.find(linhaDeExtensao);
+			AreaTematica area= daoArea.find(areaTematica);
+
 					if(request.getParameter("vinculoDaAtividade").equals("Outros")){
 						outroVinculo= request.getParameter("outroVinculoDeAtividade");
 					}else{
@@ -185,6 +185,15 @@ public class Atividades extends HttpServlet {
 						
 		}else
 			if(ref.equalsIgnoreCase("editar")){
+				int areaTematica= Integer.parseInt(request.getParameter("areaTematica"));
+				int localRealizacao= Integer.parseInt(request.getParameter("localDeLocalizacao"));
+				int linhaDeExtensao = Integer.parseInt(request.getParameter("especifiqueALinhaDeExtensão"));
+				int tipo= Integer.parseInt(request.getParameter("Tipo de atividade"));
+				LocalRealizacao local=daoLocal.find(localRealizacao);
+				TipoAtividade tipoAtividade= daot.find(tipo);
+				LinhaDeExtensao linha= daoLinha.find(linhaDeExtensao);
+				AreaTematica area= daoArea.find(areaTematica);
+
 				atividade= daoAtividade.find(Integer.parseInt(request.getParameter("id")));
 				if(request.getParameter("vinculoDaAtividade").equals("Outros")){
 					outroVinculo= request.getParameter("outroVinculoDeAtividade");

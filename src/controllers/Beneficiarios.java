@@ -41,6 +41,8 @@ public class Beneficiarios extends HttpServlet {
 		String ref= request.getParameter("ref");
 		String id=request.getParameter("id");
 		String tipo = request.getParameter("especificacao");
+		DAO.open();
+		DAO.begin();
 //		
 			if(ref.equalsIgnoreCase("novo")){
 //				Atividade atividade = daoa.find(id);
@@ -49,8 +51,29 @@ public class Beneficiarios extends HttpServlet {
 				request.getRequestDispatcher("beneficiario/inserir-beneficiario.jsp").forward(request, response);
 				
 			
-			}
-				
+			}else
+				if(ref.equalsIgnoreCase("remover")){
+					System.out.println(id);
+				int idBeneficiario= Integer.parseInt(request.getParameter("idBeneficiario"));
+					Atividade atividade = daoa.find(Integer.parseInt(id));
+					if(tipo.equalsIgnoreCase("direto")){
+						BeneficiarioDireto direto = daoDireto.find(idBeneficiario);
+						atividade.removeBeneficiarioDireto(direto);
+						daoa.merge(atividade);
+						daoDireto.remove(direto);
+						
+					}else{
+						BeneficiarioIndireto indireto = daoIndireto.find(idBeneficiario);
+						atividade.removeBeneficiarioIndireto(indireto);
+						daoa.merge(atividade);
+						daoIndireto.remove(indireto);
+					}
+					DAO.commit();
+					request.setAttribute("atividade", atividade);
+					request.setAttribute("mensagem", "Beneficiário removido com sucesso!");
+					request.getRequestDispatcher("atividade/atividade.jsp").forward(request, response);
+				}
+			DAO.close();	
 	}
 
 	/**
