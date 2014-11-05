@@ -1,6 +1,11 @@
+<%@page import="models.Atividade"%>
+<%@page import="java.util.ArrayList"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib uri="http://jsptags.com/tags/navigation/pager" prefix="pg" %>
+    <% 
+    pageContext.setAttribute("lista", request.getAttribute("lista")); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -21,8 +26,11 @@
 			<th>Opções</th>
 			
 		</tr>
+		<pg:pager id="p" maxPageItems="2" maxIndexPages="10" export="offset,currentPageNumber=pageNumber" scope="request">
+  <pg:param name="keywords"/>
 		
-		<c:forEach var="atividade" items="${requestScope.lista }">
+		<c:forEach var="atividade" items="${lista }">
+		 <pg:item>
 			<tr>
 				<td>${atividade.titulo }</td>
 				<td>${atividade.registro }</td>
@@ -31,10 +39,21 @@
 				
 				
 			</tr>
-		
+		</pg:item>
 		</c:forEach>
 		
-
+<pg:index>
+    <pg:prev>
+      <a href="<%= pageUrl %>">&lt;&lt; Anterior</a>
+    </pg:prev>
+    <pg:pages>
+       <a href="<%= pageUrl %>"><%= pageNumber %></a> 
+    </pg:pages>
+    <pg:next>
+      <a href="">Próximo &gt;&gt;</a>
+    </pg:next>
+  </pg:index>
+</pg:pager>
 
 </table>
 

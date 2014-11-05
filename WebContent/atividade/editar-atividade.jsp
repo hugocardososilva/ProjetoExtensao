@@ -202,6 +202,20 @@ pattern="yyyy-MM-dd" />" name="dataTermino" type="date" />
 		</c:forEach>
 		</select> 
 		</div>
+		<div class="form-group">
+		<h4>Beneficiários Diretos</h4>
+
+		<label for="beneficiariosDiretos"></label>
+		<textarea class="form-control" required="required" name="beneficiariosDiretos" cols="50" rows="4" id="objetivo">${requestScope.atividade.beneficiariosDiretos }</textarea>
+			
+		</div>
+			<div class="form-group">
+		<h4>Beneficiários Indiretos</h4>
+
+		<label for="beneficiariosIndiretos"></label>
+		<textarea class="form-control" required="required" name="beneficiariosIndiretos" cols="50" rows="4" id="objetivo">${requestScope.atividade.beneficiariosDiretos }</textarea>
+			
+		</div>
 	 <button type="submit" class="btn btn-info">Salvar</button>
 	</form>
 

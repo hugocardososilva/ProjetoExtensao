@@ -16,5 +16,7 @@ public interface ParticipanteInterface<T> {
 	public String toString();
 	public List<Atividade> getAtividades();
 	public void setAtividades(List<Atividade> atividades);
+	public Long getTelPrimario();
+	public void setTelPrimario(Long telefonePrimario);
 
 }

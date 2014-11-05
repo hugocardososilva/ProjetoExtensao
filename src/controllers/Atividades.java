@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.PageContext;
 
 import dao.DAO;
 import dao.DAOAreaTematica;
@@ -61,6 +62,7 @@ public class Atividades extends HttpServlet {
 		DAO.open();
 		DAO.begin();
 		
+		
 		String ref= request.getParameter("ref");
 		String outroVinculo;
 		String titulo = request.getParameter("tituloDaAtividade");
@@ -71,6 +73,8 @@ public class Atividades extends HttpServlet {
 		String dataInicio= request.getParameter("dataInicio");
 		String dataTermino= request.getParameter("dataTermino");
 		String valor= request.getParameter("valor");
+		String beneficiariosDiretos= request.getParameter("beneficiariosDiretos");
+		String beneficiariosIndiretos= request.getParameter("beneficiariosIndiretos");
 				//		abrindo conexao
 		
 		
@@ -84,6 +88,7 @@ public class Atividades extends HttpServlet {
 			TipoAtividade tipoAtividade= daot.find(tipo);
 			LinhaDeExtensao linha= daoLinha.find(linhaDeExtensao);
 			AreaTematica area= daoArea.find(areaTematica);
+			
 
 					if(request.getParameter("vinculoDaAtividade").equals("Outros")){
 						outroVinculo= request.getParameter("outroVinculoDeAtividade");
@@ -131,7 +136,8 @@ public class Atividades extends HttpServlet {
 							atividade.setLinhaDeExtensao(linha);
 							atividade.setTitulo(titulo);
 							atividade.setAreaTematica(area);
-							
+							atividade.setBeneficiariosDiretos(beneficiariosDiretos);
+							atividade.setBeneficiariosIndiretos(beneficiariosIndiretos);
 							atividade.setValor(Double.parseDouble(valor));
 							atividade.setFonteDeRecurso(fonteDeRecursos);
 							atividade.setObjetivo(objetivo);
@@ -232,7 +238,8 @@ public class Atividades extends HttpServlet {
 				atividade.setLinhaDeExtensao(linha);
 				atividade.setTitulo(titulo);
 				atividade.setAreaTematica(area);
-				
+				atividade.setBeneficiariosDiretos(beneficiariosDiretos);
+				atividade.setBeneficiariosIndiretos(beneficiariosIndiretos);
 				atividade.setValor(Double.parseDouble(valor));
 				atividade.setFonteDeRecurso(fonteDeRecursos);
 				atividade.setObjetivo(objetivo);

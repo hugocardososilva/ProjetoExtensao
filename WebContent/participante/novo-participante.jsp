@@ -21,6 +21,12 @@
 			<input class="form-control" name="email" type="text" id="email" size="50" maxlength="100" />
 		
 		</div>
+		<div class="form-group">
+			<label for="telPrimario">Telefone<br />
+		</label>
+			<input class="form-control" name="telPrimario" type="text" id="telPrimario" size="50" maxlength="100" />
+		
+		</div>
 		
 		
 		<div class="radio">

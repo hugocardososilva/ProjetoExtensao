@@ -138,7 +138,29 @@ public class Participantes extends HttpServlet {
 					request.setAttribute("atividade", atividade);
 					request.getRequestDispatcher("atividade/atividade.jsp").forward(request, response);
 					
-				}
+				}else 
+					if(ref.equalsIgnoreCase("add")){
+						String tipo = request.getParameter("tipo");
+						request.setAttribute("tipo", tipo);
+							if(tipo.equalsIgnoreCase("coordenador")){
+								request.getRequestDispatcher("participante/adicionar-coordenador.jsp").forward(request, response);
+							}else{
+								request.getRequestDispatcher("participante/adicionar-participante.jsp").forward(request, response);
+							}
+					}else
+						if(ref.equalsIgnoreCase("listar")){
+							String tipo= request.getParameter("tipo");
+							DAOParticipanteInterface daoP= FactoryDAOParticipante.getDAOParticipante(tipo);
+							List<ParticipanteInterface> lista= daoP.findAll();
+							request.setAttribute("lista", lista);
+							request.setAttribute("tipo", tipo);
+								if(tipo.equalsIgnoreCase("coordenador")){
+									request.getRequestDispatcher("participante/selecionar-coordenador.jsp").forward(request, response);
+								}else{
+									request.getRequestDispatcher("participante/selecionar-participante.jsp").forward(request, response);
+								}
+						}
+				
 			DAO.close();
 	}
 
@@ -151,45 +173,44 @@ public class Participantes extends HttpServlet {
 		DAOAtividade daoAtividade= new DAOAtividade();
 		DAO.open();
 		DAO.begin();
-		
+		System.out.println("o id está  "+ id);
 			
 			if(ref.equalsIgnoreCase("novo")){
 				String tipo = request.getParameter("tipo");
 				String nome = request.getParameter("nome");
 				String email = request.getParameter("email");
+				String telefone= request.getParameter("telPrimario");
 				boolean voluntario = Boolean.parseBoolean(request.getParameter("voluntario"));
-				Atividade atividade= daoAtividade.find(Integer.parseInt(id));
+				
 				DAOParticipanteInterface daoParticipante= FactoryDAOParticipante.getDAOParticipante(tipo);
 				ParticipanteInterface equipe= FactoryParticipante.getEquipeTematica(tipo);
-				equipe.addAtividade(atividade);
+				Atividade atividade= new Atividade();	
+					if(!id.equalsIgnoreCase("")){	
+						 atividade= daoAtividade.find(Integer.parseInt(id));
+						equipe.addAtividade(atividade);
+						atividade.addParticipante(equipe, tipo);
+						
+						
+					}
 				equipe.setNome(nome);
 				equipe.setEmail(email);
+				equipe.setTelPrimario(Long.parseLong(telefone));
 				equipe.setVoluntario(voluntario);
-				atividade.addParticipante(equipe, tipo);
-				daoa.merge(atividade);
-//					if(tipo.equalsIgnoreCase("docente")){
-//						atividade.addDocente((Docente)equipe);
-//						daoa.merge(atividade);
-//					}else
-//						if(tipo.equalsIgnoreCase("tecnico")){
-//							atividade.addTecnico((Tecnico)equipe);
-//							daoa.merge(atividade);
-//							;
-//						}else
-//							if(tipo.equalsIgnoreCase("bolsista")){
-//								atividade.addBolsista((Bolsista)equipe);
-//								daoa.merge(atividade);
-//							}else
-//								if(tipo.equalsIgnoreCase("externo")){
-//									atividade.addExternos((Externos)equipe);
-//									daoa.merge(atividade);
-//								}
+				
+				
+					
 					daoParticipante.persist(equipe);
 					DAO.flush();
 					DAO.commit();
 					request.setAttribute("mensagem", "Participante cadastrado com sucesso");
-					request.setAttribute("atividade", atividade);
-					request.getRequestDispatcher("atividade/atividade.jsp").forward(request, response);
+							if(!id.equalsIgnoreCase("")){
+								
+								daoa.merge(atividade);
+								request.setAttribute("atividade", atividade);
+								request.getRequestDispatcher("atividade/atividade.jsp").forward(request, response);
+							}else{
+								request.getRequestDispatcher("index.jsp").forward(request, response);
+							}
 				
 			}else
 				if(ref.equalsIgnoreCase("pesquisar")){
@@ -210,46 +231,13 @@ public class Participantes extends HttpServlet {
 					request.setAttribute("tipo", tipo);
 					
 						if(tipo.equalsIgnoreCase("coordenador")){
-							request.getRequestDispatcher("participante/inserir-coordenador.jsp").forward(request, response);
+							request.getRequestDispatcher("participante/selecionar-coordenador.jsp").forward(request, response);
 						}else
 						
 						request.getRequestDispatcher("participante/selecionar-participante.jsp").forward(request, response);
 						
 					
-//						if(tipo.equalsIgnoreCase("docente")){
-//							DAODocente dao= new DAODocente();
-//							List<Docente> lista = new ArrayList<Docente>();
-//								if(campo.equalsIgnoreCase("nome")) lista= dao.findByNome(pesquisa);
-//								if(campo.equalsIgnoreCase("email")) lista= dao.findByEmail(pesquisa);	
-//								request.setAttribute("lista", lista);
-//							
-//						}else
-//							if(tipo.equalsIgnoreCase("bolsista")){
-//								DAOBolsista dao= new DAOBolsista();
-//								List<Bolsista> lista = new ArrayList<Bolsista>();
-//									if(campo.equalsIgnoreCase("nome")) lista= dao.findByNome(pesquisa);
-//									if(campo.equalsIgnoreCase("email")) lista= dao.findByEmail(pesquisa);	
-//									request.setAttribute("lista", lista);
-//								
-//							}else
-//								if(tipo.equalsIgnoreCase("tecnico")){
-//									DAOTecnico dao= new DAOTecnico();
-//									List<Tecnico> lista = new ArrayList<Tecnico>();
-//										if(campo.equalsIgnoreCase("nome")) lista= dao.findByNome(pesquisa);
-//										if(campo.equalsIgnoreCase("email")) lista= dao.findByEmail(pesquisa);	
-//										request.setAttribute("lista", lista);
-//								}else
-//									if(tipo.equalsIgnoreCase("externo")){
-//										DAOExterno dao= new DAOExterno();
-//										List<Externos> lista = new ArrayList<Externos>();
-//											if(campo.equalsIgnoreCase("nome")) lista= dao.findByNome(pesquisa);
-//											if(campo.equalsIgnoreCase("email")) lista= dao.findByEmail(pesquisa);
-//											request.setAttribute("lista", lista);
-//									}
-//						request.setAttribute("id", idAtividade);
-//						request.setAttribute("tipo", tipo);
-//						request.getRequestDispatcher("selecionar-participante.jsp").forward(request, response);
-//						
+						
 							
 						}
 							

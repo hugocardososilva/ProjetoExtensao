@@ -21,6 +21,8 @@ import javax.persistence.TemporalType;
 
 import org.eclipse.persistence.jpa.config.Cascade;
 
+import com.sun.jmx.snmp.Timestamp;
+
 
 @Entity
 public class Atividade {
@@ -56,6 +58,8 @@ public class Atividade {
 	
 	
 	private String objetivo;
+	private String beneficiariosDiretos;
+	private String beneficiariosIndiretos;
 //	Relacionamentos
 	@ManyToOne(cascade= CascadeType.PERSIST)
 	private LinhaDeExtensao linhaDeExtensao;
@@ -69,11 +73,11 @@ public class Atividade {
 	@OneToOne(cascade= CascadeType.PERSIST)
 	private AtividadeAntiga atividadeAntiga;
 	
-	@OneToMany(mappedBy= "atividade", cascade= CascadeType.ALL, fetch= FetchType.EAGER)
-	private List<BeneficiarioDireto> beneficiariosDiretos;
-	
-	@OneToMany(mappedBy= "atividade", cascade= CascadeType.ALL, fetch=FetchType.EAGER)
-	private List<BeneficiarioIndireto> beneficiariosIndiretos;
+//	@OneToMany(mappedBy= "atividade", cascade= CascadeType.ALL, fetch= FetchType.EAGER)
+//	private List<BeneficiarioDireto> beneficiariosDiretos;
+//	
+//	@OneToMany(mappedBy= "atividade", cascade= CascadeType.ALL, fetch=FetchType.EAGER)
+//	private List<BeneficiarioIndireto> beneficiariosIndiretos;
 	
 	@ManyToMany(cascade= CascadeType.ALL, fetch= FetchType.EAGER)
 	private List<Docente> docentes;
@@ -90,6 +94,15 @@ public class Atividade {
 	@OneToOne(cascade= CascadeType.ALL)
 	private ControleRegistro controleRegistro;
 	
+	@ManyToOne(cascade= CascadeType.ALL)
+	private User user;
+	
+	@Temporal(TemporalType.DATE)
+	private Date timeCadastro;
+	
+	@Temporal(TemporalType.DATE)
+	private Date timeUpdate;
+	
 	// construtor vazio(JPA)
 	
 	
@@ -100,8 +113,8 @@ public class Atividade {
 		this.bolsistas= new ArrayList<Bolsista>();
 		this.tecnicos= new ArrayList<Tecnico>();
 		this.docentes= new ArrayList<Docente>();
-		this.beneficiariosDiretos= new ArrayList<BeneficiarioDireto>();
-		this.beneficiariosIndiretos= new ArrayList<BeneficiarioIndireto>();
+//		this.beneficiariosDiretos= new ArrayList<BeneficiarioDireto>();
+//		this.beneficiariosIndiretos= new ArrayList<BeneficiarioIndireto>();
 	}
 
 	public int getId() {
@@ -146,12 +159,52 @@ public class Atividade {
 	}
 	
 
+	public String getBeneficiariosDiretos() {
+		return beneficiariosDiretos;
+	}
+
+	public void setBeneficiariosDiretos(String beneficiariosDiretos) {
+		this.beneficiariosDiretos = beneficiariosDiretos;
+	}
+
+	public String getBeneficiariosIndiretos() {
+		return beneficiariosIndiretos;
+	}
+
+	public void setBeneficiariosIndiretos(String beneficiariosIndiretos) {
+		this.beneficiariosIndiretos = beneficiariosIndiretos;
+	}
+
 	public String getObjetivo() {
 		return objetivo;
 	}
 
 	public void setObjetivo(String objetivo) {
 		this.objetivo = objetivo;
+	}
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Date getTimeCadastro() {
+		return timeCadastro;
+	}
+
+	public void setTimeCadastro(Date timeCadastro) {
+		this.timeCadastro = timeCadastro;
+	}
+
+	public Date getTimeUpdate() {
+		return timeUpdate;
+	}
+
+	public void setTimeUpdate(Date timeUpdate) {
+		this.timeUpdate = timeUpdate;
 	}
 
 	public Date getDataInicio() {
@@ -248,23 +301,23 @@ public class Atividade {
 		this.atividadeAntiga = atividadeAntiga;
 	}
 
-	public List<BeneficiarioDireto> getBeneficiariosDiretos() {
-		return beneficiariosDiretos;
-	}
-
-	public void setBeneficiariosDiretos(
-			List<BeneficiarioDireto> beneficiariosDiretos) {
-		this.beneficiariosDiretos = beneficiariosDiretos;
-	}
-
-	public List<BeneficiarioIndireto> getBeneficiariosIndiretos() {
-		return beneficiariosIndiretos;
-	}
-
-	public void setBeneficiariosIndiretos(
-			List<BeneficiarioIndireto> beneficiariosIndiretos) {
-		this.beneficiariosIndiretos = beneficiariosIndiretos;
-	}
+//	public List<BeneficiarioDireto> getBeneficiariosDiretos() {
+//		return beneficiariosDiretos;
+//	}
+//
+//	public void setBeneficiariosDiretos(
+//			List<BeneficiarioDireto> beneficiariosDiretos) {
+//		this.beneficiariosDiretos = beneficiariosDiretos;
+//	}
+//
+//	public List<BeneficiarioIndireto> getBeneficiariosIndiretos() {
+//		return beneficiariosIndiretos;
+//	}
+//
+//	public void setBeneficiariosIndiretos(
+//			List<BeneficiarioIndireto> beneficiariosIndiretos) {
+//		this.beneficiariosIndiretos = beneficiariosIndiretos;
+//	}
 
 	public List<Docente> getDocentes() {
 		return docentes;
@@ -328,18 +381,18 @@ public class Atividade {
 		}
 		
 //		adicionando e removendo beneficiarios
-		public void addBeneficiarioDireto(BeneficiarioDireto direto){
-			this.beneficiariosDiretos.add(direto);
-		}
-		public void removeBeneficiarioDireto(BeneficiarioDireto direto){
-			this.beneficiariosDiretos.remove(direto);
-		}
-		public void addBeneficiarioIndireto(BeneficiarioIndireto indireto){
-			this.beneficiariosIndiretos.add(indireto);
-		}
-		public void removeBeneficiarioIndireto(BeneficiarioIndireto indireto){
-			this.beneficiariosIndiretos.remove(indireto);
-		}
+//		public void addBeneficiarioDireto(BeneficiarioDireto direto){
+//			this.beneficiariosDiretos.add(direto);
+//		}
+//		public void removeBeneficiarioDireto(BeneficiarioDireto direto){
+//			this.beneficiariosDiretos.remove(direto);
+//		}
+//		public void addBeneficiarioIndireto(BeneficiarioIndireto indireto){
+//			this.beneficiariosIndiretos.add(indireto);
+//		}
+//		public void removeBeneficiarioIndireto(BeneficiarioIndireto indireto){
+//			this.beneficiariosIndiretos.remove(indireto);
+//		}
 
 		public void addParticipante(ParticipanteInterface participante, String tipo){
 			if(tipo.equalsIgnoreCase("docente")){
@@ -391,8 +444,8 @@ public class Atividade {
 					+ linhaDeExtensao + ", coordenador=" + coordenador
 					+ ", atividades=" + atividades + ", atividadeAntiga="
 					+ atividadeAntiga + ", beneficiariosDiretos="
-					+ beneficiariosDiretos + ", beneficiariosIndiretos="
-					+ beneficiariosIndiretos + ", docentes=" + docentes
+					
+					
 					+ ", tecnicos=" + tecnicos + ", bolsistas=" + bolsistas
 					+ ", externos=" + externos + ", controleRegistro="
 					+ controleRegistro + "]";

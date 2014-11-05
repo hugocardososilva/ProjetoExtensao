@@ -18,6 +18,7 @@
 		<tr>
 			<th>Nome</th>
 			<th>Email</th>
+			<th>Telefone</th>
 			<th>Voluntário?</th>
 			<th>Opções</th>
 			
@@ -27,8 +28,18 @@
 			<tr>
 				<td>${participante.nome }</td>
 				<td>${participante.email }</td>
+				<td>${participante.telPrimario }
 				<td>${participante.voluntario }</td>
-				<td><a href="Participantes.do?ref=inserir&tipo=${requestScope.tipo }&id=${requestScope.id }&idParticipante=${participante.id}"><button type="button" class="btn btn-success right">Inserir</button></a></td>
+				<c:choose>
+					<c:when test="${requestScope.id == null }">
+					<td><a href="Participantes.do?ref=editar&tipo=${requestScope.tipo }&idParticipante=${participante.id}"><button type="button" class="btn btn-warning right">Editar</button></a></td>
+					
+					</c:when>
+					<c:otherwise>
+					<td><a href="Participantes.do?ref=inserir&tipo=${requestScope.tipo }&id=${requestScope.id }&idParticipante=${participante.id}"><button type="button" class="btn btn-success right">Inserir</button></a></td>
+					</c:otherwise>
+				</c:choose>
+				
 				
 				
 			</tr>
@@ -38,7 +49,11 @@
 
 
 </table>
-	<c:import url="inserir-participante.jsp"/>
+		<c:choose>
+			<c:when test="${requestScope.id != null }">
+				<c:import url="inserir-participante.jsp"/>
+			</c:when>
+	</c:choose>
 </div>
 
 </body>

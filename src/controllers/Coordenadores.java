@@ -49,13 +49,13 @@ public class Coordenadores extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DAO.open();
 		DAO.begin();
-		
+		String id= request.getParameter("id");
 		ref= request.getParameter("ref");
 		
 		if(ref.equalsIgnoreCase("novo")){
 			coordenador= new models.Coordenador();
 			atividade= new Atividade();
-			atividade= daoAtividade.find(Integer.parseInt(request.getParameter("id")));
+			
 			
 			
 			String nome = request.getParameter("nomeCoordenador");
@@ -67,8 +67,7 @@ public class Coordenadores extends HttpServlet {
 			String telSecundario= request.getParameter("phonePrimario2");
 			
 			
-			System.out.println(atividade);
-			coordenador.addAtividade(atividade);
+			
 			coordenador.setNome(nome);
 			coordenador.setTipo(tipo);
 			coordenador.setEmail(email);
@@ -81,17 +80,26 @@ public class Coordenadores extends HttpServlet {
 				}else{
 					coordenador.setVoluntario(false);
 				}
-				
-			atividade.setCoordenador(coordenador);
+				if(!id.equalsIgnoreCase("")){	
+					atividade= daoAtividade.find(Integer.parseInt(id));
+					System.out.println(atividade);
+					coordenador.addAtividade(atividade);
+					atividade.setCoordenador(coordenador);
+					daoAtividade.merge(atividade);
+				}
 			daoCoordenador.persist(coordenador);
 			DAO.flush();
 			
-			daoAtividade.merge(atividade);
-			DAO.commit();
-			request.setAttribute("mensagem", "Coordenador cadastrado e vinculado à atividade!");
-			request.setAttribute("atividade", atividade);
-			request.getRequestDispatcher("atividade/atividade.jsp").forward(request, response);
 			
+			DAO.commit();
+				if(!id.equalsIgnoreCase("")){
+					request.setAttribute("mensagem", "Coordenador cadastrado e vinculado à atividade!");
+					request.setAttribute("atividade", atividade);
+					request.getRequestDispatcher("atividade/atividade.jsp").forward(request, response);
+				}else{
+					request.setAttribute("mensagem", "Coordenador adicionado com sucesso!");
+					request.getRequestDispatcher("index.jsp").forward(request, response);
+				}
 			
 		}
 		DAO.close();

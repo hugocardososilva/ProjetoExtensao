@@ -3,7 +3,7 @@
 
 <div class="panel panel-default">
   			<div class="panel-heading">
-  					<h4>Novo Participante</h4>
+  					<h4>Novo ${requestScope.tipo }</h4>
  			</div>
 		 <div class="panel-body">
 <form role="form" action="Participantes.do?ref=novo&id=${requestScope.id }" method="post">
@@ -21,6 +21,12 @@
 			<label for="email">Email<br />
 		</label>
 			<input class="form-control" name="email" type="email" id="email" size="50" maxlength="100" />
+		
+		</div>
+		<div class="form-group">
+			<label for="telPrimario">Telefone<br />
+		</label>
+			<input class="form-control" name="telPrimario" type="text" id="telPrimario" size="50" maxlength="100" />
 		
 		</div>
 		

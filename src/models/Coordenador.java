@@ -21,7 +21,7 @@ public class Coordenador extends Participante implements ParticipanteInterface<C
 	private int id;
 	
 	private String setor;
-	private Long telPrimario;
+	
 	private Long telAuxiliar;
 	
 	private String tipo;
@@ -51,13 +51,7 @@ public class Coordenador extends Participante implements ParticipanteInterface<C
 		this.setor = setor;
 	}
 	
-	public Long getTelPrimario() {
-		return telPrimario;
-	}
-
-	public void setTelPrimario(Long telPrimario) {
-		this.telPrimario = telPrimario;
-	}
+	
 
 	public Long getTelAuxiliar() {
 		return telAuxiliar;
@@ -92,8 +86,8 @@ public class Coordenador extends Participante implements ParticipanteInterface<C
 
 	@Override
 	public String toString() {
-		return "Coordenador [id=" + id + ", setor=" + setor + ", telPrimario="
-				+ telPrimario + ", telAuxiliar=" + telAuxiliar + ", tipo="
+		return "Coordenador [id=" + id + ", setor=" + setor + ","
+				+ " telAuxiliar=" + telAuxiliar + ", tipo="
 				+ tipo + "]";
 	}
 	

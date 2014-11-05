@@ -24,6 +24,7 @@ public abstract class Participante {
 	private boolean voluntario;
 	@ManyToMany(cascade=CascadeType.ALL)
 	private List<Atividade> atividades;
+	private Long telPrimario;
 	
 	
 	public Participante() {
@@ -41,7 +42,13 @@ public abstract class Participante {
 		this.id = id;
 	}
 
+	public Long getTelPrimario() {
+		return telPrimario;
+	}
 
+	public void setTelPrimario(Long telPrimario) {
+		this.telPrimario = telPrimario;
+	}
 	public String getNome() {
 		return nome;
 	}
