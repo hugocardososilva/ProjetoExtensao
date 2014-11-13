@@ -1,8 +1,8 @@
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+x'<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-
+ <%@ taglib prefix="Sessao" tagdir="/WEB-INF/tags"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -11,7 +11,9 @@
 <!-- <script src="bootstrap/js/bootstrap.min.js"></script> -->
 </head>
 <body>
+<Sessao:TagSessaoUser/>
 	<div class="container">
+	
 <c:import url="../scripts.jsp"/>
 <c:import url="../header.jsp"/>
 <c:import url="../menu.jsp"/>

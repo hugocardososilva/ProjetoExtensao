@@ -94,8 +94,8 @@ public class Atividade {
 	@OneToOne(cascade= CascadeType.ALL)
 	private ControleRegistro controleRegistro;
 	
-	@ManyToOne(cascade= CascadeType.ALL)
-	private User user;
+	@ManyToOne(cascade= CascadeType.PERSIST)
+	private Usuario usuario;
 	
 	@Temporal(TemporalType.DATE)
 	private Date timeCadastro;
@@ -183,12 +183,12 @@ public class Atividade {
 		this.objetivo = objetivo;
 	}
 	
-	public User getUser() {
-		return user;
+	public Usuario getUser() {
+		return usuario;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUser(Usuario user) {
+		this.usuario = user;
 	}
 
 	public Date getTimeCadastro() {

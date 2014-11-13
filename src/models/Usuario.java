@@ -1,8 +1,14 @@
 package models;
 
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,21 +16,24 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class User {
+public class Usuario {
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private int id;
+
 	private String login;
+	private String nome;
 	private String senha;
 	private String email;
 	private Long telefone;
 	private String privilegio;
 	
-	@OneToMany(mappedBy= "user", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy= "usuario", cascade=CascadeType.PERSIST)
 	private List<Atividade> atividades;
 
-	public User() {
-		super();
+	public Usuario() {
+		
+		this.atividades= new ArrayList<Atividade>();
 	}
 
 	public int getId() {
@@ -38,6 +47,15 @@ public class User {
 	public String getLogin() {
 		return login;
 	}
+	
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
 	public void setLogin(String login) {
 		this.login = login;
@@ -47,8 +65,18 @@ public class User {
 		return senha;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setSenha(String senha){
+		this.senha= senha;
+			try {
+				this.senha = this.convertPasswordToMD5(senha);
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
 	}
 
 	public String getEmail() {
@@ -88,7 +116,13 @@ public class User {
 	public void removeAtividade(Atividade atividade){
 		this.atividades.remove(atividade);
 	}
-
+	 public static String convertPasswordToMD5(String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+	        MessageDigest md = MessageDigest.getInstance("MD5");
+	 
+	        BigInteger hash = new BigInteger(1, md.digest(password.getBytes("UTF-8")));
+	 
+	        return String.format("%32x", hash);
+	    }
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", login=" + login + ", senha=" + senha

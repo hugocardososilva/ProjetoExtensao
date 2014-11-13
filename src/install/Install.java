@@ -4,12 +4,14 @@ import models.AreaTematica;
 import models.LinhaDeExtensao;
 import models.LocalRealizacao;
 import models.TipoAtividade;
+import models.Usuario;
 import models.Vinculo;
 import dao.DAO;
 import dao.DAOAreaTematica;
 import dao.DAOLinhaDeExtensao;
 import dao.DAOLocalRealizacao;
 import dao.DAOTipoAtividade;
+import dao.DAOUser;
 import dao.DAOVinculo;
 
 public class Install {
@@ -251,6 +253,26 @@ public class Install {
 		
 			DAO.commit();
 			DAO.close();
+	}
+	public static void addUserAdmin(){
+		DAOUser daou= new DAOUser();
+		DAO.open();
+		DAO.begin();
+		
+		Usuario u = new Usuario();
+		u.setLogin("admin");
+		u.setSenha("admin");
+		u.setEmail("hugocardososilva@gmail.com");
+		u.setNome("admin");
+		u.setPrivilegio("admin");
+//		u.setTelefone(8388173256l);
+		daou.persist(u);
+		DAO.flush();
+		
+		DAO.commit();
+		
+		
+		DAO.close();
 	}
 
 }
