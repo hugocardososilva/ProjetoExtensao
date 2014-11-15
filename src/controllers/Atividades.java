@@ -5,6 +5,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,8 +13,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.PageContext;
 
+import oracle.sql.DATE;
 import dao.DAO;
 import dao.DAOAreaTematica;
 import dao.DAOAtividade;
@@ -21,6 +24,7 @@ import dao.DAOAtividadeAntiga;
 import dao.DAOLinhaDeExtensao;
 import dao.DAOLocalRealizacao;
 import dao.DAOTipoAtividade;
+import dao.DAOUser;
 import dao.DAOVinculo;
 import models.AreaTematica;
 import models.Atividade;
@@ -28,6 +32,7 @@ import models.AtividadeAntiga;
 import models.LinhaDeExtensao;
 import models.LocalRealizacao;
 import models.TipoAtividade;
+import models.Usuario;
 import models.Vinculo;
 
 /**
@@ -45,6 +50,7 @@ public class Atividades extends HttpServlet {
 	DAOAreaTematica daoArea= new DAOAreaTematica();
 	DAOLinhaDeExtensao daoLinha= new DAOLinhaDeExtensao();
 	DAOLocalRealizacao daoLocal= new DAOLocalRealizacao();
+	DAOUser daoU= new DAOUser();
 	DateFormat data= new SimpleDateFormat("yyyy-MM-dd");
        
     /**
@@ -62,6 +68,8 @@ public class Atividades extends HttpServlet {
 		DAO.open();
 		DAO.begin();
 		
+//		synchronized (request) {
+			
 		
 		String ref= request.getParameter("ref");
 		String outroVinculo;
@@ -79,7 +87,8 @@ public class Atividades extends HttpServlet {
 		
 		
 		if(ref.equalsIgnoreCase("novo")){
-		
+			HttpSession session= request.getSession();
+			Usuario user = (Usuario) session.getAttribute("user");
 			int areaTematica= Integer.parseInt(request.getParameter("areaTematica"));
 			int localRealizacao= Integer.parseInt(request.getParameter("localDeLocalizacao"));
 			int linhaDeExtensao = Integer.parseInt(request.getParameter("especifiqueALinhaDeExtensão"));
@@ -88,7 +97,7 @@ public class Atividades extends HttpServlet {
 			TipoAtividade tipoAtividade= daot.find(tipo);
 			LinhaDeExtensao linha= daoLinha.find(linhaDeExtensao);
 			AreaTematica area= daoArea.find(areaTematica);
-			
+			Date dataCriacao= new Date(System.currentTimeMillis());
 
 					if(request.getParameter("vinculoDaAtividade").equals("Outros")){
 						outroVinculo= request.getParameter("outroVinculoDeAtividade");
@@ -125,11 +134,12 @@ public class Atividades extends HttpServlet {
 			//		persistindo parametros
 					
 					
-						local.addAtividade(atividade);
-						tipoAtividade.addAtividade(atividade);
-						linha.addAtividade(atividade);
-						area.addAtividade(atividade);
-						
+//						local.addAtividade(atividade);
+//						tipoAtividade.addAtividade(atividade);
+//						linha.addAtividade(atividade);
+//						area.addAtividade(atividade);
+//						user.addAtividade(atividade);
+//						
 					
 							atividade.setLocal(local);
 							atividade.setTipoAtividade(tipoAtividade);
@@ -141,6 +151,9 @@ public class Atividades extends HttpServlet {
 							atividade.setValor(Double.parseDouble(valor));
 							atividade.setFonteDeRecurso(fonteDeRecursos);
 							atividade.setObjetivo(objetivo);
+							atividade.setUser(user);
+							atividade.setTimeCadastro(dataCriacao);
+							atividade.setTimeUpdate(new Date(System.currentTimeMillis()));
 							
 				
 		
@@ -158,9 +171,10 @@ public class Atividades extends HttpServlet {
 		daoLinha.merge(linha);
 		daoLocal.merge(local);
 		daot.merge(tipoAtividade);
+		daoU.merge(user);
 		
 		daoAtividade.persist(atividade);
-		
+		DAO.flush();
 		DAO.commit();
 		
 		Atividade atividade = daoAtividade.find(daoAtividade.getLast());
@@ -254,7 +268,8 @@ public class Atividades extends HttpServlet {
 				request.getRequestDispatcher("atividade/atividade.jsp").forward(request, response);
 			}
 		DAO.close();
-	}
+		}
+//	}
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String ref= request.getParameter("ref");

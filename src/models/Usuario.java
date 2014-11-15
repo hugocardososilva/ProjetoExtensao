@@ -28,7 +28,7 @@ public class Usuario {
 	private Long telefone;
 	private String privilegio;
 	
-	@OneToMany(mappedBy= "usuario", cascade=CascadeType.PERSIST)
+	@OneToMany(mappedBy= "usuario", cascade=CascadeType.ALL)
 	private List<Atividade> atividades;
 
 	public Usuario() {
