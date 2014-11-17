@@ -134,12 +134,12 @@ public class Atividades extends HttpServlet {
 			//		persistindo parametros
 					
 					
-//						local.addAtividade(atividade);
-//						tipoAtividade.addAtividade(atividade);
-//						linha.addAtividade(atividade);
-//						area.addAtividade(atividade);
+						local.addAtividade(atividade);
+						tipoAtividade.addAtividade(atividade);
+						linha.addAtividade(atividade);
+						area.addAtividade(atividade);
 //						user.addAtividade(atividade);
-//						
+						
 					
 							atividade.setLocal(local);
 							atividade.setTipoAtividade(tipoAtividade);
@@ -151,7 +151,7 @@ public class Atividades extends HttpServlet {
 							atividade.setValor(Double.parseDouble(valor));
 							atividade.setFonteDeRecurso(fonteDeRecursos);
 							atividade.setObjetivo(objetivo);
-							atividade.setUser(user);
+//							atividade.setUser(user);
 							atividade.setTimeCadastro(dataCriacao);
 							atividade.setTimeUpdate(new Date(System.currentTimeMillis()));
 							
@@ -171,7 +171,7 @@ public class Atividades extends HttpServlet {
 		daoLinha.merge(linha);
 		daoLocal.merge(local);
 		daot.merge(tipoAtividade);
-		daoU.merge(user);
+//		daoU.merge(user);
 		
 		daoAtividade.persist(atividade);
 		DAO.flush();

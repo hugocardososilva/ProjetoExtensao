@@ -39,10 +39,10 @@
 				<th>Opções</th>
 				
 				<td>
-					<a href="Participantes.do?ref=editar&especificacao=docente&id=${requestScope.atividade.id }&idParticipante=${docente.id}">
+					<a href="Participantes.do?ref=editar&tipo=docente&id=${requestScope.atividade.id }&idParticipante=${docente.id}">
 						<button class="btn btn-warning" type="button">Editar</button>
 					</a>
-				<a href="Participantes.do?ref=remover&especificacao=docente&id=${requestScope.atividade.id }&idParticipante=${docente.id}">
+				<a href="Participantes.do?ref=remover&tipo=docente&id=${requestScope.atividade.id }&idParticipante=${docente.id}">
 					<button  class="btn btn-danger" type="button">Remover</button>
 				</a>
 				</td>

@@ -3,6 +3,7 @@ package controllers;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
+import javax.persistence.NoResultException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -48,7 +49,10 @@ public class UserController extends HttpServlet {
 						session.invalidate();
 //						request.setAttribute("mensagem", "");
 						request.getRequestDispatcher("index.jsp").forward(request, response);
-					}
+					}else
+						if(ref.equalsIgnoreCase("add")){
+							request.getRequestDispatcher("usuario/novo-usuario.jsp").forward(request, response);
+						}
 	}
 
 	/**
@@ -76,13 +80,34 @@ public class UserController extends HttpServlet {
 			}catch (NoSuchAlgorithmException e) {
 				
 				e.printStackTrace();
-			}catch (NullPointerException e) {
+			}catch (NullPointerException | NoResultException e) {
 				System.out.println(e.toString());
 				request.setAttribute("mensagem", "Nome de usuário ou senha inválidos");
 				request.getRequestDispatcher("login.jsp").forward(request, response);
 			}
 		}else
-			if(ref.equalsIgnoreCase("add")){
+			if(ref.equalsIgnoreCase("novo")){
+				String login = request.getParameter("login");
+				String nome = request.getParameter("nome");
+				String email = request.getParameter("email");
+				String tel= request.getParameter("tel");
+				String senha= request.getParameter("senha");
+				String senha2=request.getParameter("senha2");
+				
+				Usuario user= new Usuario();
+				user.setLogin(login);
+				user.setNome(nome);
+				user.setEmail(email);
+				user.setSenha(senha);
+				user.setPrivilegio("servidor");
+				user.setTelefone(Long.parseLong(tel));
+				
+				daoU.persist(user);
+				
+				request.setAttribute("mensagem", "Usuário cadastrado com sucesso!");
+				request.getRequestDispatcher("index.jsp").forward(request, response);
+				DAO.commit();
+				
 				
 			}
 		DAO.close();

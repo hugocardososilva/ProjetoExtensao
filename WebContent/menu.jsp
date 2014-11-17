@@ -19,6 +19,7 @@
 		 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Atividade <span class="caret"></span></a>
 			 <ul class="dropdown-menu" role="menu">
 			 	<li><a href="<c:url value='/atividade/cadastrar-atividade.jsp'/>">Nova Atividade</a></li>
+			 	<li><a href="<c:url value='/atividade/cadastrar-atividade.jsp'/>">Listar Atividades</a></li>
 			 	 
 			 </ul>
 		
@@ -54,22 +55,39 @@
 			 <ul class="dropdown-menu" role="menu">
 			 	<li role="presentation" class="dropdown-header">Vínculo</li>
 			 		 <li><a href="<c:url value='/Apoio.do?ref=novo&tipo=vinculo'/>" >Adicionar Vínculo</a></li>
+			 		 <li><a href="<c:url value='/Apoio.do?ref=listar&tipo=vinculo'/>" >Listar Vínculo</a></li>
 <%-- 			 		 <li><a href="<c:url value='/Participantes.do?ref=listar&tipo=coordenador'/>" >Listar Vínculo</a></li> --%>
 			 	<li role="presentation" class="dropdown-header">Tipo de Atividade</li>
 				 	 <li><a href="<c:url value='/Apoio.do?ref=novo&tipo=tipoAtividade'/>" >Adicionar Tipo de Atividade</a></li>
+				 	  <li><a href="<c:url value='/Apoio.do?ref=listar&tipo=tipoAtividade'/>" >Listar Tipo de Atividade</a></li>
 				 <li role="presentation" class="dropdown-header">Local de Realização</li>
 				 	 <li><a href="<c:url value='/Apoio.do?ref=novo&tipo=local'/>" >Adicionar Local de Realização</a></li>
+				 	 <li><a href="<c:url value='/Apoio.do?ref=listar&tipo=local'/>" >Listar Local de Realização</a></li>
 				 <li role="presentation" class="dropdown-header">Linha de Extensão</li>
 				  <li><a href="<c:url value='/Apoio.do?ref=novo&tipo=extensao'/>" >Adicionar Linha de Extensão</a></li>
+				  <li><a href="<c:url value='/Apoio.do?ref=Listar&tipo=extensao'/>" >Listar Linha de Extensão</a></li>
 				 <li role="presentation" class="dropdown-header">Área Temática</li>
 				 	 <li><a href="<c:url value='/Apoio.do?ref=novo&tipo=areaTematica'/>" >Adicionar Área Temática</a></li>
+				 	 <li><a href="<c:url value='/Apoio.do?ref=listar&tipo=areaTematica'/>" >Listar Área Temática</a></li>
 				
 		
 			 
 			
 			 </ul>
 			 </li>
+			<li class="dropdown">
+		 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usuário <span class="caret"></span></a>
+			 <ul class="dropdown-menu" role="menu">
+			 	<li role="presentation" class="dropdown-header">Usuário</li>
+			 		 <li><a href="<c:url value='/UserController.do?ref=add'/>" >Adicionar Usuário</a></li>
+<%-- 			 		 <li><a href="<c:url value='/Apoio.do?ref=listar&tipo=vinculo'/>" >Listar Vínculo</a></li> --%>
+			 
+			 					
+		
+			 
 			
+			 </ul>
+			 </li>
 			 </ul>
 			 <c:choose>
 			 <c:when test="${sessionScope.user== null }">

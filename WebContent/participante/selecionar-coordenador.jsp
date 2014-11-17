@@ -42,7 +42,7 @@
 				<td>${participante.tipo }</td>
 				<c:choose>
 					<c:when test="${requestScope.id == null }">
-						<td><a href="Participantes.do?ref=inserir&tipo=${requestScope.tipo }&id=${requestScope.id }&idParticipante=${participante.id}"><button type="button" class="btn btn-success right">Editar</button></a></td>
+						<td><a href="Participantes.do?ref=editar&tipo=${requestScope.tipo }&id=${requestScope.id }&idParticipante=${participante.id}"><button type="button" class="btn btn-warning right">Editar</button></a></td>
 					</c:when>
 					
 					<c:otherwise>

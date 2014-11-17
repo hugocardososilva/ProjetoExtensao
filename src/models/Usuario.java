@@ -20,10 +20,12 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private int id;
-
+	@Column(unique=true)
 	private String login;
 	private String nome;
+	@Column(unique=true)
 	private String senha;
+	@Column(unique=true)
 	private String email;
 	private Long telefone;
 	private String privilegio;

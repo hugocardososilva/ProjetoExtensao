@@ -1,6 +1,8 @@
 package controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -46,6 +48,8 @@ public class Apoio extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String ref= request.getParameter("ref");
 		String tipo= request.getParameter("tipo");
+		DAO.open();
+		DAO.begin();
 		if(ref.equalsIgnoreCase("novo")){
 			if(tipo.equalsIgnoreCase("vinculo")){
 				request.getRequestDispatcher("apoio/novo-vinculo.jsp").forward(request, response);
@@ -62,7 +66,47 @@ public class Apoio extends HttpServlet {
 						if(tipo.equalsIgnoreCase("areaTematica")){
 							request.getRequestDispatcher("apoio/novo-area-tematica.jsp").forward(request, response);
 						}
-		}
+		}else
+			if(ref.equalsIgnoreCase("listar")){
+				
+				if(tipo.equalsIgnoreCase("vinculo")){
+					List<Vinculo> lista = new ArrayList<Vinculo>();
+					
+					lista= daoVinculo.findAll();
+					request.setAttribute("tipo", tipo);
+					request.setAttribute("lista", lista);
+					request.getRequestDispatcher("apoio/listar-vinculo.jsp").forward(request, response);
+				}else
+					if(tipo.equalsIgnoreCase("tipoAtividade")){
+						List<TipoAtividade> lista = new ArrayList<TipoAtividade>();
+						lista= daoTipo.findAll();
+						request.setAttribute("tipo", tipo);
+						request.setAttribute("lista", lista);
+						request.getRequestDispatcher("apoio/listar-tipo-atividade.jsp").forward(request, response);
+					}else
+						if(tipo.equalsIgnoreCase("extensao")){
+							List<LinhaDeExtensao> lista = new ArrayList<LinhaDeExtensao>();
+							lista= daoExtensao.findAll();
+							request.setAttribute("tipo", tipo);
+							request.setAttribute("lista", lista);
+							request.getRequestDispatcher("apoio/listar-linha-de-extensao.jsp").forward(request, response);
+						}else
+							if(tipo.equalsIgnoreCase("local")){
+								List<LocalRealizacao> lista = new ArrayList<LocalRealizacao>();
+								lista= daoLocal.findAll();
+								request.setAttribute("tipo", tipo);
+								request.setAttribute("lista", lista);
+								request.getRequestDispatcher("apoio/listar-local-de-realizacao.jsp").forward(request, response);
+							}else
+								if(tipo.equalsIgnoreCase("areaTematica")){
+									List<AreaTematica> lista = new ArrayList<AreaTematica>();
+									lista= daoArea.findAll();
+									request.setAttribute("tipo", tipo);
+									request.setAttribute("lista", lista);
+									request.getRequestDispatcher("apoio/listar-area-tematica.jsp").forward(request, response);
+								}
+			}
+		DAO.close();
 	}
 		
 	/**

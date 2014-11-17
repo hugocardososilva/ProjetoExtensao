@@ -9,9 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Atividade;
+import models.Coordenador;
+import models.FactoryParticipante;
+import models.ParticipanteInterface;
 import dao.DAO;
 import dao.DAOAtividade;
 import dao.DAOCoordenador;
+import dao.DAOParticipanteInterface;
+import dao.FactoryDAOParticipante;
 
 /**
  * Servlet implementation class Coordenador
@@ -24,6 +29,7 @@ public class Coordenadores extends HttpServlet {
     DAOCoordenador daoCoordenador= new DAOCoordenador();
     models.Coordenador coordenador;
     Atividade atividade;
+    
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -37,10 +43,7 @@ public class Coordenadores extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ref= request.getParameter("ref");
-		if(ref.equalsIgnoreCase("editar")){
-			
-			
-		}
+		
 	}
 
 	/**
@@ -100,8 +103,44 @@ public class Coordenadores extends HttpServlet {
 					request.setAttribute("mensagem", "Coordenador adicionado com sucesso!");
 					request.getRequestDispatcher("index.jsp").forward(request, response);
 				}
-			
-		}
+		}else
+				if(ref.equalsIgnoreCase("alterar")){
+					String tipo = request.getParameter("especificacaoCoordenador");
+					String nome = request.getParameter("nomeCoordenador");
+					String idParticipante= request.getParameter("idParticipante");
+					String email = request.getParameter("emailCoordenador");
+					String telefone= request.getParameter("phonePrimario");
+					String telAuxiliar= request.getParameter("phonePrimario2");
+					String setor= request.getParameter("setorDeTrabalho");
+					boolean voluntario = Boolean.parseBoolean(request.getParameter("voluntario"));
+					
+					DAOCoordenador daoParticipante= new DAOCoordenador();
+					Coordenador participante= new Coordenador();
+					participante = daoParticipante.find(Integer.parseInt(idParticipante ));
+					participante.setNome(nome);
+					participante.setEmail(email);
+					participante.setTelPrimario(Long.parseLong(telefone));
+					participante.setTelAuxiliar(Long.parseLong(telAuxiliar));
+					participante.setVoluntario(voluntario);
+					participante.setTipo(tipo);
+					participante.setSetor(setor);
+					
+					daoParticipante.merge(participante);
+					DAO.commit();
+					request.setAttribute("mensagem", "Coordenador editado com sucesso");
+					if(!id.equalsIgnoreCase("")){
+						Atividade atividade= daoAtividade.find(Integer.parseInt(id));
+						request.setAttribute("atividade", atividade);
+						
+						request.getRequestDispatcher("atividade/atividade.jsp").forward(request, response);
+					}else{
+						request.getRequestDispatcher("index.jsp").forward(request, response);
+						
+					}
+						
+						
+						
+				}
 		DAO.close();
 	}
 

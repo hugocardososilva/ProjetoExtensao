@@ -9,7 +9,7 @@ public class DAOUser extends DAO<Usuario> {
 		Query q = manager.createQuery("SELECT U from Usuario U where U.login like :login and U.senha like :senha");
 		q.setParameter("login", login);
 		q.setParameter("senha", senha);
-		System.out.println(q.getSingleResult().toString());
+
 		if(q.getSingleResult()== null) return null;
 		return (Usuario) q.getSingleResult();
 	}

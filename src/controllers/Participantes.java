@@ -159,7 +159,27 @@ public class Participantes extends HttpServlet {
 								}else{
 									request.getRequestDispatcher("participante/selecionar-participante.jsp").forward(request, response);
 								}
-						}
+						}else 
+							if(ref.equalsIgnoreCase("editar")){
+								String tipo= request.getParameter("tipo");
+								String idAtividade= request.getParameter("id");
+								String idParticipante= request.getParameter("idParticipante");
+								DAOParticipanteInterface daoP= FactoryDAOParticipante.getDAOParticipante(tipo);
+								ParticipanteInterface participante = (ParticipanteInterface) daoP.find(Integer.parseInt(idParticipante));
+								request.setAttribute("id", idAtividade);
+								request.setAttribute("tipo", tipo);
+								request.setAttribute("participante", participante);
+								System.out.println(participante.toString());
+									if(tipo.equalsIgnoreCase("coordenador")){
+										
+										request.getRequestDispatcher("participante/editar-coordenador.jsp").forward(request, response);
+									}else{
+										request.getRequestDispatcher("participante/editar-participante.jsp").forward(request, response);
+									}
+										
+										
+								
+								}
 				
 			DAO.close();
 	}
@@ -239,7 +259,39 @@ public class Participantes extends HttpServlet {
 					
 						
 							
-						}
+						}else
+							if(ref.equalsIgnoreCase("alterar")){
+								String tipo = request.getParameter("tipo");
+								String nome = request.getParameter("nome");
+								String idParticipante= request.getParameter("idParticipante");
+								String email = request.getParameter("email");
+								String telefone= request.getParameter("telPrimario");
+								boolean voluntario = Boolean.parseBoolean(request.getParameter("voluntario"));
+								
+								DAOParticipanteInterface daoParticipante= FactoryDAOParticipante.getDAOParticipante(tipo);
+								ParticipanteInterface participante= FactoryParticipante.getEquipeTematica(tipo);
+								participante = (ParticipanteInterface) daoParticipante.find(Integer.parseInt(idParticipante ));
+								participante.setNome(nome);
+								participante.setEmail(email);
+								participante.setTelPrimario(Long.parseLong(telefone));
+								participante.setVoluntario(voluntario);
+								
+								daoParticipante.merge(participante);
+								DAO.commit();
+								request.setAttribute("mensagem", "Participante editada com sucesso");
+								if(!id.equalsIgnoreCase("")){
+									Atividade atividade= daoa.find(Integer.parseInt(id));
+									request.setAttribute("atividade", atividade);
+									
+									request.getRequestDispatcher("atividade/atividade.jsp").forward(request, response);
+								}else{
+									request.getRequestDispatcher("index.jsp").forward(request, response);
+									
+								}
+									
+									
+									
+							}
 							
 								
 							
