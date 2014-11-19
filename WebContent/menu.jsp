@@ -20,6 +20,7 @@
 			 <ul class="dropdown-menu" role="menu">
 			 	<li><a href="<c:url value='/atividade/cadastrar-atividade.jsp'/>">Nova Atividade</a></li>
 			 	<li><a href="<c:url value='/atividade/cadastrar-atividade.jsp'/>">Listar Atividades</a></li>
+			 	<li><a href="<c:url value='/PesquisarAtividades.do?ref=pesquisar'/>">Pesquisar Atividades</a></li>
 			 	 
 			 </ul>
 		

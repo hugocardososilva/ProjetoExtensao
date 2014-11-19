@@ -28,11 +28,9 @@
 			<th>Opções</th>
 			
 		</tr>
-		<pg:pager id="p" maxPageItems="2" maxIndexPages="10" export="offset,currentPageNumber=pageNumber" scope="request">
-  <pg:param name="keywords"/>
 		
 		<c:forEach var="atividade" items="${lista }">
-		 <pg:item>
+		 
 			<tr>
 				<td>${atividade.titulo }</td>
 				<td>${atividade.registro }</td>
@@ -41,22 +39,8 @@
 				
 				
 			</tr>
-		</pg:item>
-		</c:forEach>
 		
-<pg:index>
-    <pg:prev>
-      <a href="<%= pageUrl %>">&lt;&lt; Anterior</a>
-    </pg:prev>
-    <pg:pages>
-       <a href="<%= pageUrl %>"><%= pageNumber %></a> 
-    </pg:pages>
-    <pg:next>
-      <a href="">Próximo &gt;&gt;</a>
-    </pg:next>
-  </pg:index>
-</pg:pager>
-
+		</c:forEach>
 </table>
 
 </div>

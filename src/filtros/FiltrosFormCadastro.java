@@ -35,6 +35,8 @@ import dao.DAOVinculo;
 				"/Filtros", 
 				"/atividade/editar-atividade.jsp",
 				"/atividade/cadastrar-atividade.jsp",
+				"/atividade/pesquisar.jsp",
+				"/pesquisar/pesquisar-por-tipo.jsp"
 				
 		}, servletNames = { "Atividades" })
 public class FiltrosFormCadastro implements Filter {

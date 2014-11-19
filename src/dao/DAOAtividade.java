@@ -1,5 +1,9 @@
 package dao;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -30,6 +34,31 @@ public class DAOAtividade extends DAO<Atividade> {
 		q.setParameter("registro",prepared);
 		return q.getResultList();
 	}
-
+	@SuppressWarnings("unchecked")
+	public List<Atividade> findByPeriodo(String inicio, String fim){
+		DateFormat data= new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			Date dtInicio= data.parse(inicio);
+			Date dtFim= data.parse(fim);
+			Query q= manager.createQuery("SELECT A from Atividade A where A.dataInicio >= :dtInicio and A.dataInicio <= :dtFim");
+			q.setParameter("dtInicio", dtInicio);
+			q.setParameter("dtFim", dtFim);
+			return q.getResultList();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		
+		
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Atividade> findByTipo(int tipo){
+		Query q= manager.createQuery("SELECT A from Atividade A JOIN A.tipoAtividade T where T.id = :tipo");
+		q.setParameter("tipo", tipo);
+		return q.getResultList();
+	}
 
 }
