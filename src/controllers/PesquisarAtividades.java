@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import models.Atividade;
 import dao.DAO;
 import dao.DAOAtividade;
+import dao.DAOCoordenador;
 import dao.DAOTipoAtividade;
+import dao.DAOVinculo;
 
 /**
  * Servlet implementation class PesquisarAtividades
@@ -23,6 +25,9 @@ public class PesquisarAtividades extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	DAOAtividade daoa= new DAOAtividade();
 	DAOTipoAtividade daot= new DAOTipoAtividade();
+	DAOVinculo daov= new DAOVinculo();
+	DAOCoordenador daoc= new DAOCoordenador();
+	
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -41,6 +46,8 @@ public class PesquisarAtividades extends HttpServlet {
 		DAO.begin();
 		if(ref.equalsIgnoreCase("pesquisar")){
 			request.setAttribute("listaTipo", daot.findAll());
+			request.setAttribute("listaVinculo", daov.findAll());
+			request.setAttribute("listaCoordenador", daoc.findAll());
 			request.getRequestDispatcher("atividade/pesquisar.jsp").forward(request, response);
 		}
 		DAO.close();
@@ -71,7 +78,23 @@ public class PesquisarAtividades extends HttpServlet {
 				request.setAttribute("lista", lista);
 				request.getRequestDispatcher("pesquisar/listar-atividades.jsp").forward(request, response);
 				
-			}
+			}else
+				if(ref.equalsIgnoreCase("vinculo")){
+					String vinculo= request.getParameter("vinculoAtividade");
+					String inicio= request.getParameter("inicio");
+					String fim= request.getParameter("fim");
+					lista= daoa.findByVincunlo(inicio, fim,Integer.parseInt(vinculo));
+					request.setAttribute("lista", lista);
+					request.getRequestDispatcher("pesquisar/listar-atividades.jsp").forward(request, response);
+				}else 
+					if(ref.equalsIgnoreCase("coordenador")){
+						String coordenador = request.getParameter("coordenadorAtividade");
+						String inicio = request.getParameter("inicio");
+						String fim= request.getParameter("fim");
+						lista=daoa.findByCoordenador(inicio, fim, Integer.parseInt(coordenador));
+						request.setAttribute("lista", lista);
+						request.getRequestDispatcher("pesquisar/listar-atividades.jsp").forward(request, response);
+					}
 		DAO.close();
 	}
 

@@ -61,7 +61,7 @@ import org.eclipse.persistence.config.PersistenceUnitProperties;
 		public List<T> findAll(){
 			Class<T> type = (Class<T>) ((ParameterizedType) this.getClass()
 					.getGenericSuperclass()).getActualTypeArguments()[0];
-			Query query = manager.createQuery("select x from " + type.getSimpleName() + " x");
+			Query query = manager.createQuery("select x from " + type.getSimpleName() + " x" +" ORDER BY x.id");
 			return (List<T>) query.getResultList();
 
 		}

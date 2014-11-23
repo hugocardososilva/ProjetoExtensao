@@ -306,7 +306,16 @@ public class Atividades extends HttpServlet {
 				request.setAttribute("localRealizacao", localRealizacao);
 				request.setAttribute("atividade", atividade);
 				request.getRequestDispatcher("atividade/editar-atividade.jsp").forward(request, response);
-			}
+			}else
+				if(ref.equalsIgnoreCase("visualizar")){
+					String id = request.getParameter("id");
+					request.setAttribute("atividade", daoa.find(Integer.parseInt(id)));
+					request.getRequestDispatcher("atividade/atividade.jsp").forward(request, response);
+				}else
+					if(ref.equalsIgnoreCase("listar")){
+						request.setAttribute("lista", daoa.findAll());
+						request.getRequestDispatcher("pesquisar/listar-atividades.jsp").forward(request, response);
+					}
 		DAO.close(); 
 	}
 }
