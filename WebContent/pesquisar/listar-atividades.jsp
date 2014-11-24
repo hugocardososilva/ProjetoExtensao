@@ -24,34 +24,30 @@
 		<c:forEach items="${requestScope.lista }" var="atividade">
 		<table class="table table-bordered table-hover">
 		<tr></tr>
-		<tr>
-			<th class="tdnome">ID</th>
-			<td>${atividade.id } <a href="Atividades.do?ref=visualizar&id=${atividade.id }"><button style="clear:both;float:right;" class="btn btn-success" type="button">Visualizar</button></a></td>
-		</tr>
+		
+		
+			 
+		
 		<tr>
 			<th>Titulo</th>
-			<td>${atividade.titulo }</td>
+			<td>${atividade.titulo } <a href="Atividades.do?ref=visualizar&id=${atividade.id }"><button style="clear:both;float:right;" class="btn btn-success" type="button">Visualizar</button></a></td>
 		</tr>
 		<tr>
 			<th>Coordenador</th>
 			<td>${atividade.coordenador.nome }</td>
 		</tr>
 		<tr>
-			<th>Tipo da Atividade</th>
-			<td>${atividade.tipoAtividade.nome }</td>
+			<th>Data de Início</th>
+			<td><fmt:formatDate value="${atividade.dataInicio }" type="both"   
+pattern="dd/MM/yyyy" /></td>
 		</tr>
 		<tr>
-			<th>Vínculo</th>
-			<td>${atividade.vinculo.nome }</td>
+			<th>Data Término</th>
+			<td><fmt:formatDate value="${atividade.dataTermino }" type="both"   
+pattern="dd/MM/yyyy" /></td>
 		</tr>
-		<tr>
-			<th>Fonte de Recursos</th>
-			<td>${atividade.fonteDeRecurso }</td>
-		</tr>
-		<tr>
-			<th>Valor</th>
-			<td><fmt:formatNumber type="currency" currencySymbol="R$" currencyCode="BRL" value="${atividade.valor }"/></td>
-	</tr>
+		
+		
 	</table>
 	</c:forEach>
 	

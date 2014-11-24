@@ -21,6 +21,9 @@
 	<c:import url="../pesquisar/atividade-por-tipo.jsp"/>
 	<c:import url="../pesquisar/atividade-por-vinculo.jsp"/>
 	<c:import url="../pesquisar/atividade-por-coordenador.jsp"/>
+	<c:import url="../pesquisar/atividade-por-local.jsp"/>
+	<c:import url="../pesquisar/atividade-por-area.jsp"/>
+	<c:import url="../pesquisar/atividade-por-linha.jsp"/>
 	
 		</div>
 		

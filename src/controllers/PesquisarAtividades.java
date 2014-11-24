@@ -12,8 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import models.Atividade;
 import dao.DAO;
+import dao.DAOAreaTematica;
 import dao.DAOAtividade;
 import dao.DAOCoordenador;
+import dao.DAOLinhaDeExtensao;
+import dao.DAOLocalRealizacao;
 import dao.DAOTipoAtividade;
 import dao.DAOVinculo;
 
@@ -27,6 +30,9 @@ public class PesquisarAtividades extends HttpServlet {
 	DAOTipoAtividade daot= new DAOTipoAtividade();
 	DAOVinculo daov= new DAOVinculo();
 	DAOCoordenador daoc= new DAOCoordenador();
+	DAOLocalRealizacao daol= new DAOLocalRealizacao();
+	DAOAreaTematica daoArea= new DAOAreaTematica();
+	DAOLinhaDeExtensao daoLinha= new DAOLinhaDeExtensao();
 	
        
     /**
@@ -48,6 +54,10 @@ public class PesquisarAtividades extends HttpServlet {
 			request.setAttribute("listaTipo", daot.findAll());
 			request.setAttribute("listaVinculo", daov.findAll());
 			request.setAttribute("listaCoordenador", daoc.findAll());
+			request.setAttribute("listaLocal", daol.findAll());
+			request.setAttribute("listaArea", daoArea.findAll());
+			request.setAttribute("listaLinha", daoLinha.findAll());
+			
 			request.getRequestDispatcher("atividade/pesquisar.jsp").forward(request, response);
 		}
 		DAO.close();
@@ -74,7 +84,9 @@ public class PesquisarAtividades extends HttpServlet {
 			if(ref.equalsIgnoreCase("tipo")){
 //				int tipo= Integer.parseInt(request.getParameter("Tipo de atividade"));
 				String tipo= request.getParameter("tipoAtividade");
-				lista= daoa.findByTipo(Integer.parseInt(tipo));
+				String inicio= request.getParameter("inicio");
+				String fim= request.getParameter("fim");
+				lista= daoa.findByTipo(inicio, fim,Integer.parseInt(tipo));
 				request.setAttribute("lista", lista);
 				request.getRequestDispatcher("pesquisar/listar-atividades.jsp").forward(request, response);
 				
@@ -94,7 +106,31 @@ public class PesquisarAtividades extends HttpServlet {
 						lista=daoa.findByCoordenador(inicio, fim, Integer.parseInt(coordenador));
 						request.setAttribute("lista", lista);
 						request.getRequestDispatcher("pesquisar/listar-atividades.jsp").forward(request, response);
-					}
+					}else 
+						if(ref.equalsIgnoreCase("local")){
+							String local = request.getParameter("localAtividade");
+							String inicio = request.getParameter("inicio");
+							String fim= request.getParameter("fim");
+							lista=daoa.findByLocal(inicio, fim, Integer.parseInt(local));
+							request.setAttribute("lista", lista);
+							request.getRequestDispatcher("pesquisar/listar-atividades.jsp").forward(request, response);
+						}else 
+							if(ref.equalsIgnoreCase("area")){
+								String area = request.getParameter("areaAtividade");
+								String inicio = request.getParameter("inicio");
+								String fim= request.getParameter("fim");
+								lista=daoa.findByAreaTematica(inicio, fim, Integer.parseInt(area));
+								request.setAttribute("lista", lista);
+								request.getRequestDispatcher("pesquisar/listar-atividades.jsp").forward(request, response);
+							}else 
+								if(ref.equalsIgnoreCase("linha")){
+									String linha = request.getParameter("linhaAtividade");
+									String inicio = request.getParameter("inicio");
+									String fim= request.getParameter("fim");
+									lista=daoa.findByLinhaDeExtensao(inicio, fim, Integer.parseInt(linha));
+									request.setAttribute("lista", lista);
+									request.getRequestDispatcher("pesquisar/listar-atividades.jsp").forward(request, response);
+								}
 		DAO.close();
 	}
 
