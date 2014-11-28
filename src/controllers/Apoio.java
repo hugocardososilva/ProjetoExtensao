@@ -105,7 +105,32 @@ public class Apoio extends HttpServlet {
 									request.setAttribute("lista", lista);
 									request.getRequestDispatcher("apoio/listar-area-tematica.jsp").forward(request, response);
 								}
-			}
+			}else
+				if(ref.equalsIgnoreCase("editar")){
+					String id = request.getParameter("id");
+//					String tipo= request.getParameter("tipo");
+						if(tipo.equalsIgnoreCase("vinculo")){
+							request.setAttribute("apoio", daoVinculo.find(Integer.parseInt(id)));
+							request.getRequestDispatcher("apoio/novo-vinculo.jsp").forward(request, response);
+						}else
+							if(tipo.equalsIgnoreCase("tipoAtividade")){
+								request.setAttribute("apoio", daoTipo.find(Integer.parseInt(id)));
+								request.getRequestDispatcher("apoio/novo-tipo-atividade.jsp").forward(request, response);
+							}else
+								if(tipo.equalsIgnoreCase("local")){
+									request.setAttribute("apoio", daoLocal.find(Integer.parseInt(id)));
+									request.getRequestDispatcher("apoio/novo-local.jsp").forward(request, response);
+								}else
+									if(tipo.equalsIgnoreCase("extensao")){
+										request.setAttribute("apoio", daoExtensao.find(Integer.parseInt(id)));
+										request.getRequestDispatcher("apoio/novo-extensao.jsp").forward(request, response);
+								}else
+									if(tipo.equalsIgnoreCase("areaTematica")){
+										request.setAttribute("apoio", daoArea.find(Integer.parseInt(id)));
+										request.getRequestDispatcher("apoio/novo-area-tematica.jsp").forward(request, response);
+									}
+							
+				}
 		DAO.close();
 	}
 		
@@ -190,7 +215,75 @@ public class Apoio extends HttpServlet {
 				if(ref.equalsIgnoreCase("listar")){
 				
 				
-			}
+			}else
+				if(ref.equalsIgnoreCase("editar")){
+					String id= request.getParameter("id");
+					request.setAttribute("tipo", tipo);
+					
+					if(tipo.equalsIgnoreCase("vinculo")){
+						System.out.println("editando vinculo");
+						String nome = request.getParameter("nome");
+						Vinculo v = daoVinculo.find(Integer.parseInt(id));
+						v.setNome(nome);
+						daoVinculo.merge(v);
+						request.setAttribute("mensagem", "vinculo editado com sucesso!");
+						request.setAttribute("lista", daoVinculo.findAll());
+						request.getRequestDispatcher("apoio/listar-vinculo.jsp").forward(request, response);
+					}else
+						if(tipo.equalsIgnoreCase("tipoAtividade")){
+							String sigla = request.getParameter("sigla");
+							String nome= request.getParameter("nome");
+							TipoAtividade t = daoTipo.find(Integer.parseInt(id));
+							t.setSigla(sigla);
+							t.setNome(nome);
+							daoTipo.merge(t);
+							request.setAttribute("mensagem", "Tipo de atividade editado com sucesso!");
+							request.setAttribute("lista", daoTipo.findAll());
+							request.getRequestDispatcher("apoio/listar-tipo-atividade.jsp").forward(request, response);
+							
+						}else
+							if(tipo.equalsIgnoreCase("local")){
+								String codigo= request.getParameter("codigo");
+								String local= request.getParameter("local");
+								LocalRealizacao l = daoLocal.find(Integer.parseInt(id));
+								l.setCodigo(Integer.parseInt(codigo));
+								l.setLocal(local);
+								daoLocal.merge(l);
+								request.setAttribute("mensagem", "Local editado com sucesso!");
+								request.setAttribute("lista", daoLocal.findAll());
+								request.getRequestDispatcher("apoio/listar-local-de-realizacao.jsp").forward(request, response);
+								
+							}else
+								if(tipo.equalsIgnoreCase("extensao")){
+									String numero = request.getParameter("numero");
+									String denominacao= request.getParameter("denominacao");
+									String definicoes= request.getParameter("definicoes");
+									LinhaDeExtensao l= daoExtensao.find(Integer.parseInt(id));
+									l.setNumero(Integer.parseInt(numero));
+									l.setDenominacao(denominacao);
+									l.setDefinicoes(definicoes);
+									daoExtensao.merge(l);
+									request.setAttribute("mensagem", "Linha de Extensão editada com sucesso!");
+									request.setAttribute("lista", daoExtensao.findAll());
+									request.getRequestDispatcher("apoio/listar-linha-de-extensao.jsp").forward(request, response);
+									
+							}else
+								if(tipo.equalsIgnoreCase("areaTematica")){
+									String area= request.getParameter("area");
+									String descricao= request.getParameter("descricao");
+									String sigla= request.getParameter("sigla");
+									AreaTematica a= daoArea.find(Integer.parseInt(id));
+									a.setArea(area);
+									a.setDescricao(descricao);
+									a.setSigla(sigla);
+									daoArea.merge(a);
+									request.setAttribute("mensagem", "Área Temática editada com sucesso!");
+									request.setAttribute("lista", daoArea.findAll());
+									request.getRequestDispatcher("apoio/listar-area-tematica.jsp").forward(request, response);
+								}
+					DAO.commit();
+				}
+			
 			DAO.close();
 	}
 

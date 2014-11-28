@@ -32,7 +32,7 @@
 				
 				
 					
-					<td><a href="Apoio.do?ref=editar&tipo=${requestScope.tipo }"><button type="button" class="btn btn-warning right">Editar</button></a></td>
+					<td><a href="Apoio.do?ref=editar&tipo=${requestScope.tipo }&id=${local.id}"><button type="button" class="btn btn-warning right">Editar</button></a></td>
 					
 					
 <%-- 					<td><a href="Apoio.do?ref=excluir&tipo=${requestScope.tipo }&id=${local.id }"><button type="button" class="btn btn-danger right">Excluir</button></a></td> --%>

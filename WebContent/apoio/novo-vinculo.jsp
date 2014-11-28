@@ -21,15 +21,23 @@
   					<h4>Novo Vínculo</h4>
  			</div>
 		 <div class="panel-body">
+<c:choose>
+<c:when test="${requestScope.apoio == null }">	
+	 
 <form role="form" action="Apoio.do?ref=add" method="post">
-		
+</c:when>	
+<c:otherwise>
+<form role="form" action="Apoio.do?ref=editar" method="post">
+<input type="hidden" name="id" value="${requestScope.apoio.id }">
+</c:otherwise>	
+</c:choose>
 		<div class="form-group">
 		
 		<input type="hidden" name="tipo" value="vinculo">
 		
 		<label for="nome">Nome <br />
 		</label>
-			<input class="form-control" name="nome" required="required" type="text" id="nome" size="50" maxlength="100" />
+			<input class="form-control" name="nome" value="${requestScope.apoio.nome }" required="required" type="text" id="nome" size="50" maxlength="100" />
 		</div>
 		
 		

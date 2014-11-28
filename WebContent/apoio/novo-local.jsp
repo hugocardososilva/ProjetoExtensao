@@ -21,18 +21,27 @@
   					<h4>Novo Local</h4>
  			</div>
 		 <div class="panel-body">
+<c:choose>
+<c:when test="${requestScope.apoio == null }">	
+	 
 <form role="form" action="Apoio.do?ref=add" method="post">
+</c:when>	
+<c:otherwise>
+<form role="form" action="Apoio.do?ref=editar" method="post">
+<input type="hidden" name="id" value="${requestScope.apoio.id }">
+</c:otherwise>	
+</c:choose>
 		
 		<div class="form-group">
 		
 		<input type="hidden" name="tipo" value="local">
 		<label for="nome">Código<br />
 		</label>
-			<input class="form-control" name="codigo" required="required" type="text" id="sigla" size="3" maxlength="3" />
+			<input class="form-control" name="codigo" value="${requestScope.apoio.codigo }" required="required" type="text" id="sigla" size="3" maxlength="3" />
 		</div>
 		<label for="nome">Local <br />
 		</label>
-			<input class="form-control" name="local" required="required" type="text" id="nome" size="50" maxlength="100" />
+			<input class="form-control" name="local" required="required" value="${requestScope.apoio.local }" type="text" id="nome" size="50" maxlength="100" />
 		
 		
 		

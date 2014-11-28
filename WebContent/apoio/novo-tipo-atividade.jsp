@@ -21,18 +21,27 @@
   					<h4>Novo Tipo de Atividade</h4>
  			</div>
 		 <div class="panel-body">
+<c:choose>
+<c:when test="${requestScope.apoio == null }">	
+	 
 <form role="form" action="Apoio.do?ref=add" method="post">
+</c:when>	
+<c:otherwise>
+<form role="form" action="Apoio.do?ref=editar" method="post">
+<input type="hidden" name="id" value="${requestScope.apoio.id }">
+</c:otherwise>	
+</c:choose>
 		
 		<div class="form-group">
 		
 		<input type="hidden" name="tipo" value="tipoAtividade">
 		<label for="nome">Sigla<br />
 		</label>
-			<input class="form-control" name="sigla" required="required" type="text" id="sigla" size="3" maxlength="3" />
+			<input class="form-control" value="${requestScope.apoio.sigla }" name="sigla" required="required" type="text" id="sigla" size="3" maxlength="3" />
 		</div>
 		<label for="nome">Nome <br />
 		</label>
-			<input class="form-control" name="nome" required="required" type="text" id="nome" size="50" maxlength="100" />
+			<input class="form-control" name="nome" value="${requestScope.apoio.nome }" required="required" type="text" id="nome" size="50" maxlength="100" />
 		
 		
 		
