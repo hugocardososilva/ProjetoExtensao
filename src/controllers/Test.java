@@ -10,8 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import models.ControleRegistro;
 import models.Docente;
 import dao.DAO;
+import dao.DAOAtividade;
+import dao.DAOControleRegistro;
 import dao.DAODocente;
 
 /**
@@ -34,14 +37,16 @@ public class Test extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		test.Test.cadastro();
-//		DAO.open();
-//		DAO.begin();
-//		DAODocente dao= new DAODocente();
-//		List<Docente> lista= new ArrayList<>();
-//		lista= dao.findByNome("gil");
-//		System.out.println(lista);
-//		DAO.close();
-//		
+		DAO.open();
+		DAO.begin();
+		DAOControleRegistro daoc= new DAOControleRegistro();
+		DAOAtividade daoa= new DAOAtividade();
+		System.out.println(daoc.getLast());
+		ControleRegistro.EmitirControleDeRegistro(daoa.find(2));
+		
+		
+		DAO.close();
+		
 	}
 
 	/**

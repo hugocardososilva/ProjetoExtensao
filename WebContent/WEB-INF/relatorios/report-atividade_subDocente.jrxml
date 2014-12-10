@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report-atividade_subDocente" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="0ea1b448-9f3b-4758-bc18-5a52ddec47eb">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ID_ATIVIDADE" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+     docente."id" AS docente_id,
+     docente."email" AS docente_email,
+     docente."nome" AS docente_nome,
+     docente."telprimario" AS docente_telprimario,
+     docente."voluntario" AS docente_voluntario,
+     atividade_docente."atividade_id" AS atividade_docente_atividade_id,
+     atividade_docente."docentes_id" AS atividade_docente_docentes_id
+FROM
+     "public"."docente" docente INNER JOIN "public"."atividade_docente" atividade_docente ON docente."id" = atividade_docente."docentes_id"
+WHERE atividade_docente."atividade_id" = $P{ID_ATIVIDADE}]]>
+	</queryString>
+	<field name="docente_id" class="java.lang.Integer"/>
+	<field name="docente_email" class="java.lang.String"/>
+	<field name="docente_nome" class="java.lang.String"/>
+	<field name="docente_telprimario" class="java.lang.Long"/>
+	<field name="docente_voluntario" class="java.lang.Boolean"/>
+	<field name="atividade_docente_atividade_id" class="java.lang.Integer"/>
+	<field name="atividade_docente_docentes_id" class="java.lang.Integer"/>
+	<group name="docente_nome">
+		<groupExpression><![CDATA[$F{docente_nome}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="20" backcolor="#C0C0C0" uuid="bb46140d-39d2-4e3d-824f-eca8d853ff52"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="20" uuid="eb59fd7f-b494-4264-ba5c-c52d830cad74"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DOCENTES ENVOLVIDOS]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="27" height="20" uuid="82e72e96-002e-4d18-aedf-13ac857e8b35"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="27" y="0" width="262" height="20" uuid="f457d659-6120-4001-b3fc-ef7545779e6b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="222" y="0" width="177" height="20" uuid="78957044-11e9-4656-a34a-bc3fcffe87c2"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="399" y="0" width="105" height="20" uuid="1d169792-ed6a-482d-9300-c0eb7f3e0c02"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="504" y="0" width="51" height="20" uuid="e3398633-0a82-4871-a412-ec4cd780ebd8"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="27" height="20" uuid="5203c073-f841-4fd9-8100-e804271267c2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="0" width="195" height="20" uuid="68d04385-660c-4d62-865e-904842b500a5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[NOME COMPLETO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="222" y="0" width="111" height="20" uuid="7544a254-948b-4bb8-830b-038fa9b611b1"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[E-MAIL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="399" y="0" width="105" height="20" uuid="257dd5ea-3c3f-4706-b5d3-886af1f85281"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[TELEFONE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="504" y="0" width="51" height="20" uuid="0a938388-55b8-446d-b625-65d751515c0f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[VOL]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="27" height="20" uuid="363f630d-4754-4ae9-9cd8-b3bdbe42526f"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="27" y="0" width="262" height="20" uuid="aa8890b8-8870-4cd4-a7f5-de73037d4fe8"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="222" y="0" width="177" height="20" uuid="1311ddc5-657d-4118-a28a-898253c6defd"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="399" y="0" width="105" height="20" uuid="012d4413-073a-46bc-9b97-b617ed608c09"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="504" y="0" width="51" height="20" uuid="ea354a14-cc60-4eb8-942d-35d3fe67879d"/>
+			</rectangle>
+			<textField>
+				<reportElement x="10" y="0" width="17" height="20" uuid="feac64db-71e1-444f-b961-3fc411b69449"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{docente_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="33" y="0" width="185" height="20" uuid="7ed8c135-6d73-48cb-a222-33bc07870cc4"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{docente_email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="226" y="0" width="173" height="20" uuid="beb515d4-a59e-440f-a090-a7ab7434882e"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{docente_nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="401" y="0" width="105" height="20" uuid="4c89f0f6-ac52-4fc7-9c37-7b42c91dc357"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{docente_telprimario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="508" y="0" width="39" height="20" uuid="59c9fce2-3267-4ef5-882a-1461ebd85ec2"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[( $F{docente_voluntario}== false ? "NÃO" : "SIM" )]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

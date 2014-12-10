@@ -22,7 +22,7 @@
 	<Mensage:mensagens mensagem="${requestScope.mensagem }"/>
 	<div class="panel panel-default">
   			<div class="panel-heading">
-  			<p><a href="Atividades.do?ref=editar&id=${requestScope.atividade.id }"><button style="clear:both;float:right;" class="btn btn-warning" type="button">Editar</button></a></p>
+  			<p><a href="Atividades.do?ref=editar&id=${requestScope.atividade.id }"><button style="clear:both;float:right;" class="btn btn-warning" type="button">Editar</button></a><a target="_blank" href="Relatorios.do?ref=atividade&id=${requestScope.atividade.id }"><button style="float:right;" class="btn btn-info" type="button">Gerar Ficha</button></a></p>
   					<h4>Atividade</h4>
   					
  			</div>
@@ -36,6 +36,10 @@
 		<tr>
 			<th>Titulo</th>
 			<td>${requestScope.atividade.titulo }</td>
+		</tr>
+		<tr>
+			<th>Registro</th>
+			<td>${requestScope.atividade.registro }</td>
 		</tr>
 		<tr>
 			<th>Tipo da Atividade</th>
@@ -106,6 +110,7 @@ pattern="dd/MM/yyyy" /></td>
 		</div>
 		<c:import url="../painel/painel-coordenador.jsp"/>
 		<c:import url="../painel/painel-docente.jsp"/>
+		<c:import url="../painel/painel-tecnico.jsp"/>
 		<c:import url="../painel/painel-bolsista.jsp"/>
 		<c:import url="../painel/painel-externo.jsp"/>
 		<c:import url="../painel/painel-atividade-vinculada.jsp"/>

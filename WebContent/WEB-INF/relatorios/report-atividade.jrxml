@@ -1,0 +1,675 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e0d6483a-199f-4ad9-a6ca-a18f666965fc">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="729"/>
+	<style name="style1">
+		<conditionalStyle>
+			<style/>
+		</conditionalStyle>
+	</style>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="d06ef589-e281-40b5-8074-2d06cb474d64"/>
+	<subDataset name="dataset1" uuid="f77efb1f-d482-4630-b9b7-fb215ed44cc1"/>
+	<subDataset name="dataset2" uuid="328b4de3-ca75-42f5-95a8-9cc6935e8e0f"/>
+	<subDataset name="New Dataset 1" uuid="af401492-ed06-4746-83d7-465229bc652b">
+		<queryString language="SQL">
+			<![CDATA[SELECT
+     atividade."id" AS atividade_id,
+     atividade."beneficiariosdiretos" AS atividade_beneficiariosdiretos,
+     atividade."beneficiariosindiretos" AS atividade_beneficiariosindiretos,
+     atividade."datainicio" AS atividade_datainicio,
+     atividade."datatermino" AS atividade_datatermino,
+     atividade."fontederecurso" AS atividade_fontederecurso,
+     atividade."objetivo" AS atividade_objetivo,
+     atividade."registro" AS atividade_registro,
+     atividade."timecadastro" AS atividade_timecadastro,
+     atividade."timeupdate" AS atividade_timeupdate,
+     atividade."titulo" AS atividade_titulo,
+     atividade."valor" AS atividade_valor,
+     atividade."areatematica_id" AS atividade_areatematica_id,
+     atividade."coordenador_id" AS atividade_coordenador_id,
+     atividade."linhadeextensao_id" AS atividade_linhadeextensao_id,
+     atividade."local_id" AS atividade_local_id,
+     atividade."tipoatividade_id" AS atividade_tipoatividade_id,
+     atividade."usuario_id" AS atividade_usuario_id,
+     atividade."vinculo_id" AS atividade_vinculo_id,
+     atividade."atividadeantiga_id" AS atividade_atividadeantiga_id,
+     atividade."controleregistro_id" AS atividade_controleregistro_id,
+     bolsista."id" AS bolsista_id,
+     bolsista."email" AS bolsista_email,
+     bolsista."nome" AS bolsista_nome,
+     bolsista."telprimario" AS bolsista_telprimario,
+     bolsista."voluntario" AS bolsista_voluntario,
+     atividade_bolsista."atividade_id" AS atividade_bolsista_atividade_id,
+     atividade_bolsista."bolsistas_id" AS atividade_bolsista_bolsistas_id
+FROM
+     "public"."atividade" atividade INNER JOIN "public"."atividade_bolsista" atividade_bolsista ON atividade."id" = atividade_bolsista."atividade_id"
+     INNER JOIN "public"."bolsista" bolsista ON atividade_bolsista."bolsistas_id" = bolsista."id"]]>
+		</queryString>
+		<field name="atividade_id" class="java.lang.Integer"/>
+		<field name="atividade_beneficiariosdiretos" class="java.lang.String"/>
+		<field name="atividade_beneficiariosindiretos" class="java.lang.String"/>
+		<field name="atividade_datainicio" class="java.sql.Date"/>
+		<field name="atividade_datatermino" class="java.sql.Date"/>
+		<field name="atividade_fontederecurso" class="java.lang.String"/>
+		<field name="atividade_objetivo" class="java.lang.String"/>
+		<field name="atividade_registro" class="java.lang.String"/>
+		<field name="atividade_timecadastro" class="java.sql.Date"/>
+		<field name="atividade_timeupdate" class="java.sql.Date"/>
+		<field name="atividade_titulo" class="java.lang.String"/>
+		<field name="atividade_valor" class="java.lang.Double"/>
+		<field name="atividade_areatematica_id" class="java.lang.Integer"/>
+		<field name="atividade_coordenador_id" class="java.lang.Integer"/>
+		<field name="atividade_linhadeextensao_id" class="java.lang.Integer"/>
+		<field name="atividade_local_id" class="java.lang.Integer"/>
+		<field name="atividade_tipoatividade_id" class="java.lang.Integer"/>
+		<field name="atividade_usuario_id" class="java.lang.Integer"/>
+		<field name="atividade_vinculo_id" class="java.lang.Integer"/>
+		<field name="atividade_atividadeantiga_id" class="java.lang.Integer"/>
+		<field name="atividade_controleregistro_id" class="java.lang.Integer"/>
+		<field name="bolsista_id" class="java.lang.Integer"/>
+		<field name="bolsista_email" class="java.lang.String"/>
+		<field name="bolsista_nome" class="java.lang.String"/>
+		<field name="bolsista_telprimario" class="java.lang.Long"/>
+		<field name="bolsista_voluntario" class="java.lang.Boolean"/>
+		<field name="atividade_bolsista_atividade_id" class="java.lang.Integer"/>
+		<field name="atividade_bolsista_bolsistas_id" class="java.lang.Integer"/>
+		<group name="bolsista_id">
+			<groupExpression><![CDATA[$F{bolsista_id}]]></groupExpression>
+		</group>
+	</subDataset>
+	<parameter name="ID_ATIVIDADE" class="java.lang.Integer"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\relatorios\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     atividade."beneficiariosdiretos" AS atividade_beneficiariosdiretos,
+     atividade."beneficiariosindiretos" AS atividade_beneficiariosindiretos,
+     atividade."datainicio" AS atividade_datainicio,
+     atividade."datatermino" AS atividade_datatermino,
+     atividade."fontederecurso" AS atividade_fontederecurso,
+     atividade."objetivo" AS atividade_objetivo,
+     atividade."registro" AS atividade_registro,
+     atividade."timecadastro" AS atividade_timecadastro,
+     atividade."timeupdate" AS atividade_timeupdate,
+     atividade."titulo" AS atividade_titulo,
+     atividade."valor" AS atividade_valor,
+     areatematica."id" AS areatematica_id,
+     areatematica."area" AS areatematica_area,
+     areatematica."descricao" AS areatematica_descricao,
+     areatematica."sigla" AS areatematica_sigla,
+     linhadeextensao."definicoes" AS linhadeextensao_definicoes,
+     linhadeextensao."denominacao" AS linhadeextensao_denominacao,
+     linhadeextensao."numero" AS linhadeextensao_numero,
+     tipoatividade."nome" AS tipoatividade_nome,
+     tipoatividade."sigla" AS tipoatividade_sigla,
+     vinculo."id" AS vinculo_id,
+     vinculo."nome" AS vinculo_nome,
+     atividadeantiga."id" AS atividadeantiga_id,
+     atividadeantiga."ano" AS atividadeantiga_ano,
+     atividadeantiga."atividade_id" AS atividadeantiga_atividade_id,
+     coordenador."id" AS coordenador_id,
+     coordenador."email" AS coordenador_email,
+     coordenador."nome" AS coordenador_nome,
+     coordenador."setor" AS coordenador_setor,
+     coordenador."telauxiliar" AS coordenador_telauxiliar,
+     coordenador."telprimario" AS coordenador_telprimario,
+     coordenador."tipo" AS coordenador_tipo,
+     coordenador."voluntario" AS coordenador_voluntario
+FROM
+     "public"."areatematica" areatematica INNER JOIN "public"."atividade" atividade ON areatematica."id" = atividade."areatematica_id"
+     INNER JOIN "public"."linhadeextensao" linhadeextensao ON atividade."linhadeextensao_id" = linhadeextensao."id"
+     INNER JOIN "public"."tipoatividade" tipoatividade ON atividade."tipoatividade_id" = tipoatividade."id"
+     INNER JOIN "public"."vinculo" vinculo ON atividade."vinculo_id" = vinculo."id"
+     LEFT OUTER JOIN "public"."atividadeantiga" atividadeantiga ON atividade."id" = atividadeantiga."atividade_id"
+     INNER JOIN "public"."coordenador" coordenador ON atividade."coordenador_id" = coordenador."id"
+WHERE
+     atividade."id" = $P{ID_ATIVIDADE}]]>
+	</queryString>
+	<field name="atividade_beneficiariosdiretos" class="java.lang.String"/>
+	<field name="atividade_beneficiariosindiretos" class="java.lang.String"/>
+	<field name="atividade_datainicio" class="java.sql.Date"/>
+	<field name="atividade_datatermino" class="java.sql.Date"/>
+	<field name="atividade_fontederecurso" class="java.lang.String"/>
+	<field name="atividade_objetivo" class="java.lang.String"/>
+	<field name="atividade_registro" class="java.lang.String"/>
+	<field name="atividade_timecadastro" class="java.sql.Date"/>
+	<field name="atividade_timeupdate" class="java.sql.Date"/>
+	<field name="atividade_titulo" class="java.lang.String"/>
+	<field name="atividade_valor" class="java.lang.Double"/>
+	<field name="areatematica_id" class="java.lang.Integer"/>
+	<field name="areatematica_area" class="java.lang.String"/>
+	<field name="areatematica_descricao" class="java.lang.String"/>
+	<field name="areatematica_sigla" class="java.lang.String"/>
+	<field name="linhadeextensao_definicoes" class="java.lang.String"/>
+	<field name="linhadeextensao_denominacao" class="java.lang.String"/>
+	<field name="linhadeextensao_numero" class="java.lang.Integer"/>
+	<field name="tipoatividade_nome" class="java.lang.String"/>
+	<field name="tipoatividade_sigla" class="java.lang.String"/>
+	<field name="vinculo_id" class="java.lang.Integer"/>
+	<field name="vinculo_nome" class="java.lang.String"/>
+	<field name="atividadeantiga_id" class="java.lang.Integer"/>
+	<field name="atividadeantiga_ano" class="java.sql.Date"/>
+	<field name="atividadeantiga_atividade_id" class="java.lang.Integer"/>
+	<field name="coordenador_id" class="java.lang.Integer"/>
+	<field name="coordenador_email" class="java.lang.String"/>
+	<field name="coordenador_nome" class="java.lang.String"/>
+	<field name="coordenador_setor" class="java.lang.String"/>
+	<field name="coordenador_telauxiliar" class="java.lang.Long"/>
+	<field name="coordenador_telprimario" class="java.lang.Long"/>
+	<field name="coordenador_tipo" class="java.lang.String"/>
+	<field name="coordenador_voluntario" class="java.lang.Boolean"/>
+	<title>
+		<band height="151" splitType="Stretch">
+			<staticText>
+				<reportElement x="91" y="125" width="450" height="19" uuid="11ceb909-d01f-447c-951c-e866b41d7ef9"/>
+				<textElement>
+					<font fontName="Times New Roman" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FICHA DE REGISTRO DE ATIVIDADE DE EXTENSÃO]]></text>
+			</staticText>
+			<image>
+				<reportElement x="10" y="0" width="287" height="144" uuid="14a602f7-b127-4ed2-bdcc-e9bca581df3e"/>
+				<imageExpression><![CDATA["\\..\\ProjetoExtensao\\WebContent\\images\\logoifpb.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="385">
+			<rectangle>
+				<reportElement x="0" y="48" width="555" height="20" backcolor="#CCCCCC" uuid="8085ab2b-39aa-4f80-9e50-bbd88745228b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="68" width="555" height="20" uuid="880b05b8-d34d-495c-8af1-ef53c4641c58"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="150" width="555" height="20" backcolor="#CCCCCC" uuid="a7a6ddc5-e924-48e8-8ddb-04257f6a913f"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="170" width="555" height="20" uuid="71e9cdcd-7c8b-4d70-a7af-a172c578760c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="0" y="227" width="555" height="24" uuid="ea44e338-75cc-443f-a388-35770483285d"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="0" y="227" width="157" height="24" uuid="b16923e1-02ec-43c8-acb8-bb313c3b9968"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="157" y="227" width="398" height="24" uuid="b2fa4124-3b90-4e8c-8cd5-bb8393c1beca"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="0" y="262" width="553" height="24" uuid="c4f9ed3d-651c-43da-85fa-fed78a9089ff"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="0" y="262" width="157" height="24" uuid="5a4d669e-3527-4c40-824e-a160d13255a9"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="157" y="262" width="398" height="24" uuid="dd97bfb7-088b-46d3-a573-927f5be9150c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="0" y="296" width="555" height="24" uuid="742362b5-43d7-4157-8d35-b733fb434dff"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="0" y="296" width="91" height="76" uuid="8c03d718-7767-4aa4-b7d9-51e03775bba4"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="91" y="296" width="464" height="76" uuid="946086e8-1633-4fee-903f-e89980bd8a00"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="99" width="555" height="20" backcolor="#CCCCCC" uuid="8491061c-df46-47a0-b42c-468b6df9d257"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="119" width="555" height="20" uuid="ae6f357a-32d7-4ce3-9b55-21b740d2a9d3"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="10" y="99" width="545" height="20" uuid="c49ec39a-ba7c-4a0d-b387-9da0c2840e5c"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TÍTULO DA ATIVIDADE]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="10" y="68" width="127" height="20" uuid="45fcf98f-55aa-438c-b401-631b333c3801"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipoatividade_sigla}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="168" y="264" width="385" height="20" uuid="a1058508-dbbd-48dc-8caa-7bd98efab4b0"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[java.text.NumberFormat.getCurrencyInstance(new Locale("pt","br")).format($F{atividade_valor}.doubleValue())]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="10" y="230" width="147" height="20" uuid="b03c6441-6a2a-47eb-b8a4-95f9c2b5540f"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fonte dos Recursos:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="157" y="68" width="398" height="20" uuid="f07ab3b7-b773-474f-b97c-e181a84c7472"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipoatividade_nome}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="91" y="296" width="462" height="76" uuid="3ab2976e-4328-4890-871f-a40cadf3a7a3"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{atividade_objetivo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="150" width="545" height="20" uuid="b9b03dea-2602-4726-b7e5-ba51113c2bd4"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VÍNCULO DA ATIVIDADE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="10" y="266" width="127" height="20" uuid="5ff4fcc9-142f-4455-a1b9-8171ee1ae570"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="10" y="170" width="545" height="20" uuid="c388a0be-9c79-447d-b2f5-df76ffe99c53"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vinculo_nome}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="10" y="300" width="81" height="72" uuid="836227d7-445c-46b9-bcca-5e5e1fadbd7d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Objetivo]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="10" y="119" width="545" height="20" uuid="01c70fbb-48c9-4f4c-9168-a2ffd2cf4023"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{atividade_titulo}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="48" width="545" height="20" uuid="68a948be-bf5a-4289-9a79-b1a7437f63e3"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TIPO DE ATIVIDADE]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="168" y="230" width="385" height="20" uuid="99233051-9632-430f-b3eb-edbc342e60e2"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{atividade_fontederecurso}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="2" y="201" width="555" height="17" uuid="38727129-9461-4e9d-a2ba-6623127e575c"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ID_ATIVIDADE">
+					<subreportParameterExpression><![CDATA[$P{ID_ATIVIDADE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "report1_atividades_vinculadas.jasper"]]></subreportExpression>
+			</subreport>
+			<rectangle>
+				<reportElement x="0" y="0" width="376" height="28" uuid="19e78f78-5691-407f-a3be-01351821945e"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="393" y="0" width="162" height="28" uuid="ecf094db-d039-49c2-821c-31482e5f2244"/>
+			</rectangle>
+			<textField>
+				<reportElement x="403" y="0" width="152" height="28" uuid="a19d085b-38c0-4b13-874c-5cd992188e52"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{atividade_registro}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="376" height="28" uuid="9754a497-c66b-47df-844f-99d11c4e77c8"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NÚMERO DO REGISTRO NA ÁREA DE EXTENSÃO]]></text>
+			</staticText>
+		</band>
+		<band height="232">
+			<rectangle>
+				<reportElement positionType="Float" x="2" y="83" width="168" height="20" uuid="d9c5434f-3c9f-4804-b552-b9fde885e962"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="0" y="23" width="555" height="20" uuid="a515e8d4-edbe-486b-9b89-7d5cd26b3f09"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="0" y="134" width="555" height="20" uuid="eeae0d3e-9514-45b0-9b12-accd4a24d85c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="0" y="134" width="168" height="20" uuid="3053e353-93dc-4272-84f8-c0b70e1e02c3"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="0" y="154" width="555" height="20" uuid="be659b12-2997-4dc4-8456-063691bd218c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="0" y="154" width="168" height="20" uuid="5d33bdbe-4948-4bd5-a7ef-619f2862b926"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="0" y="3" width="555" height="20" backcolor="#CCCCCC" uuid="92723ed5-75e1-42d9-bfb9-4ea385bb460b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="0" y="63" width="555" height="20" backcolor="#CCCCCC" uuid="01c050fa-a731-4f4f-a4d8-b3f2f8b87f12"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="0" y="114" width="555" height="20" backcolor="#CCCCCC" uuid="c613ea36-5118-4ae7-bfc3-d2b46a43f1af"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="0" y="83" width="555" height="20" uuid="38494cea-a971-4489-94bc-363040226a4f"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="0" y="191" width="91" height="20" uuid="908cfa8c-d237-4964-94c2-c8a5b87270b4"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="2" y="23" width="119" height="20" uuid="f8bdfcb0-e612-4970-8933-00542aa0dacd"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="125" y="23" width="100" height="20" uuid="0bf97be4-1048-4b25-9fe3-cee533943e32"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ANO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="10" y="3" width="545" height="20" uuid="1a01d787-0471-43c2-b1e4-d1da51d15135"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ATIVIDADE REALIZADA ANTERIORMENTE]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="225" y="23" width="328" height="20" uuid="73f940bf-e37a-4798-b3aa-c41fff2fbe50"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("yyyy").format($F{atividadeantiga_ano})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="10" y="23" width="100" height="20" uuid="f786a48f-6d61-4edf-a888-99ab6f89d0f0"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{atividadeantiga_ano}== null ? "NÃO" : "SIM" )]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="10" y="63" width="545" height="20" uuid="ee777767-a1e0-4066-a4ac-10e63ff20a75"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ÁREA TEMÁTICA]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="10" y="83" width="158" height="20" uuid="c5e3783e-0474-4954-88d2-d1fa13a330a3"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{areatematica_area}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="168" y="83" width="387" height="20" uuid="899a2c72-dca2-4cf5-8049-6883b6e4a666"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{areatematica_descricao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="10" y="114" width="545" height="20" uuid="52a3641b-3d5a-407e-b3e0-ce7ef4a52527"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LINHA DE EXTENSÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="10" y="134" width="158" height="20" uuid="7d2a1ff0-363e-4911-b037-cedbc4f27586"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Número]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="10" y="154" width="158" height="20" uuid="3fcec438-6948-4076-a7d5-573a1c675eb6"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Linha]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="174" y="134" width="385" height="20" uuid="4ba36e67-45ca-4691-a6e2-a37267c949b0"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{linhadeextensao_numero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="172" y="154" width="385" height="20" uuid="9244aed7-29a7-42ee-a653-578d342b3861"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{linhadeextensao_denominacao}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="2" y="191" width="551" height="20" uuid="afccd301-c92b-4287-bb93-25f56d724d5d"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="225" y="191" width="178" height="20" uuid="09551d5f-c9e7-448c-9dc7-bd610f017058"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="2" y="191" width="89" height="20" uuid="9ae48ca4-33c9-42e5-98ff-97ce089a2788"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data de Início]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="229" y="191" width="167" height="20" uuid="09bea7a3-eda0-45c4-85c0-3ef593eed646"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data prevista para o Término]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="91" y="191" width="134" height="20" uuid="f841fd3b-ecf5-4e66-b2f4-7537c9d4e693"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{atividade_datainicio})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="416" y="191" width="137" height="20" uuid="9f3e2c87-ebd7-4d2f-8617-6da3944d1b3f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{atividade_datatermino})]]></textFieldExpression>
+			</textField>
+			<break>
+				<reportElement x="0" y="103" width="110" height="1" uuid="b088539f-f586-4de1-8dd4-5bfef8e057e7"/>
+			</break>
+		</band>
+		<band height="260">
+			<staticText>
+				<reportElement x="2" y="11" width="551" height="19" uuid="790bc86e-0b4c-41d3-9383-da42b24b9cd2"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EQUIPE TÉCNICA DA ATIVIDADE]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement positionType="Float" x="0" y="48" width="555" height="20" backcolor="#CCCCCC" uuid="aeb4e43f-3222-461c-b959-b5e997421c48"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="8" y="48" width="545" height="20" uuid="ea1c649b-4dc0-4fff-a891-51826b1893b0"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COORDENADOR]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="2" y="68" width="66" height="20" uuid="37b4425a-1e3e-49e8-9624-7b8b6208a3f3"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="8" y="68" width="60" height="20" uuid="c294cccb-5453-4a02-8fa8-11694d31c9b1"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="68" y="68" width="487" height="20" uuid="427b38a3-8971-4e66-8847-b68b6826bfca"/>
+			</rectangle>
+			<textField>
+				<reportElement x="70" y="68" width="483" height="20" uuid="79f29a00-e112-4f3c-88e7-324a9261b82f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{coordenador_nome}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="2" y="88" width="66" height="20" uuid="536b1dd3-eac1-4f09-96aa-b65b1e886cb2"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="8" y="88" width="44" height="20" uuid="31a4e780-dff1-4b20-8213-f3619ae8e43c"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="68" y="88" width="487" height="20" uuid="8a65e81b-0668-4f7e-8740-b6b3aaa41f85"/>
+			</rectangle>
+			<textField>
+				<reportElement x="70" y="88" width="141" height="20" uuid="a124a923-9687-4597-bd14-13fb9bf082a2"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{coordenador_tipo}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="225" y="88" width="89" height="20" uuid="156818dd-3bc8-41d2-9f7c-90a31150f7b8"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="229" y="88" width="85" height="20" uuid="d15cbe3c-f87f-4c6b-ac4f-41ddd941da6c"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Voluntário]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="318" y="88" width="209" height="20" uuid="43a32816-9ece-443d-ab9e-d99ee9650199"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{coordenador_voluntario}== false ? "NÃO" : "SIM" )]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="68" y="108" width="487" height="20" uuid="546d5a31-5571-4621-ad76-527a4d84d797"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="2" y="108" width="66" height="20" uuid="35a9623c-01f6-4432-939d-b231b04fc033"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="8" y="108" width="58" height="20" uuid="7561495b-b1d5-4968-8469-90c9a90e2cbd"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[E-mail]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="66" y="128" width="159" height="20" uuid="9f0ae07e-f57c-46b1-a8ff-12be6431b75e"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="2" y="128" width="66" height="20" uuid="6490822a-f8db-46f3-8515-6df7daeaafb2"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="8" y="128" width="62" height="20" uuid="c9860403-e5eb-46b0-bdfd-b2003e2bd16e"/>
+				<textElement verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telefone]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="225" y="128" width="89" height="20" uuid="781c37ed-523d-49cd-b117-9e03f8646d9e"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="314" y="128" width="241" height="20" uuid="fe96bb4d-fcfa-4d4b-a5a7-8e722327c07c"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="229" y="128" width="62" height="20" uuid="cffd08cf-f098-4d28-a1bd-2cc5f55f386b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telefone]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="68" y="108" width="473" height="20" uuid="b0f0e4e9-f91c-4bf8-b80d-b86489b778eb"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{coordenador_email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="72" y="128" width="153" height="20" uuid="17d61eac-36b0-4010-8a53-b5544f97ff30"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{coordenador_telprimario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="318" y="128" width="235" height="20" uuid="184f4b80-f3f2-40ba-ad72-df22a534e610"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{coordenador_telauxiliar}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="2" y="160" width="555" height="14" uuid="3feea6ba-c1a0-42e2-99ec-dc7d223c1c1f"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ID_ATIVIDADE">
+					<subreportParameterExpression><![CDATA[$P{ID_ATIVIDADE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "report-atividade_subDocente.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

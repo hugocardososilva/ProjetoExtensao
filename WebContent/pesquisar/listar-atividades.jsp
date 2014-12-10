@@ -33,6 +33,10 @@
 			<td>${atividade.titulo } <a href="Atividades.do?ref=visualizar&id=${atividade.id }"><button style="clear:both;float:right;" class="btn btn-success" type="button">Visualizar</button></a></td>
 		</tr>
 		<tr>
+			<th>Registro</th>
+			<td>${atividade.registro } </td>
+		</tr>
+		<tr>
 			<th>Coordenador</th>
 			<td>${atividade.coordenador.nome }</td>
 		</tr>

@@ -29,6 +29,7 @@ import dao.DAOVinculo;
 import models.AreaTematica;
 import models.Atividade;
 import models.AtividadeAntiga;
+import models.ControleRegistro;
 import models.LinhaDeExtensao;
 import models.LocalRealizacao;
 import models.TipoAtividade;
@@ -178,6 +179,7 @@ public class Atividades extends HttpServlet {
 		DAO.commit();
 		
 		Atividade atividade = daoAtividade.find(daoAtividade.getLast());
+		ControleRegistro.EmitirControleDeRegistro(atividade);
 		request.setAttribute("atividade", atividade);
 		request.setAttribute("mensagem", "Atividade cadastrada com sucesso!");
 		
@@ -263,6 +265,7 @@ public class Atividades extends HttpServlet {
 				daot.merge(tipoAtividade);
 				daoAtividade.merge(atividade);
 				DAO.commit();
+				ControleRegistro.EmitirControleDeRegistro(atividade);
 				request.setAttribute("mensagem", "atividade editada com sucesso");
 				request.setAttribute("atividade", atividade);
 				request.getRequestDispatcher("atividade/atividade.jsp").forward(request, response);

@@ -1,6 +1,9 @@
 package dao;
 
 import java.lang.reflect.ParameterizedType;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,6 +17,8 @@ import javax.persistence.Query;
 import org.eclipse.persistence.config.PersistenceUnitProperties;
 
 
+
+
 	public class DAO<T> implements DAOInterface<T> {
 		protected static EntityManager manager;
 
@@ -23,8 +28,11 @@ import org.eclipse.persistence.config.PersistenceUnitProperties;
 			getManager();
 		}
 		public static void close(){
-			if(manager != null)
+			if(manager != null){
+				manager.close();
 				manager = null;
+			
+			}
 		}
 		protected static EntityManager getManager(){
 			if(manager==null){
@@ -97,6 +105,10 @@ import org.eclipse.persistence.config.PersistenceUnitProperties;
 			if(manager.getTransaction().isActive())
 				manager.getTransaction().rollback();
 		}
+		public static Connection getConnection() throws SQLException{
+			return DriverManager.getConnection("jdbc:postgresql://localhost:5432/crpmn","postgres", "12345");
+			
+		}
 
 //		public static EntityManager getManager(){
 //			if(manager==null){
@@ -157,6 +169,8 @@ import org.eclipse.persistence.config.PersistenceUnitProperties;
 //			int linhas = q.executeUpdate();
 //			return linhas;
 //		}
+		
+		
 
 	}
 

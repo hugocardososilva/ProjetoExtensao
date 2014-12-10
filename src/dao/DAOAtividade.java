@@ -41,7 +41,8 @@ public class DAOAtividade extends DAO<Atividade> {
 		try {
 			Date dtInicio= data.parse(inicio);
 			Date dtFim= data.parse(fim);
-			Query q= manager.createQuery("SELECT A from Atividade A where A.dataInicio >= :dtInicio and A.dataInicio <= :dtFim ORDER BY A.id");
+//			Query q= manager.createQuery("SELECT A from Atividade A where A.dataInicio >= :dtInicio and A.dataInicio <= :dtFim ORDER BY A.id");
+			Query q= manager.createQuery("SELECT A FROM Atividade A where A.dataInicio <= :dtFim AND A.dataTermino >= :dtInicio ORDER BY A.id");
 			q.setParameter("dtInicio", dtInicio);
 			q.setParameter("dtFim", dtFim);
 			return q.getResultList();

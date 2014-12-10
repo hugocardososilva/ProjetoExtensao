@@ -162,6 +162,8 @@ public class Participantes extends HttpServlet {
 						}else 
 							if(ref.equalsIgnoreCase("editar")){
 								String tipo= request.getParameter("tipo");
+								if(tipo== null) tipo= request.getParameter("especificacao");
+								
 								String idAtividade= request.getParameter("id");
 								String idParticipante= request.getParameter("idParticipante");
 								DAOParticipanteInterface daoP= FactoryDAOParticipante.getDAOParticipante(tipo);

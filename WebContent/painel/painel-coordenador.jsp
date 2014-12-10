@@ -52,7 +52,7 @@
 				<tr>
 				<th>Opçoes</th>
 				<td>
-					<a href="Coordenador.do?ref=editar">
+					<a href="Participantes.do?ref=editar&tipo=coordenador&id=${requestScope.atividade.id }&idParticipante=${requestScope.atividade.coordenador.id}">
 						<button class="btn btn-warning" type="button">Editar</button>
 					</a>
 					<a href="Participantes.do?ref=remover&especificacao=coordenador&id=${requestScope.atividade.id }&idParticipante=${requestScope.atividade.coordenador.id}">

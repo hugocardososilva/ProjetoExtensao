@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1_atividades_vinculadas" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="664bd620-9abd-43c8-aa8a-330b1fa44532">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ID_ATIVIDADE" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+     atividade_atividade."atividade_id" AS atividade_atividade_atividade_id,
+     atividade_atividade."atividades_id" AS atividade_atividade_atividades_id,
+     atividade_A."titulo" AS atividade_A_titulo,
+     atividade_A."registro" AS atividade_A_registro,
+     atividade."id" AS atividade_id,
+     atividade_A."id" AS atividade_A_id
+FROM
+     "public"."atividade" atividade RIGHT OUTER JOIN "public"."atividade_atividade" atividade_atividade ON atividade."id" = atividade_atividade."atividade_id"
+     LEFT OUTER JOIN "public"."atividade" atividade_A ON atividade_atividade."atividades_id" = atividade_A."id"
+WHERE
+     atividade_atividade."atividade_id" = $P{ID_ATIVIDADE}]]>
+	</queryString>
+	<field name="atividade_atividade_atividade_id" class="java.lang.Integer"/>
+	<field name="atividade_atividade_atividades_id" class="java.lang.Integer"/>
+	<field name="atividade_a_titulo" class="java.lang.String"/>
+	<field name="atividade_a_registro" class="java.lang.String"/>
+	<field name="atividade_id" class="java.lang.Integer"/>
+	<field name="atividade_a_id" class="java.lang.Integer"/>
+	<group name="atividade_id">
+		<groupExpression><![CDATA[$F{atividade_id}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="23" backcolor="#C0C0C0" uuid="087b8400-7983-498f-9f4b-4a1eb8062ddb"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="14" y="0" width="540" height="20" uuid="d52bf830-c2d1-48e3-b105-832c056423a2"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ATIVIDADES VINCULADAS AO PROJETO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="31" splitType="Stretch">
+			<elementGroup>
+				<rectangle>
+					<reportElement x="0" y="0" width="554" height="31" uuid="b2609cdc-6096-4e36-a914-4c03eb454a2d"/>
+				</rectangle>
+				<rectangle>
+					<reportElement x="0" y="0" width="277" height="31" uuid="a6966f36-1d60-49f3-97b2-0c49a41a9bf8"/>
+				</rectangle>
+				<rectangle>
+					<reportElement x="277" y="0" width="277" height="31" uuid="c30e26aa-c281-47c6-a5cf-46b0e054ca06"/>
+				</rectangle>
+			</elementGroup>
+			<staticText>
+				<reportElement x="4" y="0" width="49" height="31" uuid="19e2d000-726e-48bf-989a-3a0ec36f6ea0"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Título:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="282" y="0" width="67" height="31" uuid="97b85dd2-0f1d-484f-9e93-c507142a6da4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Registro:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="54" y="0" width="223" height="31" uuid="4ca1ba19-ae35-450d-83c4-c98a8136e97b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{atividade_a_titulo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="351" y="0" width="203" height="31" uuid="8f65b7b9-48be-40fc-b703-7ca83bb1d3ca"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{atividade_a_registro}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
