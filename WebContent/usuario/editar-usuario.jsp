@@ -7,16 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link  rel= "stylesheet"  href= "bootstrap/css/bootstrap.min.css" >
 <link  rel= "stylesheet"  href= "../bootstrap/css/bootstrap.min.css" >
-<title>Adicionar Usuário</title>
-<script>
-function validaSenha (input){ 
-	if (input.value != document.getElementById('senha').value) {
-    input.setCustomValidity('Repita a senha corretamente');
-  } else {
-    input.setCustomValidity('');
-  }
-} 
-</script>
+<title>Editar Usuário</title>
 </head>
 <body>
 <div class="container">
@@ -30,36 +21,36 @@ function validaSenha (input){
   					<h4>Nova Usuário</h4>
  			</div>
 		 <div class="panel-body">
-<form role="form" action="UserController.do?ref=novo" method="post">
+<form role="form" action="UserController.do?ref=editar" method="post">
 		
 		<div class="form-group">
-		
+		<input type="hidden" name= "id" value="${usuario.id }">
 		
 		<label for="nome">Nome<br />
 		</label>
-			<input class="form-control" name="nome" required="required" type="text"   />
+			<input class="form-control" name="nome" value="${usuario.nome }" required="required" type="text"   />
 		
 		<label for="login">Login <br />
 		</label>
-			<input class="form-control" name="login" required="required" type="text"  />
+			<input class="form-control" name="login" value="${usuario.login }" required="required" type="text"  />
 		<label for="email">Email <br />
 		</label>
 		
-			<input class="form-control" name="email" required="required" type="text" />
+			<input class="form-control" name="email" required="required" value="${usuario.email }" type="text" />
 		<label for="senha">Senha <br />
 		</label>
 		
-			<input class="form-control" name="senha"  id="senha" required="required" type="password" />
+			<input class="form-control" name="senha" required="required" type="password" />
 		
 	
 		<label for="senha2">Repetir Senha <br />
 		</label>
 		
-			<input class="form-control" name="senha2" required="required" type="password" oninput="validaSenha(this)" />
+			<input class="form-control" name="senha2" required="required"  type="password" />
 		
 		<label for="tel">Telefone <br />
 		</label>
-			<input class="form-control" name="tel" required="required" type="tel"  />
+			<input class="form-control" name="tel" value="${usuario.telefone }" required="required" type="number"  />
 		</div>
 		
 		

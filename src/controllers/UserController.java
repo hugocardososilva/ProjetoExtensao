@@ -38,6 +38,8 @@ public class UserController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String ref= request.getParameter("ref");
+		DAO.open();
+		DAO.begin();
 			if(ref.equalsIgnoreCase("inicio")){
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}else
@@ -52,7 +54,15 @@ public class UserController extends HttpServlet {
 					}else
 						if(ref.equalsIgnoreCase("add")){
 							request.getRequestDispatcher("usuario/novo-usuario.jsp").forward(request, response);
-						}
+						}else
+							if(ref.equalsIgnoreCase("editar")){
+//								String id = request.getParameter("id");
+								HttpSession session = request.getSession();
+								Usuario user = (Usuario) session.getAttribute("user");
+								request.setAttribute("usuario", user);
+								request.getRequestDispatcher("usuario/editar-usuario.jsp").forward(request, response);
+							}
+			DAO.close();
 	}
 
 	/**
@@ -109,7 +119,27 @@ public class UserController extends HttpServlet {
 				DAO.commit();
 				
 				
-			}
+			}else
+				if(ref.equalsIgnoreCase("editar")){
+					String login = request.getParameter("login");
+					String nome = request.getParameter("nome");
+					String email = request.getParameter("email");
+					String tel= request.getParameter("tel");
+					String senha= request.getParameter("senha");
+					String senha2=request.getParameter("senha2");
+					
+					Usuario user= daoU.find(Integer.parseInt(request.getParameter("id")));
+					user.setLogin(login);
+					user.setNome(nome);
+					user.setEmail(email);
+					user.setSenha(senha);
+					user.setPrivilegio("servidor");
+					user.setTelefone(Long.parseLong(tel));
+					daoU.merge(user);
+					request.setAttribute("mensagem", "Usuário editado com sucesso!");
+					request.getRequestDispatcher("index.jsp").forward(request, response);
+					DAO.commit();
+				}
 		DAO.close();
 	}
 
