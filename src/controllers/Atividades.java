@@ -66,10 +66,13 @@ public class Atividades extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+			
+		
 		DAO.open();
 		DAO.begin();
 		
-//		synchronized (request) {
+		
 			
 		
 		String ref= request.getParameter("ref");
@@ -178,9 +181,9 @@ public class Atividades extends HttpServlet {
 		DAO.flush();
 		DAO.commit();
 		
-		Atividade atividade = daoAtividade.find(daoAtividade.getLast());
-		ControleRegistro.EmitirControleDeRegistro(atividade);
-		request.setAttribute("atividade", atividade);
+		Atividade a = daoAtividade.find(daoAtividade.getLast());
+		ControleRegistro.EmitirControleDeRegistro(a);
+		request.setAttribute("atividade", a);
 		request.setAttribute("mensagem", "Atividade cadastrada com sucesso!");
 		
 		System.out.println(atividade.toString());
@@ -259,6 +262,7 @@ public class Atividades extends HttpServlet {
 				atividade.setValor(Double.parseDouble(valor));
 				atividade.setFonteDeRecurso(fonteDeRecursos);
 				atividade.setObjetivo(objetivo);
+				
 				daoArea.merge(area);
 				daoLinha.merge(linha);
 				daoLocal.merge(local);
@@ -272,6 +276,7 @@ public class Atividades extends HttpServlet {
 			}
 		DAO.close();
 		}
+		
 //	}
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

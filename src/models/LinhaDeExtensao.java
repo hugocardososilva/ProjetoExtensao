@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class LinhaDeExtensao {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id; 
 	private int numero;
 	private String denominacao;

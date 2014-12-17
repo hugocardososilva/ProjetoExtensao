@@ -92,6 +92,7 @@ public class ControleRegistro {
 		DAO.open();
 		DAO.begin();
 		ControleRegistro ultimo =daocr.find(daocr.getLast());
+		
 		ControleRegistro cRegistro= new ControleRegistro();
 		cRegistro.setAno(new Date(System.currentTimeMillis()));
 		if(atividade.getControleRegistro()== null){
@@ -100,6 +101,7 @@ public class ControleRegistro {
 				System.out.println("nulo");
 				
 			}else{
+				System.out.println("ultimo registro = " + ultimo.toString());
 				if(!data.format(ultimo.getAno()).equalsIgnoreCase(data.format(new Date(System.currentTimeMillis())))){
 					cRegistro.setNumero(1);
 					System.out.println("diferentes");
