@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
+import org.postgresql.util.PSQLException;
+
 import dao.DAO;
 import dao.DAOUser;
 import models.Usuario;
@@ -103,7 +105,7 @@ public class UserController extends HttpServlet {
 				String tel= request.getParameter("tel");
 				String senha= request.getParameter("senha");
 				String senha2=request.getParameter("senha2");
-				
+				try {
 				Usuario user= new Usuario();
 				user.setLogin(login);
 				user.setNome(nome);
@@ -112,11 +114,20 @@ public class UserController extends HttpServlet {
 				user.setPrivilegio("servidor");
 				user.setTelefone(Long.parseLong(tel));
 				
-				daoU.persist(user);
+					daoU.persist(user);
+					request.setAttribute("login", login);
+					request.setAttribute("nome", nome);
+					request.setAttribute("email", email);
+					request.setAttribute("tel", tel);
+					dao.commit();
+					request.setAttribute("mensagem", "Usuário cadastrado com sucesso!");
+					request.getRequestDispatcher("index.jsp").forward(request, response);
+					
+				} catch (Exception e) {
+					request.setAttribute("mensagem", e.toString());
+					request.getRequestDispatcher("usuario/novo-usuario.jsp").forward(request, response);
+				}
 				
-				request.setAttribute("mensagem", "Usuário cadastrado com sucesso!");
-				request.getRequestDispatcher("index.jsp").forward(request, response);
-				dao.commit();
 				
 				
 			}else

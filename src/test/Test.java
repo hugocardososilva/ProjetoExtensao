@@ -25,13 +25,14 @@ import models.TipoAtividade;
 
 public class Test {
 	public static void cadastro(){
+		DAO dao = new DAO();
 //		DAOAtividade daoa= new DAOAtividade();
 ////		DAOCoordenador daoc= new DAOCoordenador();
 ////		DAOParticipante daop= new DAOParticipante();
 ////		DAOTipoAtividade daot= new DAOTipoAtividade();
 ////		List<TipoAtividade> lista = new ArrayList<TipoAtividade>();
-		DAO.open();
-		DAO.begin();
+		dao.open();
+		dao.begin();
 ////		Atividade a= new Atividade();
 ////		Coordenador c= new Coordenador();
 ////		Docente d= new Docente();
@@ -87,7 +88,7 @@ public class Test {
 		System.out.println(daoc.getLast());
 		
 		
-		DAO.close();
+		dao.close();
 //		System.out.println(a.toString());
 		
 		
