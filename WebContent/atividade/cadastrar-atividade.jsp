@@ -59,7 +59,7 @@
 		<input class="form-control" name="fonteDeRecursos"  type="text" size="50" maxlength="100" />
 		<h4>Valor </h4>
 		<label for="valor"></label>
-		<input class="form-control" type="text" required="required" name="valor" id="valor" />
+		<input class="form-control" pattern="[0-9]+$" type="text" required="required" name="valor" id="valor" />
 		</div>
 		<div class="form-group">
 		<h4>Objetivo</h4>

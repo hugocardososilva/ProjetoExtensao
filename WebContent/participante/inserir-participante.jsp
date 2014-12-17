@@ -26,7 +26,7 @@
 		<div class="form-group">
 			<label for="telPrimario">Telefone<br />
 		</label>
-			<input class="form-control" name="telPrimario" type="text" id="telPrimario" size="50" maxlength="100" />
+			<input class="form-control" name="telPrimario" pattern="[0-9]+$" type="text" id="telPrimario" size="50" maxlength="100" />
 		
 		</div>
 		

@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
      <%@ taglib prefix="Sessao" tagdir="/WEB-INF/tags"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -32,7 +32,7 @@
 		<input type="hidden" name="tipo" value="${requestScope.especificacao }">
 		<label for="nomeCoordenador">Nome Completo<br />
 		</label>
-		<input name="nomeCoordenador" class="form-control" value="${requestScope.participante.nome }" type="text" id="nomeCoordenador" size="50" maxlength="100" />
+		<input name="nomeCoordenador" required="required" class="form-control" value="${requestScope.participante.nome }" type="text"  id="nomeCoordenador" size="50" maxlength="100" />
 		
 		<c:choose>
 		<c:when test="${requestScope.participante.tipo == 'Docente' }">
@@ -65,7 +65,7 @@
 
 			<label for="emailCoordenador">Email<br />
 			</label>
-			<input class="form-control" name="emailCoordenador" value="${requestScope.participante.email }" type="text" id="emailCoordenador" size="50" maxlength="100" />
+			<input class="form-control" name="emailCoordenador" value="${requestScope.participante.email }" type="email" id="emailCoordenador" size="50" maxlength="100" />
 
 		
 		Voluntario
@@ -97,19 +97,19 @@
 		
 		<label  for="setorDeTrabalho">Setor de trabalho<br />
 		</label>
-		<input class="form-control" name="setorDeTrabalho" value="${requestScope.participante.setor }" type="text" id="setorDeTrabalho" value="" size="50" maxlength="50" />
+		<input class="form-control" required="required" name="setorDeTrabalho" value="${requestScope.participante.setor }" type="text" id="setorDeTrabalho" value="" size="50" maxlength="50" />
 		</p>
 		<p>
 
 
 		<label for="phonePrimario">Fone principal<br />
 		</label>
-		<input  class="form-control" name="phonePrimario" value="${requestScope.participante.telPrimario }" type="text" id="phonePrimario" size="50" maxlength="10" />
+		<input  class="form-control" pattern="[0-9]+$" required="required" name="phonePrimario" value="${requestScope.participante.telPrimario }" type="text" id="phonePrimario" size="50" maxlength="10" />
 
 		<label for="phonePrimario"><br />
 		Fone secundário<br />
 		</label>
-		<input class="form-control" name="phonePrimario2" value="${requestScope.participante.telAuxiliar }" type="text" id="phonePrimario" size="50" maxlength="10" />
+		<input class="form-control" pattern="[0-9]+$" required="required" name="phonePrimario2" value="${requestScope.participante.telAuxiliar }" type="text" id="phonePrimario" size="50" maxlength="10" />
 
 		<button type="submit" class="btn btn-info">Editar</button> 
 
