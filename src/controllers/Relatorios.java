@@ -103,6 +103,9 @@ public class Relatorios extends HttpServlet {
 					if(ref.equalsIgnoreCase("vinculo")){
 						request.setAttribute("tipo", daov.findAll());
 						request.getRequestDispatcher("relatorios/relatorio-por-vinculo.jsp").forward(request, response);
+					}if(ref.equalsIgnoreCase("periodo")){
+						
+						request.getRequestDispatcher("relatorios/relatorio-por-periodo.jsp").forward(request, response);
 					}
 		
 		
@@ -157,7 +160,7 @@ public class Relatorios extends HttpServlet {
 			 try {
 				conexao= DAO.getConnection();
 				Map<String, Object> parametros = new HashMap<>();
-				parametros.put("ID_TIPO", Integer.parseInt(id));
+				parametros.put("ID_VINCULO", Integer.parseInt(id));
 				parametros.put("DATA_INICIO", data.parse(dataInicio));
 				parametros.put("DATA_FIM", data.parse(dataFim));
 				String nomeReport = request.getServletContext().getRealPath("/WEB-INF/relatorios/relatorio_por_vinculo.jasper");
@@ -198,6 +201,38 @@ public class Relatorios extends HttpServlet {
 				exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);
 				response.setContentType("application/pdf");
 				response.setHeader("Content-Disposition", "inline; filename=Relatorio-tipo"+ System.currentTimeMillis());
+				exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, response.getOutputStream());
+				
+				exporter.exportReport();
+				
+				
+				
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		 }else
+			 if(ref.equalsIgnoreCase("periodo")){
+			 
+			 
+			 try {
+				conexao= DAO.getConnection();
+				Map<String, Object> parametros = new HashMap<>();
+				
+				parametros.put("DATA_INICIO", data.parse(dataInicio));
+				parametros.put("DATA_FIM", data.parse(dataFim));
+				String nomeReport = request.getServletContext().getRealPath("/WEB-INF/relatorios/relatorio_atividade_periodo.jasper");
+				JasperPrint print = JasperFillManager.fillReport(nomeReport, parametros, conexao);
+				JRExporter exporter= new JRPdfExporter();
+				exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);
+				response.setContentType("application/pdf");
+				response.setHeader("Content-Disposition", "inline; filename=Relatorio-periodo"+ System.currentTimeMillis());
 				exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, response.getOutputStream());
 				
 				exporter.exportReport();

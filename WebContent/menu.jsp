@@ -94,9 +94,11 @@
 			 <li class="dropdown">
 		 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Relatórios <span class="caret"></span></a>
 			 <ul class="dropdown-menu" role="menu">
-			 	<li role="presentation" class="dropdown-header">Coordenador</li>
+<!-- 			 	<li role="presentation" class="dropdown-header">Coordenador</li> -->
+			 		<li><a href="<c:url value='/Relatorios.do?ref=periodo'/>" >Por período</a></li>
 			 		 <li><a href="<c:url value='/Relatorios.do?ref=coordenador'/>" >Por Coordenador</a></li>
 			 		 <li><a href="<c:url value='/Relatorios.do?ref=tipo'/>" >Por Tipo</a></li>
+			 		 <li><a href="<c:url value='/Relatorios.do?ref=vinculo'/>" >Por Vínculo</a></li>
 <%-- 			 		  <li><a href="<c:url value='/UserController.do?ref=editar'/>" >Editar Usuário</a></li> --%>
 <%-- 			 		 <li><a href="<c:url value='/Apoio.do?ref=listar&tipo=vinculo'/>" >Listar Vínculo</a></li> --%>
 			 

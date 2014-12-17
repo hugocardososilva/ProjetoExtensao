@@ -8,7 +8,7 @@
 <head>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Relatórios por coordenador</title>
+<title>Relatórios por tipo</title>
 <link  rel= "stylesheet"  href= "../bootstrap/css/bootstrap.min.css" >
 <link  rel= "stylesheet"  href= "bootstrap/css/bootstrap.min.css" >
 </head>
@@ -23,19 +23,14 @@
 
 	<div class="panel panel-default">
   			<div class="panel-heading">
-  					<h4>Relatório por Coordenador</h4>
+  					<h4>Relatório por Tipo</h4>
  			</div>
 		 <div class="panel-body">
-	<form target="_blank" role="form" action="Relatorios.do?ref=coordenador" method="post">
+	<form target="_blank" role="form" action="Relatorios.do?ref=periodo" method="post">
 		
-				 <h4>Tipo de atividade</h4>
+				 <h4>Período</h4>
 			          	 
-			<select class="form-control" name="coordenadorAtividade" id="coordenador">
-				<c:forEach var="coordenador"  items="${requestScope.tipo }">
-						<option value="${coordenador.id }">${coordenador.id } - ${coordenador.nome } - ${coordenador.email }</option>
-						</c:forEach>
-				
-			</select>
+			
 			<label for="inicio">Data Início
 				<input name="inicio" class="form-control" type="date"   />
 				</label>
