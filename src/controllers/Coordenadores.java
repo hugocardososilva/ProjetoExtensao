@@ -29,6 +29,7 @@ public class Coordenadores extends HttpServlet {
     DAOCoordenador daoCoordenador= new DAOCoordenador();
     models.Coordenador coordenador;
     Atividade atividade;
+    DAO dao= new DAO();
     
     /**
      * @see HttpServlet#HttpServlet()
@@ -50,8 +51,8 @@ public class Coordenadores extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		DAO.open();
-		DAO.begin();
+		dao.open();
+		dao.begin();
 		String id= request.getParameter("id");
 		ref= request.getParameter("ref");
 		
@@ -91,10 +92,10 @@ public class Coordenadores extends HttpServlet {
 					daoAtividade.merge(atividade);
 				}
 			daoCoordenador.persist(coordenador);
-			DAO.flush();
+			dao.flush();
 			
 			
-			DAO.commit();
+			dao.commit();
 				if(!id.equalsIgnoreCase("")){
 					request.setAttribute("mensagem", "Coordenador cadastrado e vinculado à atividade!");
 					request.setAttribute("atividade", atividade);
@@ -126,7 +127,7 @@ public class Coordenadores extends HttpServlet {
 					participante.setSetor(setor);
 					
 					daoParticipante.merge(participante);
-					DAO.commit();
+					dao.commit();
 					request.setAttribute("mensagem", "Coordenador editado com sucesso");
 					if(!id.equalsIgnoreCase("")){
 						Atividade atividade= daoAtividade.find(Integer.parseInt(id));
@@ -141,7 +142,7 @@ public class Coordenadores extends HttpServlet {
 						
 						
 				}
-		DAO.close();
+		dao.close();
 	}
 
 }

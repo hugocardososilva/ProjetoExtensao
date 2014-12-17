@@ -42,7 +42,7 @@ import models.Vinculo;
 @WebServlet("/Atividades.do")
 public class Atividades extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+	DAO dao= new DAO();
 	private Atividade atividade = new Atividade();
 	private DAOAtividade daoAtividade= new DAOAtividade();
 	private DAOAtividadeAntiga daoAntiga= new DAOAtividadeAntiga();
@@ -69,8 +69,8 @@ public class Atividades extends HttpServlet {
 		
 			
 		
-		DAO.open();
-		DAO.begin();
+		dao.open();
+		dao.begin();
 		
 		
 			
@@ -178,8 +178,8 @@ public class Atividades extends HttpServlet {
 //		daoU.merge(user);
 		
 		daoAtividade.persist(atividade);
-		DAO.flush();
-		DAO.commit();
+		dao.flush();
+		dao.commit();
 		
 		Atividade a = daoAtividade.find(daoAtividade.getLast());
 		ControleRegistro.EmitirControleDeRegistro(a);
@@ -268,13 +268,13 @@ public class Atividades extends HttpServlet {
 				daoLocal.merge(local);
 				daot.merge(tipoAtividade);
 				daoAtividade.merge(atividade);
-				DAO.commit();
+				dao.commit();
 				ControleRegistro.EmitirControleDeRegistro(atividade);
 				request.setAttribute("mensagem", "atividade editada com sucesso");
 				request.setAttribute("atividade", atividade);
 				request.getRequestDispatcher("atividade/atividade.jsp").forward(request, response);
 			}
-		DAO.close();
+		dao.close();
 		}
 		
 //	}
@@ -283,8 +283,8 @@ public class Atividades extends HttpServlet {
 		String ref= request.getParameter("ref");
 		Atividade atividade= new Atividade();
 		DAOAtividade daoa= new DAOAtividade();
-		DAO.open();
-		DAO.begin();
+		dao.open();
+		dao.begin();
 			if(ref.equalsIgnoreCase("editar")){
 				int id = Integer.parseInt(request.getParameter("id"));
 				atividade = daoa.find(id);
@@ -324,6 +324,6 @@ public class Atividades extends HttpServlet {
 						request.setAttribute("lista", daoa.findAll());
 						request.getRequestDispatcher("pesquisar/listar-atividades.jsp").forward(request, response);
 					}
-		DAO.close(); 
+		dao.close(); 
 	}
 }

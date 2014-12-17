@@ -84,13 +84,14 @@ public class ControleRegistro {
 	
 	
 	public static void EmitirControleDeRegistro(Atividade atividade){
+		DAO dao = new DAO();
 		DateFormat data= new SimpleDateFormat("yy");
 		DAOControleRegistro daocr= new DAOControleRegistro();
 		DAOAtividade daoa= new DAOAtividade();
 		DecimalFormat dLocal= new DecimalFormat("00");
 		DecimalFormat dNumero= new DecimalFormat("000");
-		DAO.open();
-		DAO.begin();
+		dao.open();
+		dao.begin();
 		ControleRegistro ultimo =daocr.find(daocr.getLast());
 		
 		ControleRegistro cRegistro= new ControleRegistro();
@@ -116,7 +117,7 @@ public class ControleRegistro {
 			cRegistro.setAtividade(atividade);
 			atividade.setControleRegistro(cRegistro);
 			
-		}
+//		}
 		String numero= dNumero.format(atividade.getControleRegistro().getNumero());
 		String tipo = atividade.getTipoAtividade().getSigla();
 		String aTematica= atividade.getAreaTematica().getSigla();
@@ -128,12 +129,30 @@ public class ControleRegistro {
 		
 		String registro = tipo+"-"+aTematica+"-"+local+"-"+numero+"-"+linha+"-"+ano;
 		System.out.println(registro);
+		
 		atividade.setRegistro(registro);
 		daoa.merge(atividade);
 		daocr.persist(cRegistro);
-		
-		DAO.commit();
-		DAO.close();
+		}else{
+			String numero= dNumero.format(atividade.getControleRegistro().getNumero());
+			String tipo = atividade.getTipoAtividade().getSigla();
+			String aTematica= atividade.getAreaTematica().getSigla();
+			
+			String local= dLocal.format(atividade.getLocal().getCodigo());
+			
+			String linha = dLocal.format(atividade.getLinhaDeExtensao().getNumero());
+			String ano= data.format(atividade.getControleRegistro().getAno());
+			
+			String registro = tipo+"-"+aTematica+"-"+local+"-"+numero+"-"+linha+"-"+ano;
+			System.out.println(registro);
+			
+			atividade.setRegistro(registro);
+			daoa.merge(atividade);
+//			daocr.merge(cRegistro);
+			
+		}
+		dao.commit();
+		dao.close();
 	}
 	
 	

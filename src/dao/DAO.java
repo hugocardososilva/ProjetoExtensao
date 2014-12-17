@@ -24,17 +24,17 @@ import org.eclipse.persistence.config.PersistenceUnitProperties;
 
 		public DAO(){}
 
-		public static void open(){
+		public void open(){
 			getManager();
 		}
-		public static void close(){
+		public void close(){
 			if(manager != null){
 				manager.close();
 				manager = null;
 			
 			}
 		}
-		protected static EntityManager getManager(){
+		protected EntityManager getManager(){
 			if(manager==null){
 				EntityManagerFactory factory = 
 					Persistence.createEntityManagerFactory("crpmn");
@@ -88,17 +88,17 @@ import org.eclipse.persistence.config.PersistenceUnitProperties;
 		//----------------------- TRANSAÇÃO   ----------------------
 		//----------------------------------------------------------
 
-		public static void begin(){
+		public void begin(){
 			if(!manager.getTransaction().isActive())
 				manager.getTransaction().begin();
 		}
-		public static void commit(){
+		public void commit(){
 			if(manager.getTransaction().isActive()){
 				manager.getTransaction().commit();
 				manager.clear();		// esvaziar o cache de objetos
 			}
 		}
-		public static void flush(){
+		public void flush(){
 			manager.flush();
 		}
 		public static void rollback(){

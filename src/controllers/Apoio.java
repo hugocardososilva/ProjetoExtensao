@@ -29,6 +29,7 @@ import models.Vinculo;
 public class Apoio extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	DAOVinculo daoVinculo= new DAOVinculo();
+	DAO dao= new DAO();
 	DAOTipoAtividade daoTipo= new DAOTipoAtividade();
 	DAOLinhaDeExtensao daoExtensao= new DAOLinhaDeExtensao();
 	DAOLocalRealizacao daoLocal= new DAOLocalRealizacao();
@@ -48,8 +49,8 @@ public class Apoio extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String ref= request.getParameter("ref");
 		String tipo= request.getParameter("tipo");
-		DAO.open();
-		DAO.begin();
+		dao.open();
+		dao.begin();
 		if(ref.equalsIgnoreCase("novo")){
 			if(tipo.equalsIgnoreCase("vinculo")){
 				request.getRequestDispatcher("apoio/novo-vinculo.jsp").forward(request, response);
@@ -131,15 +132,15 @@ public class Apoio extends HttpServlet {
 									}
 							
 				}
-		DAO.close();
+		dao.close();
 	}
 		
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		DAO.open();
-		DAO.begin();
+		dao.open();
+		dao.begin();
 		String ref= request.getParameter("ref");
 		String tipo= request.getParameter("tipo");
 		
@@ -150,8 +151,8 @@ public class Apoio extends HttpServlet {
 					String nome= request.getParameter("nome");
 					vinculo.setNome(nome);
 					daoVinculo.persist(vinculo);
-					DAO.flush();
-					DAO.commit();
+					dao.flush();
+					dao.commit();
 					request.setAttribute("mensagem", "Novo vínculo adicionado com sucesso!");
 					request.getRequestDispatcher("index.jsp").forward(request, response);
 				}else 
@@ -162,8 +163,8 @@ public class Apoio extends HttpServlet {
 						tipoA.setNome(nome);
 						tipoA.setSigla(sigla.toUpperCase());
 						daoTipo.persist(tipoA);
-						DAO.flush();
-						DAO.commit();
+						dao.flush();
+						dao.commit();
 						request.setAttribute("mensagem", "Novo Tipo de Atividade adicionado com sucesso!");
 						request.getRequestDispatcher("index.jsp").forward(request, response);
 					}else
@@ -176,8 +177,8 @@ public class Apoio extends HttpServlet {
 							extensao.setDenominacao(denominacao);
 							extensao.setDefinicoes(definicoes);
 							daoExtensao.persist(extensao);
-							DAO.flush();
-							DAO.commit();
+							dao.flush();
+							dao.commit();
 							request.setAttribute("mensagem", "Nova Linha de Extensão adicionada com sucesso!");
 							request.getRequestDispatcher("index.jsp").forward(request, response);
 							
@@ -189,8 +190,8 @@ public class Apoio extends HttpServlet {
 								localRealizacao.setCodigo(codigo);
 								localRealizacao.setLocal(local);
 								daoLocal.persist(localRealizacao);
-								DAO.flush();
-								DAO.commit();
+								dao.flush();
+								dao.commit();
 								request.setAttribute("mensagem", "Novo Local de Realização adicionado com sucesso!");
 								request.getRequestDispatcher("index.jsp").forward(request, response);
 								
@@ -204,8 +205,8 @@ public class Apoio extends HttpServlet {
 									areaTematica.setDescricao(descricao);
 									areaTematica.setSigla(sigla);
 									daoArea.persist(areaTematica);
-									DAO.flush();
-									DAO.commit();
+									dao.flush();
+									dao.commit();
 									request.setAttribute("mensagem", "Nova Área Temática adicionada com sucesso!");
 									request.getRequestDispatcher("index.jsp").forward(request, response);
 								}
@@ -281,10 +282,10 @@ public class Apoio extends HttpServlet {
 									request.setAttribute("lista", daoArea.findAll());
 									request.getRequestDispatcher("apoio/listar-area-tematica.jsp").forward(request, response);
 								}
-					DAO.commit();
+					dao.commit();
 				}
 			
-			DAO.close();
+			dao.close();
 	}
 
 }

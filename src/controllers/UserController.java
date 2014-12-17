@@ -22,7 +22,7 @@ import models.Usuario;
 @WebServlet("/UserController.do")
 public class UserController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+	DAO dao= new DAO();
 	DAOUser daoU= new DAOUser();
        
     /**
@@ -38,8 +38,8 @@ public class UserController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String ref= request.getParameter("ref");
-		DAO.open();
-		DAO.begin();
+		dao.open();
+		dao.begin();
 			if(ref.equalsIgnoreCase("inicio")){
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}else
@@ -62,7 +62,7 @@ public class UserController extends HttpServlet {
 								request.setAttribute("usuario", user);
 								request.getRequestDispatcher("usuario/editar-usuario.jsp").forward(request, response);
 							}
-			DAO.close();
+			dao.close();
 	}
 
 	/**
@@ -70,8 +70,8 @@ public class UserController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String ref= request.getParameter("ref");
-		DAO.open();
-		DAO.begin();
+		dao.open();
+		dao.begin();
 		if(ref.equalsIgnoreCase("login")){
 			String login= request.getParameter("login");
 			try {
@@ -116,7 +116,7 @@ public class UserController extends HttpServlet {
 				
 				request.setAttribute("mensagem", "Usuário cadastrado com sucesso!");
 				request.getRequestDispatcher("index.jsp").forward(request, response);
-				DAO.commit();
+				dao.commit();
 				
 				
 			}else
@@ -138,9 +138,9 @@ public class UserController extends HttpServlet {
 					daoU.merge(user);
 					request.setAttribute("mensagem", "Usuário editado com sucesso!");
 					request.getRequestDispatcher("index.jsp").forward(request, response);
-					DAO.commit();
+					dao.commit();
 				}
-		DAO.close();
+		dao.close();
 	}
 
 }

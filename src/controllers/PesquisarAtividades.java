@@ -33,7 +33,7 @@ public class PesquisarAtividades extends HttpServlet {
 	DAOLocalRealizacao daol= new DAOLocalRealizacao();
 	DAOAreaTematica daoArea= new DAOAreaTematica();
 	DAOLinhaDeExtensao daoLinha= new DAOLinhaDeExtensao();
-	
+	DAO dao= new DAO();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -48,8 +48,8 @@ public class PesquisarAtividades extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String ref= request.getParameter("ref");
-		DAO.open();
-		DAO.begin();
+		dao.open();
+		dao.begin();
 		if(ref.equalsIgnoreCase("pesquisar")){
 			request.setAttribute("listaTipo", daot.findAll());
 			request.setAttribute("listaVinculo", daov.findAll());
@@ -60,15 +60,15 @@ public class PesquisarAtividades extends HttpServlet {
 			
 			request.getRequestDispatcher("atividade/pesquisar.jsp").forward(request, response);
 		}
-		DAO.close();
+		dao.close();
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		DAO.open();
-		DAO.begin();
+		dao.open();
+		dao.begin();
 		List<Atividade> lista = new ArrayList<Atividade>();
 		String ref= request.getParameter("ref");
 		
@@ -131,7 +131,7 @@ public class PesquisarAtividades extends HttpServlet {
 									request.setAttribute("lista", lista);
 									request.getRequestDispatcher("pesquisar/listar-atividades.jsp").forward(request, response);
 								}
-		DAO.close();
+		dao.close();
 	}
 
 }

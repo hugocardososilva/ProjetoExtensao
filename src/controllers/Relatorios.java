@@ -45,6 +45,7 @@ public class Relatorios extends HttpServlet {
 	DAOVinculo daov= new DAOVinculo();
 	DateFormat data= new SimpleDateFormat("yyyy-MM-dd");
 	Connection conexao;
+	DAO dao= new DAO();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -61,8 +62,8 @@ public class Relatorios extends HttpServlet {
 		String ref = request.getParameter("ref");
 		
 		
-		DAO.open();
-		DAO.begin();
+		dao.open();
+		dao.begin();
 			if(ref.equalsIgnoreCase("atividade")){
 			try{
 				conexao= DAO.getConnection();
@@ -109,15 +110,15 @@ public class Relatorios extends HttpServlet {
 					}
 		
 		
-		DAO.close();
+		dao.close();
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		DAO.open();
-		DAO.begin();
+		dao.open();
+		dao.begin();
 		
 		String ref = request.getParameter("ref");
 		 String dataInicio = request.getParameter("inicio");
@@ -251,7 +252,7 @@ public class Relatorios extends HttpServlet {
 			}
 		 }
 		 
-		 DAO.close();
+		 dao.close();
 	}
 	
 }

@@ -34,7 +34,7 @@ import models.Tecnico;
 @WebServlet("/Participantes.do")
 public class Participantes extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+	DAO dao= new DAO();
 	DAOAtividade daoa= new DAOAtividade();
        
     /**
@@ -55,8 +55,8 @@ public class Participantes extends HttpServlet {
 		DAOExterno daoext= new DAOExterno();
 		DAOBolsista daobol= new DAOBolsista();
 		DAOTecnico daotec= new DAOTecnico();
-		DAO.open();
-		DAO.begin();
+		dao.open();
+		dao.begin();
 			
 		
 			if(ref.equalsIgnoreCase("novo")){
@@ -104,7 +104,7 @@ public class Participantes extends HttpServlet {
 								request.setAttribute("mensagem", "Esse participante já está vinculado à atividade");
 							}	
 						
-					DAO.commit();
+					dao.commit();
 					
 					request.setAttribute("atividade", atividade);
 					
@@ -133,7 +133,7 @@ public class Participantes extends HttpServlet {
 							
 							daoParticipante.merge(participante);
 						}
-					DAO.commit();
+					dao.commit();
 					request.setAttribute("mensagem", "Participante removido da atividade com sucesso!");
 					request.setAttribute("atividade", atividade);
 					request.getRequestDispatcher("atividade/atividade.jsp").forward(request, response);
@@ -183,7 +183,7 @@ public class Participantes extends HttpServlet {
 								
 								}
 				
-			DAO.close();
+			dao.close();
 	}
 
 	/**
@@ -193,8 +193,8 @@ public class Participantes extends HttpServlet {
 		String ref = request.getParameter("ref");
 		String id= request.getParameter("id");
 		DAOAtividade daoAtividade= new DAOAtividade();
-		DAO.open();
-		DAO.begin();
+		dao.open();
+		dao.begin();
 		System.out.println("o id está  "+ id);
 			
 			if(ref.equalsIgnoreCase("novo")){
@@ -222,8 +222,8 @@ public class Participantes extends HttpServlet {
 				
 					
 					daoParticipante.persist(equipe);
-					DAO.flush();
-					DAO.commit();
+					dao.flush();
+					dao.commit();
 					request.setAttribute("mensagem", "Participante cadastrado com sucesso");
 							if(!id.equalsIgnoreCase("")){
 								
@@ -279,7 +279,7 @@ public class Participantes extends HttpServlet {
 								participante.setVoluntario(voluntario);
 								
 								daoParticipante.merge(participante);
-								DAO.commit();
+								dao.commit();
 								request.setAttribute("mensagem", "Participante editada com sucesso");
 								if(!id.equalsIgnoreCase("")){
 									Atividade atividade= daoa.find(Integer.parseInt(id));
@@ -298,7 +298,7 @@ public class Participantes extends HttpServlet {
 								
 							
 			
-		DAO.close();
+		dao.close();
 		
 	}
 

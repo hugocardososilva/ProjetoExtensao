@@ -26,7 +26,7 @@ public class GerarRegistro extends HttpServlet {
 	Atividade atividade= new Atividade();
 	ControleRegistro controleRegistro= new ControleRegistro();
 	String controle= "";
-	
+	DAO dao= new DAO();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -40,8 +40,8 @@ public class GerarRegistro extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		DAO.open();
-		DAO.begin();
+		dao.open();
+		dao.begin();
 		int id= Integer.parseInt(request.getParameter("id"));
 		controleRegistro= daoControle.find(daoControle.getLast());
 		DecimalFormat formDecimal= new DecimalFormat("00");

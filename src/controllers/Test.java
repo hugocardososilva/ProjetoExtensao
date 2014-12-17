@@ -23,7 +23,7 @@ import dao.DAODocente;
 @WebServlet("/Test")
 public class Test extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	DAO dao= new DAO();  
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -37,15 +37,15 @@ public class Test extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		test.Test.cadastro();
-		DAO.open();
-		DAO.begin();
+		dao.open();
+		dao.begin();
 		DAOControleRegistro daoc= new DAOControleRegistro();
 		DAOAtividade daoa= new DAOAtividade();
 		System.out.println(daoc.getLast());
 		ControleRegistro.EmitirControleDeRegistro(daoa.find(2));
 		
 		
-		DAO.close();
+		dao.close();
 		
 	}
 

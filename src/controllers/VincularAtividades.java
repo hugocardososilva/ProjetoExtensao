@@ -19,6 +19,7 @@ import dao.DAOAtividade;
 public class VincularAtividades extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     DAOAtividade daoa= new DAOAtividade();
+    DAO dao= new DAO();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -31,8 +32,8 @@ public class VincularAtividades extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		DAO.open();
-		DAO.begin();
+		dao.open();
+		dao.begin();
 			String ref = request.getParameter("ref");
 			String id= request.getParameter("id");
 				
@@ -48,12 +49,12 @@ public class VincularAtividades extends HttpServlet {
 						Atividade atividadeVincular= daoa.find(Integer.parseInt(idAtividadeVincular));
 						atividade.addAtividade(atividadeVincular);
 						daoa.merge(atividade);
-						DAO.commit();
+						dao.commit();
 						request.setAttribute("atividade", atividade);
 						request.setAttribute("mensagem", "Atividade vinculada com sucesso!");
 						request.getRequestDispatcher("atividade/atividade.jsp").forward(request, response);
 					}
-		DAO.close();
+		dao.close();
 	}
 
 	/**
