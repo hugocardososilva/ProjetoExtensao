@@ -2,7 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
  <%@ taglib prefix="Sessao" tagdir="/WEB-INF/tags"%>
- <%@ taglib prefix="Mensage" uri="projeto.tags"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -25,7 +24,7 @@ function validaSenha (input){
 <c:import url="../scripts.jsp"/>
 	<c:import url="../header.jsp"/>
 	<c:import url="../menu.jsp"/>
-	<Mensage:mensagens mensagem="${requestScope.mensagem }"/>	
+	
 	<div class="panel panel-default">
   			<div class="panel-heading">
   					<h4>Nova Usuário</h4>
@@ -38,19 +37,19 @@ function validaSenha (input){
 		
 		<label for="nome">Nome<br />
 		</label>
-			<input value="${requestScope.nome }" class="form-control" name="nome" required="required" type="text"   />
+			<input class="form-control" name="nome" required="required" type="text"   />
 		
 		<label for="login">Login <br />
 		</label>
-			<input class="form-control" name="login" value="${requestScope.login }" required="required" type="text"  />
+			<input class="form-control" name="login" required="required" type="text"  />
 		<label for="email">Email <br />
 		</label>
 		
-			<input class="form-control" value="${requestScope.email }" name="email" required="required" type="text" />
+			<input class="form-control" name="email" required="required" type="text" />
 		<label for="senha">Senha <br />
 		</label>
 		
-			<input class="form-control" name="senha"   id="senha" required="required" type="password" />
+			<input class="form-control" name="senha"  id="senha" required="required" type="password" />
 		
 	
 		<label for="senha2">Repetir Senha <br />
@@ -60,7 +59,7 @@ function validaSenha (input){
 		
 		<label for="tel">Telefone <br />
 		</label>
-			<input class="form-control" value="${requestScope.tel }" name="tel" required="required" type="tel"  />
+			<input class="form-control" name="tel" required="required" type="tel"  />
 		</div>
 		
 		

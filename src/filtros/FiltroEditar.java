@@ -29,20 +29,19 @@ import dao.DAOVinculo;
  */
 @WebFilter({ "/editar-atividade.jsp" })
 public class FiltroEditar implements Filter {
-	DAO dao = new DAO();
-	
+
     /**
      * Default constructor. 
      */
     public FiltroEditar() {
-        
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see Filter#destroy()
 	 */
 	public void destroy() {
-		 
+		// TODO Auto-generated method stub
 	}
 
 	/**
@@ -52,8 +51,8 @@ public class FiltroEditar implements Filter {
 		
 		
 		System.out.println("filtro de form acionado");
-		dao.open();
-		dao.begin();
+		DAO.open();
+		DAO.begin();
 			List<TipoAtividade> listaTipo= new ArrayList<TipoAtividade>();
 			List<Vinculo> vinculo= new ArrayList<Vinculo>();
 			List<AreaTematica> areaTematica= new ArrayList<AreaTematica>();
@@ -74,7 +73,7 @@ public class FiltroEditar implements Filter {
 				localRealizacao= daoLocal.findAll();
 				
 			
-		dao.close();
+		DAO.close();
 		
 			request.setAttribute("listaTipo", listaTipo);
 			request.setAttribute("vinculo", vinculo);

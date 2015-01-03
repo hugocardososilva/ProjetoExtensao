@@ -23,7 +23,7 @@ public class Usuario {
 	@Column(unique=true)
 	private String login;
 	private String nome;
-	
+	@Column(unique=true)
 	private String senha;
 	@Column(unique=true)
 	private String email;

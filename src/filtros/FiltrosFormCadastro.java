@@ -40,8 +40,7 @@ import dao.DAOVinculo;
 				
 		}, servletNames = { "Atividades" })
 public class FiltrosFormCadastro implements Filter {
-	DAO dao= new DAO();
-	
+
     /**
      * Default constructor. 
      */
@@ -63,8 +62,8 @@ public class FiltrosFormCadastro implements Filter {
 		// TODO Auto-generated method stub
 		// place your code here
 		System.out.println("filtro de form acionado");
-		dao.open();
-		dao.begin();
+		DAO.open();
+		DAO.begin();
 			List<TipoAtividade> listaTipo= new ArrayList<TipoAtividade>();
 			List<Vinculo> vinculo= new ArrayList<Vinculo>();
 			List<AreaTematica> areaTematica= new ArrayList<AreaTematica>();
@@ -85,7 +84,7 @@ public class FiltrosFormCadastro implements Filter {
 				localRealizacao= daoLocal.findAll();
 				
 			
-		dao.close();
+		DAO.close();
 		
 			request.setAttribute("listaTipo", listaTipo);
 			request.setAttribute("vinculo", vinculo);
