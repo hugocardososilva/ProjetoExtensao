@@ -19,6 +19,33 @@
 	<c:import url="header.jsp"/>
 	<c:import url="menu.jsp"/>
 	<Mensage:mensagens mensagem="${requestScope.mensagem }"/>
+	<div class="row">
+  <div class="col-md-3">
+		<div class="list-group">
+  <li class="list-group-item">Atividade</li>
+  <a href="<c:url value='/atividade/cadastrar-atividade.jsp'/>" class="list-group-item"> Nova Atividade</a>
+  <a href="<c:url value='/Atividades.do?ref=listar'/>" class="list-group-item">Listar Atividades</a>
+  <a href="<c:url value='/PesquisarAtividades.do?ref=pesquisar'/>" class="list-group-item">Pesquisar Atividades</a>
+  
 </div>
+</div>
+  <div class="col-md-3">
+			<div class="list-group">
+			  <li class="list-group-item">Emitir Relatório</li>
+			  <a href="<c:url value='/Relatorios.do?ref=periodo'/>" class="list-group-item">Por Período</a>
+			  <a href="<c:url value='/Relatorios.do?ref=coordenador'/>" class="list-group-item">Por Coordenador</a>
+			  <a href="<c:url value='/Relatorios.do?ref=tipo'/>" class="list-group-item">Por Tipo</a>
+			  <a href="<c:url value='/Relatorios.do?ref=vinculo'/>" class="list-group-item">Por Vínculo</a>
+			</div>
+	</div>
+</div>
+	
+
+	
+	
+</div>
+
+
+
 </body>
 </html>
